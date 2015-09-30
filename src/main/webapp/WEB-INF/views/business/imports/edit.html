@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<#include "/console/layout/main.html"/>
+<html class="fuelux">
+<@headEdit/>
+<link href="${base}/styles/css/bootstrap-switch.min.css" rel="stylesheet">
+<body>
+<div class="container">
+    <form role="form" id="formSubmit" commandName="imports" class="form-horizontal"
+          data-fv-framework="bootstrap"
+          data-fv-message="This value is not valid"
+          data-fv-feedbackicons-valid="glyphicon glyphicon-ok"
+          data-fv-feedbackicons-invalid="glyphicon glyphicon-remove"
+          data-fv-feedbackicons-validating="glyphicon glyphicon-refresh"
+          enctype='multipart/form-data'>
+
+        <input type="hidden" name="filePath" id="filePath"/>
+        <input type="hidden" name="title" id="title"/>
+        <input type="hidden" id="modelFlag" name="modelFlag" class="js-check-change-field"/>
+
+        <!-- /.container -->
+        <div class="wizard" data-initialize="wizard" id="myWizard">
+            <div class="steps-container">
+                <ul class="steps">
+                    <li data-step="1" data-name="campaign" class="active"><span class="badge">1</span>导入<span
+                            class="chevron"></span></li>
+                    <li data-step="2"><span class="badge">2</span>对应<span class="chevron"></span></li>
+                </ul>
+            </div>
+            <div class="actions">
+                <button type="button" class="btn btn-default btn-prev"><span
+                        class="glyphicon glyphicon-arrow-left"></span>上一步
+                </button>
+                <button type="button" class="btn btn-default btn-next" data-last="Complete">下一步<span
+                        class="glyphicon glyphicon-arrow-right"></span></button>
+            </div>
+            <div class="step-content">
+                <div class="step-pane active sample-pane alert" data-step="1">
+                    <div class="row control-group">
+                        <div class="col-sm-12 controls">
+                            <input type="file" class="form-control" id="file" name="file" maxlength="50"
+                                   placeholder="选择文件"
+                                   required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-pane sample-pane bg-info alert" data-step="2">
+
+                    <div class="row control-group">
+                        <div class="col-sm-2 col-sm-offset-1">
+                            <label class="control-label" for="modelList">历史模板</label>
+                        </div>
+                        <div class="col-sm-8 controls">
+                            <select id="modelList" name="modelList" class="form-control" required>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row control-group">
+                        <div class="col-sm-2 col-sm-offset-1">
+                            <label class="control-label" for="modelList">另存模板</label>
+                        </div>
+                        <div class="col-sm-4 controls">
+                            <div class="pull-left">
+                                <div class="switch" >
+                                    <input type="checkbox" id="state" name="state" data-size="small" data-on-color="success" data-off-color="warning" data-on-text="保存" data-off-text="忽略">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 controls" id="saveOne">
+
+                        </div>
+                    </div>
+
+
+                    <div id="fields">
+                        <div class="row control-group" >
+                            <div class="col-sm-2 controls col-sm-offset-1"><button type="button" class="btn btn-warning btn-sm">字段名称</button></div>
+                            <div class="col-sm-4 controls"><button type="button" class="btn btn-warning btn-sm">字段编码</button></div>
+                            <div class="col-sm-4 controls"><button type="button" class="btn btn-warning btn-sm">DBF编码</button></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/business/imports/edit.js"></script>
+<script type="text/javascript">
+    var imports = JSON.parse(JSON.stringify(${imports}));
+</script>
+</html>
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<#include "/console/layout/main.html"/>
+<html class="fuelux" >
+<@headEdit/>
+<body>
+<div class="container">
+    <form role="form" id="formSubmit" commandName="model" class="form-horizontal"
+          data-fv-framework="bootstrap"
+          data-fv-message="This value is not valid"
+          data-fv-feedbackicons-valid="glyphicon glyphicon-ok"
+          data-fv-feedbackicons-invalid="glyphicon glyphicon-remove"
+          data-fv-feedbackicons-validating="glyphicon glyphicon-refresh"
+          enctype='multipart/form-data'
+          action="${base}/business/model/save">
+        <!-- Modal -->
+
+        <input type="hidden" name="modelId" id="modelId"/>
+        <input type="hidden" name="state" id="state"/>
+        <input type="hidden" name="userId" id="userId"/>
+
+
+    </form>
+
+</div>
+
+
+<!-- /.container -->
+
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/business/model/edit.js"></script>
+<script type="text/javascript">
+    var model = JSON.parse(JSON.stringify(${model}));
+</script>
+</html>
+

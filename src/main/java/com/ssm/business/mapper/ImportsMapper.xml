@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.business.mapper.ImportsMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.business.entity.Imports" >
+    <id column="import_id" property="importId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="model_id" property="modelId" jdbcType="INTEGER" />
+    <result column="action_time" property="actionTime" jdbcType="TIMESTAMP" />
+    <result column="row_sum" property="rowSum" jdbcType="INTEGER" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    import_id, title, action_time, model_id, row_sum, file_path, state, message
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.business.entity.ImportCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_import
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from business_import
+    where import_id = #{importId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from business_import
+    where import_id = #{importId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.business.entity.ImportCriteria" >
+    delete from business_import
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.business.entity.Imports" >
+    insert into business_import (import_id, title, model_id,
+    action_time, row_sum, file_path,
+    state, message)
+    values (#{importId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{modelId,jdbcType=INTEGER},
+    #{actionTime,jdbcType=TIMESTAMP}, #{rowSum,jdbcType=INTEGER}, #{filePath,jdbcType=VARCHAR},
+    #{state,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.business.entity.Imports" >
+    insert into business_import
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="importId != null" >
+        import_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="actionTime != null" >
+        action_time,
+      </if>
+      <if test="rowSum != null" >
+        row_sum,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="importId != null" >
+        #{importId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="actionTime != null" >
+        #{actionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowSum != null" >
+        #{rowSum,jdbcType=INTEGER},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.business.entity.ImportCriteria" resultType="java.lang.Integer" >
+    select count(*) from business_import
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update business_import
+    <set >
+      <if test="record.importId != null" >
+        import_id = #{record.importId,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelId != null" >
+        model_id = #{record.modelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.actionTime != null" >
+        action_time = #{record.actionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rowSum != null" >
+        row_sum = #{record.rowSum,jdbcType=INTEGER},
+      </if>
+      <if test="record.filePath != null" >
+        file_path = #{record.filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update business_import
+    set import_id = #{record.importId,jdbcType=INTEGER},
+    title = #{record.title,jdbcType=VARCHAR},
+    model_id = #{record.modelId,jdbcType=INTEGER},
+    action_time = #{record.actionTime,jdbcType=TIMESTAMP},
+    row_sum = #{record.rowSum,jdbcType=INTEGER},
+    file_path = #{record.filePath,jdbcType=VARCHAR},
+    state = #{record.state,jdbcType=INTEGER},
+    message = #{record.message,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.business.entity.Imports" >
+    update business_import
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="actionTime != null" >
+        action_time = #{actionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=INTEGER},
+      </if>
+      <if test="rowSum != null" >
+        row_sum = #{rowSum,jdbcType=INTEGER},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where import_id = #{importId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.business.entity.Imports" >
+    update business_import
+    set title = #{title,jdbcType=VARCHAR},
+      action_time = #{actionTime,jdbcType=TIMESTAMP},
+      model_id = #{modelId,jdbcType=INTEGER},
+      row_sum = #{rowSum,jdbcType=INTEGER},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      message = #{message,jdbcType=VARCHAR}
+    where import_id = #{importId,jdbcType=INTEGER}
+  </update>
+</mapper>
