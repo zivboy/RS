@@ -103,14 +103,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ssm.business.entity.Imports" >
-    insert into business_import (import_id, title, model_id,
+    <selectKey resultType="java.lang.Integer" keyProperty="importId" order="AFTER" >
+      SELECT LAST_INSERT_ID() as importId
+    </selectKey>
+    insert into business_import (title, model_id,
     action_time, row_sum, file_path,
     state, message)
-    values (#{importId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{modelId,jdbcType=INTEGER},
+    values (#{title,jdbcType=VARCHAR}, #{modelId,jdbcType=INTEGER},
     #{actionTime,jdbcType=TIMESTAMP}, #{rowSum,jdbcType=INTEGER}, #{filePath,jdbcType=VARCHAR},
     #{state,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ssm.business.entity.Imports" >
+    <selectKey resultType="java.lang.Integer" keyProperty="importId" order="AFTER" >
+      SELECT LAST_INSERT_ID() as importId
+    </selectKey>
     insert into business_import
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="importId != null" >

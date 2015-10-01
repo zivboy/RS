@@ -60,6 +60,13 @@ public class ItemServiceImpl  extends BaseService implements ItemService {
         baseDao.getMapper(ItemMapper.class).insertSelective(item);
     }
 
+
+    @Override
+    public int saveBatch(List<Item> list) {
+        return baseDao.updateBatch(Item.class,"INSERT",list);
+    }
+
+
     @Override
     public Item get(int id) {
         return baseDao.getMapper(ItemMapper.class).selectByPrimaryKey(id);

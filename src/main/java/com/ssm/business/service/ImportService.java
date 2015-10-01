@@ -17,7 +17,7 @@ public interface ImportService {
 
     int countByExample(Page page, Imports imports);
 
-    void save(Imports imports);
+    int save(Imports imports);
 
     Imports get(int id);
 

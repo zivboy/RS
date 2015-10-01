@@ -101,11 +101,11 @@
   </delete>
   <insert id="insert" parameterType="com.ssm.business.entity.Model" >
     <selectKey resultType="java.lang.Integer" keyProperty="modelId" order="AFTER" >
-      SELECT LAST_INSERT_ID()
+      SELECT LAST_INSERT_ID() as modelId
     </selectKey>
-    insert into business_model (model_id, name, create_date, 
+    insert into business_model (name, create_date,
       state, user_id)
-    values (#{modelId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, 
+    values (#{name,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE},
       #{state,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ssm.business.entity.Model" >

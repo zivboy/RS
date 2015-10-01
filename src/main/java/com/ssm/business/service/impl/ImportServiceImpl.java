@@ -59,8 +59,8 @@ public class ImportServiceImpl  extends BaseService implements ImportService {
     }
 
     @Override
-    public void save(Imports imports) {
-        baseDao.getMapper(ImportsMapper.class).insertSelective(imports);
+    public int save(Imports imports) {
+        return baseDao.getMapper(ImportsMapper.class).insertSelective(imports);
     }
 
     @Override

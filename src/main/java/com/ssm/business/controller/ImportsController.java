@@ -209,7 +209,7 @@ public class ImportsController extends BaseAction {
             // 一条条取出path文件中记录
             while ((rowValues = reader.nextRecord()) != null) {
                 for (int i = 0; i < rowValues.length; i++) {
-                    System.out.println(rowValues[i]);
+                    //System.out.println(rowValues[i]);
                 }
             }
             imports.setActionTime(new Date());
@@ -217,10 +217,21 @@ public class ImportsController extends BaseAction {
             imports.setMessage("导入中");
             imports.setFieldCount(imports.getFieldHtml().size());
             imports.setTitle(model.getName()+imports.getTitle());
-            importService.save(imports);
+            int importId = importService.save(imports);
             result.setMsg("数据导入中");
             result.setSuccessful(true);
             result.setData(imports);
+
+            ImportThread importThread = new ImportThread(importId,model.getModelId(),imports.getTitle(),imports.getFieldHtml(),imports.getColumnHtml());
+            try {
+                importThread.setImportServiceMe(importService);
+                Thread thread = new Thread(importThread);
+                thread.start();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -228,6 +239,62 @@ public class ImportsController extends BaseAction {
             result.setSuccessful(false);
         }
         return result;
+    }
+
+    class ImportThread implements Runnable
+    {
+        private int importId,modelId;
+        private String fileName;
+        private List<String> fieldHtml,columnHtml;
+        private ImportService importServiceMe;
+
+        public ImportService getImportServiceMe() {
+            return importServiceMe;
+        }
+
+        public void setImportServiceMe(ImportService importServiceMe) {
+            this.importServiceMe = importServiceMe;
+        }
+
+        public ImportThread(int importId,int modelId,String fileName,List<String> fieldHtml,List<String> columnHtml)
+        {
+            this.importId = importId;
+            this.modelId = modelId;
+            this.fileName = fileName;
+            this.fieldHtml = fieldHtml;
+            this.columnHtml = columnHtml;
+        }
+
+        @Override
+        public synchronized void run() {
+            List<Item> list = new ArrayList<>();
+            int i = 0;
+            for(String field: fieldHtml)
+            {
+                String [] columnArray = columnHtml.get(i).split(".");
+                Item item = new Item();
+                item.setModelId(modelId);
+                item.setState(1);
+                item.setSourceTabel(fileName);
+                item.setSourceField(field);
+                item.setTargetTable(columnArray[0]);
+                item.setTargetField(columnArray[1]);
+                i++;
+                list.add(item);
+            }
+            if(list!=null) {
+                int num =  itemService.saveBatch(list);
+                if(num!=0)
+                {
+                    Imports imports = new Imports();
+                    imports.setState(1);
+                    imports.setImportId(importId);
+                    imports.setMessage("导入成功");
+                    imports.setRowSum(num);
+                    importServiceMe.update(imports);
+                }
+            }
+        }
     }
 
     /**

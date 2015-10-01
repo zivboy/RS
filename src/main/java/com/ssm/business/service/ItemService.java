@@ -21,6 +21,8 @@ public interface ItemService {
 
     void save(Item item);
 
+    int saveBatch(List<Item> list);
+
     Item get(int id);
 
     void update(Item item);
