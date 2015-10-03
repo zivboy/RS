@@ -91,8 +91,8 @@ function queryParamsF(params) {
     var value = $("#search").val();
     var str = "{\"" + name + "\":\"" + value + "\"}";
     var data = eval('(' + str + ')');
-    //params.sortName = "";
-    //params.sortOrder = "";
+    params.sortName = "action_time";
+    params.sortOrder = "desc";
     return $.extend({}, params, data);
 }
 

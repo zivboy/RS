@@ -27,5 +27,7 @@ public interface ItemMapper {
 
     int updateByPrimaryKeySelective(Item record);
 
+    int insertBatch(List<Item> list);
+
     int updateByPrimaryKey(Item record);
 }

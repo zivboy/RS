@@ -90,8 +90,9 @@ function initSelect(id, ajaxUrl, ajaxDataParam, initData, sValue, sText,isQuery)
 //初始化下拉框函数
 function initSelectByData(data,id, sValue, sText) {
     //同步
-    var options = "";
+    var options = "<option   value=''></option>\n";;
     $(data).each(function () {
+
         options += selectOption($(this), "", sValue, sText);
     });
     $("#" + id).append(options);
@@ -103,7 +104,7 @@ function addSearchBox(id) {
     //增加搜索框
     var jObj = $('#' + id)
         .selectpicker({
-            liveSearch: true
+            liveSearch: true,
         });
     //使用移动选择
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {

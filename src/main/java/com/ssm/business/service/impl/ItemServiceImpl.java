@@ -63,7 +63,7 @@ public class ItemServiceImpl  extends BaseService implements ItemService {
 
     @Override
     public int saveBatch(List<Item> list) {
-        return baseDao.updateBatch(Item.class,"INSERT",list);
+        return baseDao.getMapper(ItemMapper.class).insertBatch(list);
     }
 
 

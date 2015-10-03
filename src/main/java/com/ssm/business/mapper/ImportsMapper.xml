@@ -151,6 +151,9 @@
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=INTEGER},
+      </if>
       <if test="actionTime != null" >
         #{actionTime,jdbcType=TIMESTAMP},
       </if>

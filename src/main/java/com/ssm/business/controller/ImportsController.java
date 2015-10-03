@@ -198,9 +198,40 @@ public class ImportsController extends BaseAction {
                 model.setState(1);
                 model.setCreateDate(new Date());
                 model.setUserId(Integer.parseInt(com.ssm.shiro.SecurityUtils.getShiroUser().getId()+""));
-                int model_id = modelService.save(model);//先增加模板
-                imports.setModelId(model_id);
+                int model_count = modelService.save(model);//先增加模板
+                imports.setModelId(model.getModelId());
             }
+            else
+            {
+                imports.setModelId(0);
+            }
+
+
+            imports.setActionTime(new Date());
+            imports.setState(1);
+            imports.setMessage("导入中");
+            imports.setFieldCount(imports.getFieldHtml().size());
+            imports.setTitle(model.getName()+imports.getTitle());
+            int importId = importService.save(imports);
+            importId = imports.getImportId();
+            result.setMsg("数据导入中");
+            result.setSuccessful(true);
+            result.setData(imports);
+
+            //导入模板数据
+            ImportThread importThread = new ImportThread(importId,model.getModelId(),imports.getTitle(),imports.getFieldHtml(),imports.getColumnHtml());
+            try {
+                Thread thread = new Thread(importThread);
+                thread.start();
+                System.out.println(" thread is running ");
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            //导入表格数据
+
             fis = new FileInputStream(imports.getFilePath());
             // 根据输入流初始化一个DBFReader实例，用来读取DBF文件信息
             DBFReader reader = new DBFReader(fis);
@@ -212,26 +243,8 @@ public class ImportsController extends BaseAction {
                     //System.out.println(rowValues[i]);
                 }
             }
-            imports.setActionTime(new Date());
-            imports.setState(1);
-            imports.setMessage("导入中");
-            imports.setFieldCount(imports.getFieldHtml().size());
-            imports.setTitle(model.getName()+imports.getTitle());
-            int importId = importService.save(imports);
-            result.setMsg("数据导入中");
-            result.setSuccessful(true);
-            result.setData(imports);
+            fis.close();
 
-            ImportThread importThread = new ImportThread(importId,model.getModelId(),imports.getTitle(),imports.getFieldHtml(),imports.getColumnHtml());
-            try {
-                importThread.setImportServiceMe(importService);
-                Thread thread = new Thread(importThread);
-                thread.start();
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -246,15 +259,6 @@ public class ImportsController extends BaseAction {
         private int importId,modelId;
         private String fileName;
         private List<String> fieldHtml,columnHtml;
-        private ImportService importServiceMe;
-
-        public ImportService getImportServiceMe() {
-            return importServiceMe;
-        }
-
-        public void setImportServiceMe(ImportService importServiceMe) {
-            this.importServiceMe = importServiceMe;
-        }
 
         public ImportThread(int importId,int modelId,String fileName,List<String> fieldHtml,List<String> columnHtml)
         {
@@ -267,11 +271,58 @@ public class ImportsController extends BaseAction {
 
         @Override
         public synchronized void run() {
-            List<Item> list = new ArrayList<>();
+            List<Item> list = new ArrayList<Item>();
             int i = 0;
             for(String field: fieldHtml)
             {
-                String [] columnArray = columnHtml.get(i).split(".");
+                String [] columnArray = columnHtml.get(i).split("\\.");
+                Item item = new Item();
+                item.setModelId(modelId);
+                item.setState(1);
+                item.setSourceTabel(fileName);
+                item.setSourceField(field);
+                item.setTargetTable(columnArray[0]);
+                item.setTargetField(columnArray[1]);
+                i++;
+                list.add(item);
+            }
+            if(list!=null) {
+                int num =  itemService.saveBatch(list);
+            }
+        }
+    }
+
+    class ImportDateThread implements Runnable
+    {
+        private int importId,modelId;
+        private String fileName;
+        private List<String> fieldHtml,columnHtml;
+        private ImportService importServiceMe;
+
+        public ImportService getImportServiceMe() {
+            return importServiceMe;
+        }
+
+        public void setImportServiceMe(ImportService importServiceMe) {
+            this.importServiceMe = importServiceMe;
+        }
+
+        public ImportDateThread(int importId,int modelId,String fileName,List<String> fieldHtml,List<String> columnHtml)
+        {
+            this.importId = importId;
+            this.modelId = modelId;
+            this.fileName = fileName;
+            this.fieldHtml = fieldHtml;
+            this.columnHtml = columnHtml;
+        }
+
+        @Override
+        public synchronized void run() {
+            List<Item> list = new ArrayList<Item>();
+            int i = 0;
+            for(String field: fieldHtml)
+            {
+                String [] columnArray = columnHtml.get(i).split("\\.");
                 Item item = new Item();
                 item.setModelId(modelId);
                 item.setState(1);
@@ -286,8 +337,10 @@ public class ImportsController extends BaseAction {
                 int num =  itemService.saveBatch(list);
                 if(num!=0)
                 {
+
+                    System.out.println(" thread is over ");
                     Imports imports = new Imports();
-                    imports.setState(1);
+                    imports.setState(0);
                     imports.setImportId(importId);
                     imports.setMessage("导入成功");
                     imports.setRowSum(num);

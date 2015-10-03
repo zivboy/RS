@@ -1,18 +1,24 @@
 package com.ssm.business.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssm.generator.entity.Columns;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 
-public class Imports {
+public class Imports implements Serializable {
+
     private Integer importId;
 
     private String title;
 
     private Integer modelId;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date actionTime;
 
     private Integer rowSum;

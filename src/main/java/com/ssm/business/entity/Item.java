@@ -3,6 +3,7 @@ package com.ssm.business.entity;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Repository
 public class Item implements Serializable {
@@ -19,6 +20,8 @@ public class Item implements Serializable {
     private String targetField;
 
     private Integer state;
+
+    private List<Item> list;
 
     public Integer getItemId() {
         return itemId;
@@ -74,5 +77,13 @@ public class Item implements Serializable {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public List<Item> getList() {
+        return list;
+    }
+
+    public void setList(List<Item> list) {
+        this.list = list;
     }
 }

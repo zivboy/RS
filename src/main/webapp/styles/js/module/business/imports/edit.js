@@ -1,6 +1,6 @@
 //加载插件
 
-requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'validator', 'vb', 'validatorLAG', 'comm', 'form', 'message'],
+requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'validator', 'vb', 'validatorLAG', 'comm', 'form', 'message'],
     function ($, _) {
 
         //列表
@@ -8,6 +8,7 @@ requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'valid
         var importsBean;//导入bean
         var columnCount;//dbf行数
         var columnsList;//表字段
+        var isModelFlag = false;
 
         //返回
         $("#back").bind("click", function () {
@@ -18,15 +19,15 @@ requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'valid
         var $OK = $.scojs_message.TYPE_OK;
         var $ERROR = $.scojs_message.TYPE_ERROR;
 
-        initSelect("modelList", WEB_GLOBAL_CTX+"/business/model/modelList", '','', "id", "name",true);
+        initSelect("modelList", WEB_GLOBAL_CTX + "/business/model/modelList", '', '', "id", "name", true);
 
-        var msg ="文件限于dbf格式，请重新选择";
+        var msg = "文件限于dbf格式，请重新选择";
         var type = ".DBF";
-        $("#file").change(function(){
-            var filepath =$("#file").val();
+        $("#file").change(function () {
+            var filepath = $("#file").val();
             var extStart = filepath.lastIndexOf(".");
             var ext = filepath.substring(extStart, filepath.length).toUpperCase();
-            if (ext != type ) {
+            if (ext != type) {
                 $("#file").val("");
                 $.scojs_message(msg, $ERROR);
                 highlight_error($("#file"));
@@ -61,11 +62,26 @@ requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'valid
             if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
                 data.fv.disableSubmitButtons(true);
             }
-        })
-            .on('success.form.fv', function (e) {
-                e.preventDefault();
-                var $form = $(e.target);
-                var params = $form.serialize();
+        }).on('success.form.fv', function (e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            var params = $form.serialize();
+            var fieldHtml = $("select[name='fieldHtml']");
+            var selectedCount =0;
+            $.each(fieldHtml, function (i, value) {
+                if(value.val()!="")
+                selectedCount++;
+            });
+            var fv = $form.data('formValidation');
+
+            if ($("#name").val() == '' && isModelFlag) {
+                highlight_error($("#name"));
+                return false;
+            }
+            else if (selectedCount==0) {
+                $.scojs_message("未选择字段匹配", $ERROR);
+                return false;
+            } else {
                 $.post(WEB_GLOBAL_CTX + "/business/imports/saveModel", params, function (rsp) {
                     if (rsp.successful) {
                         $.scojs_message(rsp.msg, $OK);
@@ -77,7 +93,8 @@ requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'valid
                 }).error(function () {
                 });
                 return true;
-            });
+            }
+        });
 
 
         // WIZARD
@@ -86,22 +103,20 @@ requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'valid
             console.log('changed');
             console.log(data);
 
-            if ( data.step === 2) {
+            if (data.step === 2) {
                 var alertMsg = true;
-                if($("#file").val() == '')
-                {
+                if ($("#file").val() == '') {
                     alertMsg = false;
                 }
-                else
-                {
-                    var filepath =$("#file").val();
+                else {
+                    var filepath = $("#file").val();
                     var extStart = filepath.lastIndexOf(".");
                     var ext = filepath.substring(extStart, filepath.length).toUpperCase();
-                    if (ext != type ) {
+                    if (ext != type) {
                         alertMsg = false;
                     }
                 }
-                if(!alertMsg) {
+                if (!alertMsg) {
                     wizard.wizard('selectedItem', {
                         step: 1
                     });
@@ -110,7 +125,7 @@ requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'valid
                     highlight_error($("#file"));
                     return false;
                 }
-                else{
+                else {
                     var $form = $(e.target),
                         formData = new FormData(),
                         params = $form.serializeArray(),
@@ -124,7 +139,7 @@ requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'valid
                         formData.append(val.name, val.value);
                     });
                     $.ajax({
-                        url: WEB_GLOBAL_CTX+"/business/imports/save",
+                        url: WEB_GLOBAL_CTX + "/business/imports/save",
                         data: formData,
                         cache: false,
                         contentType: false,
@@ -139,7 +154,7 @@ requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'valid
                                 columnsList = importsBean.column;
                                 $("#filePath").val(importsBean.filePath);
                                 $("#title").val(importsBean.title);
-                                initFields(columnsList,fieldList);//以数据库列为第一列
+                                initFields(columnsList, fieldList);//以数据库列为第一列
                                 $.scojs_message(rsp.msg, $OK);
                                 parent.Loading.modal('hide');
                                 setHeight();
@@ -152,16 +167,15 @@ requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'valid
             }
         });
 
-        function initFields(vColumnsList,vFieldList)
-        {
-            var i=0;
-            $.each(vColumnsList,function(n,value) {
-                if(value.columnKey=="") {
+        function initFields(vColumnsList, vFieldList) {
+            var i = 0;
+            $.each(vColumnsList, function (n, value) {
+                if (value.columnKey == "") {
                     var options = "";
                     options += "                        <div class='row control-group' >\n";
                     options += "                            <div class='col-sm-2 controls col-sm-offset-1'><h4><span class='label label-success'>" + value.columnComment + "</span></h4></div>\n";
                     options += "                            <div class='col-sm-4 controls'><input type='text' class='form-control' id='column_" + i + "' name='columnHtml' tabindex='" + i + "' value='" + value.tableName + "." + value.columnName + "' readonly/></div>\n";
-                    options += "                            <div class='col-sm-4 controls'><select id='fieldHtml_" + i + "' name='fieldHtml' class='form-control' required ></select></div>\n";
+                    options += "                            <div class='col-sm-4 controls'><select id='fieldHtml_" + i + "' name='fieldHtml' class='form-control selectpicker show-tick'  required ></select></div>\n";
                     options += "                        </div>\n\n";
                     $("#fields").append(options);
                     initSelectByData(vFieldList, "fieldHtml_" + i, "sourceField", "sourceField");
@@ -169,11 +183,12 @@ requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'valid
                 }
             });
         }
+
         wizard.on('actionclicked.fu.wizard', function (e, data) {
             console.log('action clicked');
             console.log(data);
 
-            if ( data.step === 2 && $("#filePath").val() != "") {
+            if (data.step === 2 && $("#filePath").val() != "") {
                 $("#formSubmit").submit();
             }
             //$("#formSubmit").submit();
@@ -186,17 +201,16 @@ requirejs(['jquery','switchs','fuelux','bootstrap', 'select', 'selectCN', 'valid
 
         //状态插件
         $("input[type=\"checkbox\"]").not("[data-switch-no-init]").bootstrapSwitch()
-            .on('switchChange.bootstrapSwitch', function(event, state) {
-                if(state)
-                {
+            .on('switchChange.bootstrapSwitch', function (event, state) {
+                if (state) {
                     $("#modelFlag").val(state)
                     $("#saveOne").append(modelNameDiv);
                 }
-                else
-                {
+                else {
                     $("#modelFlag").val(state)
                     $("#saveOne").empty();
                 }
+                isModelFlag = state;
             });
 
     });
