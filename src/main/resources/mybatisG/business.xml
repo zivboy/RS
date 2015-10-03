@@ -9,7 +9,7 @@
 
 
 <generatorConfiguration>
-    <classPathEntry location="D:\Code\jar\ojdbc6-11.2.0.1.0.jar" />
+    <classPathEntry location="F:\code\Code\jar\mysql-connector-java-5.1.31.jar" />
 
     <context id="TeamTables" targetRuntime="MyBatis3">
 
@@ -23,10 +23,10 @@
             <property name="suppressDate" value="true" />
         </commentGenerator>
 
-        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
-                        connectionURL="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=134.96.77.75)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=custom)(SERVER=DEDICATED)))"
-                        userId="custom"
-                        password="customadmin">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/recruit"
+                        userId="vincent"
+                        password="123qwe">
         </jdbcConnection>
 
         <javaTypeResolver>
@@ -47,8 +47,27 @@
         </javaClientGenerator>
 
 
-        <table schema="" tableName="TOOLS_ERROR_CTL" domainObjectName="CtlTools" >
+        <!--<table schema="ssm" tableName="business_dictionary" domainObjectName="Dictionary" >
+            &lt;!&ndash;<columnOverride column="create_time" property="createTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP" />
+       &ndash;&gt; </table>-->
 
+        <!--        <table schema="ssm" tableName="business_investor" domainObjectName="Investor" >
+                    <columnOverride column="input_time" property="inputTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP" />
+                </table>-->
+        <!--
+                <table schema="ssm" tableName="business_visit" domainObjectName="Visit" >
+                    <columnOverride column="input_time" property="inputTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP" />
+                </table>-->
+        <table schema="ssm" tableName="business_student" domainObjectName="Student" >
         </table>
+        <!--
+        <table schema="ssm" tableName="business_visit_client" domainObjectName="VisitClient" >
+        </table>
+
+
+        <table schema="ssm" tableName="business_visit_rivaly" domainObjectName="VisitRivaly" >
+        </table>
+        <table schema="ssm" tableName="business_visit_msg" domainObjectName="VisitMsg" >
+        </table>-->
     </context>
 </generatorConfiguration>

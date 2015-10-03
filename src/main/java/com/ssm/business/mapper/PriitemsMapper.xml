@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.business.mapper.PriitemsMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.business.entity.Priitems" >
+    <id column="pri_id" property="priId" jdbcType="INTEGER" />
+    <result column="mod_id" property="modId" jdbcType="INTEGER" />
+    <result column="pri_name" property="priName" jdbcType="VARCHAR" />
+    <result column="pri_code" property="priCode" jdbcType="VARCHAR" />
+    <result column="pri_value" property="priValue" jdbcType="VARCHAR" />
+    <result column="pri_left" property="priLeft" jdbcType="INTEGER" />
+    <result column="pri_top" property="priTop" jdbcType="INTEGER" />
+    <result column="pri_width" property="priWidth" jdbcType="INTEGER" />
+    <result column="pri_height" property="priHeight" jdbcType="INTEGER" />
+    <result column="pri_order" property="priOrder" jdbcType="INTEGER" />
+    <result column="state_time" property="stateTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pri_id, mod_id, pri_name, pri_code, pri_value, pri_left, pri_top, pri_width, pri_height, 
+    pri_order, state_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.business.entity.PriitemsCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_priitems
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from business_priitems
+    where pri_id = #{priId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from business_priitems
+    where pri_id = #{priId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.business.entity.PriitemsCriteria" >
+    delete from business_priitems
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.business.entity.Priitems" >
+    insert into business_priitems (pri_id, mod_id, pri_name, 
+      pri_code, pri_value, pri_left, 
+      pri_top, pri_width, pri_height, 
+      pri_order, state_time)
+    values (#{priId,jdbcType=INTEGER}, #{modId,jdbcType=INTEGER}, #{priName,jdbcType=VARCHAR}, 
+      #{priCode,jdbcType=VARCHAR}, #{priValue,jdbcType=VARCHAR}, #{priLeft,jdbcType=INTEGER}, 
+      #{priTop,jdbcType=INTEGER}, #{priWidth,jdbcType=INTEGER}, #{priHeight,jdbcType=INTEGER}, 
+      #{priOrder,jdbcType=INTEGER}, #{stateTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.business.entity.Priitems" >
+    insert into business_priitems
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="priId != null" >
+        pri_id,
+      </if>
+      <if test="modId != null" >
+        mod_id,
+      </if>
+      <if test="priName != null" >
+        pri_name,
+      </if>
+      <if test="priCode != null" >
+        pri_code,
+      </if>
+      <if test="priValue != null" >
+        pri_value,
+      </if>
+      <if test="priLeft != null" >
+        pri_left,
+      </if>
+      <if test="priTop != null" >
+        pri_top,
+      </if>
+      <if test="priWidth != null" >
+        pri_width,
+      </if>
+      <if test="priHeight != null" >
+        pri_height,
+      </if>
+      <if test="priOrder != null" >
+        pri_order,
+      </if>
+      <if test="stateTime != null" >
+        state_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="priId != null" >
+        #{priId,jdbcType=INTEGER},
+      </if>
+      <if test="modId != null" >
+        #{modId,jdbcType=INTEGER},
+      </if>
+      <if test="priName != null" >
+        #{priName,jdbcType=VARCHAR},
+      </if>
+      <if test="priCode != null" >
+        #{priCode,jdbcType=VARCHAR},
+      </if>
+      <if test="priValue != null" >
+        #{priValue,jdbcType=VARCHAR},
+      </if>
+      <if test="priLeft != null" >
+        #{priLeft,jdbcType=INTEGER},
+      </if>
+      <if test="priTop != null" >
+        #{priTop,jdbcType=INTEGER},
+      </if>
+      <if test="priWidth != null" >
+        #{priWidth,jdbcType=INTEGER},
+      </if>
+      <if test="priHeight != null" >
+        #{priHeight,jdbcType=INTEGER},
+      </if>
+      <if test="priOrder != null" >
+        #{priOrder,jdbcType=INTEGER},
+      </if>
+      <if test="stateTime != null" >
+        #{stateTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.business.entity.PriitemsCriteria" resultType="java.lang.Integer" >
+    select count(*) from business_priitems
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update business_priitems
+    <set >
+      <if test="record.priId != null" >
+        pri_id = #{record.priId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modId != null" >
+        mod_id = #{record.modId,jdbcType=INTEGER},
+      </if>
+      <if test="record.priName != null" >
+        pri_name = #{record.priName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priCode != null" >
+        pri_code = #{record.priCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priValue != null" >
+        pri_value = #{record.priValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priLeft != null" >
+        pri_left = #{record.priLeft,jdbcType=INTEGER},
+      </if>
+      <if test="record.priTop != null" >
+        pri_top = #{record.priTop,jdbcType=INTEGER},
+      </if>
+      <if test="record.priWidth != null" >
+        pri_width = #{record.priWidth,jdbcType=INTEGER},
+      </if>
+      <if test="record.priHeight != null" >
+        pri_height = #{record.priHeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.priOrder != null" >
+        pri_order = #{record.priOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.stateTime != null" >
+        state_time = #{record.stateTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update business_priitems
+    set pri_id = #{record.priId,jdbcType=INTEGER},
+      mod_id = #{record.modId,jdbcType=INTEGER},
+      pri_name = #{record.priName,jdbcType=VARCHAR},
+      pri_code = #{record.priCode,jdbcType=VARCHAR},
+      pri_value = #{record.priValue,jdbcType=VARCHAR},
+      pri_left = #{record.priLeft,jdbcType=INTEGER},
+      pri_top = #{record.priTop,jdbcType=INTEGER},
+      pri_width = #{record.priWidth,jdbcType=INTEGER},
+      pri_height = #{record.priHeight,jdbcType=INTEGER},
+      pri_order = #{record.priOrder,jdbcType=INTEGER},
+      state_time = #{record.stateTime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.business.entity.Priitems" >
+    update business_priitems
+    <set >
+      <if test="modId != null" >
+        mod_id = #{modId,jdbcType=INTEGER},
+      </if>
+      <if test="priName != null" >
+        pri_name = #{priName,jdbcType=VARCHAR},
+      </if>
+      <if test="priCode != null" >
+        pri_code = #{priCode,jdbcType=VARCHAR},
+      </if>
+      <if test="priValue != null" >
+        pri_value = #{priValue,jdbcType=VARCHAR},
+      </if>
+      <if test="priLeft != null" >
+        pri_left = #{priLeft,jdbcType=INTEGER},
+      </if>
+      <if test="priTop != null" >
+        pri_top = #{priTop,jdbcType=INTEGER},
+      </if>
+      <if test="priWidth != null" >
+        pri_width = #{priWidth,jdbcType=INTEGER},
+      </if>
+      <if test="priHeight != null" >
+        pri_height = #{priHeight,jdbcType=INTEGER},
+      </if>
+      <if test="priOrder != null" >
+        pri_order = #{priOrder,jdbcType=INTEGER},
+      </if>
+      <if test="stateTime != null" >
+        state_time = #{stateTime,jdbcType=DATE},
+      </if>
+    </set>
+    where pri_id = #{priId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.business.entity.Priitems" >
+    update business_priitems
+    set mod_id = #{modId,jdbcType=INTEGER},
+      pri_name = #{priName,jdbcType=VARCHAR},
+      pri_code = #{priCode,jdbcType=VARCHAR},
+      pri_value = #{priValue,jdbcType=VARCHAR},
+      pri_left = #{priLeft,jdbcType=INTEGER},
+      pri_top = #{priTop,jdbcType=INTEGER},
+      pri_width = #{priWidth,jdbcType=INTEGER},
+      pri_height = #{priHeight,jdbcType=INTEGER},
+      pri_order = #{priOrder,jdbcType=INTEGER},
+      state_time = #{stateTime,jdbcType=DATE}
+    where pri_id = #{priId,jdbcType=INTEGER}
+  </update>
+</mapper>

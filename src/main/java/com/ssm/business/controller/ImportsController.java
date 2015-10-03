@@ -9,6 +9,7 @@ import com.ssm.business.entity.Model;
 import com.ssm.business.service.ImportService;
 import com.ssm.business.service.ItemService;
 import com.ssm.business.service.ModelService;
+import com.ssm.business.service.StudentService;
 import com.ssm.common.baseaction.BaseAction;
 import com.ssm.common.mybatis.Page;
 import com.ssm.common.util.JacksonMapper;
@@ -48,6 +49,9 @@ public class ImportsController extends BaseAction {
 
     @Autowired
     ModelService modelService;
+
+    @Autowired
+    StudentService studentService;
 
     @Autowired
     ItemService itemService;
@@ -297,15 +301,6 @@ public class ImportsController extends BaseAction {
         private int importId,modelId;
         private String fileName;
         private List<String> fieldHtml,columnHtml;
-        private ImportService importServiceMe;
-
-        public ImportService getImportServiceMe() {
-            return importServiceMe;
-        }
-
-        public void setImportServiceMe(ImportService importServiceMe) {
-            this.importServiceMe = importServiceMe;
-        }
 
         public ImportDateThread(int importId,int modelId,String fileName,List<String> fieldHtml,List<String> columnHtml)
         {
@@ -344,7 +339,7 @@ public class ImportsController extends BaseAction {
                     imports.setImportId(importId);
                     imports.setMessage("导入成功");
                     imports.setRowSum(num);
-                    importServiceMe.update(imports);
+                    importService.update(imports);
                 }
             }
         }

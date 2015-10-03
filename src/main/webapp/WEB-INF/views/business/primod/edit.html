@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<#include "/console/layout/main.html"/>
+<html class="fuelux" >
+<@headEdit/>
+<body>
+<div class="container">
+    <form role="form" id="formSubmit" commandName="primod" class="form-horizontal"
+          data-fv-framework="bootstrap"
+          data-fv-message="This value is not valid"
+          data-fv-feedbackicons-valid="glyphicon glyphicon-ok"
+          data-fv-feedbackicons-invalid="glyphicon glyphicon-remove"
+          data-fv-feedbackicons-validating="glyphicon glyphicon-refresh">
+        <!-- Modal -->
+        <div class="panel panel-default">
+            <div class="panel-heading">打印模板</div>
+            <div class="panel-body">
+                <div class="control-group">
+                                   <input type="hidden" name="modId" id="modId" /> 
+
+                </div>
+                          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="modName">模板名称</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="modName" name="modName" maxlength="50" placeholder="输入模板名称" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="modWidth">模板图宽</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="modWidth" name="modWidth" maxlength="50" placeholder="输入模板图宽" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="modHeight">模板图高</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="modHeight" name="modHeight" maxlength="50" placeholder="输入模板图高" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="url">模板图地址</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="url" name="url" maxlength="50" placeholder="输入模板图地址" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="stateTime">更新时间</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="date" class="form-control"  id="stateTime" name="stateTime" maxlength="50" placeholder="输入更新时间" size="100" required   />
+                </div> 
+          </div> 
+
+            </div>
+
+            <div class="panel-footer">
+                <div class="row control-group">
+                    <div class="col-sm-4 col-sm-offset-5">
+                        <div style="align-content: center">
+                            <button type="submit" id="save" class="btn btn-primary" >保存</button>
+                            <button type="button" id="back" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+<!-- /.container -->
+
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/business/primod/edit.js"></script>
+<script type="text/javascript">
+    var primod = JSON.parse(JSON.stringify(${primod}));
+</script>
+</html>
+

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.business.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.business.entity.Student" >
+    <id column="student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="examinee_number" property="examineeNumber" jdbcType="VARCHAR" />
+    <result column="candidate_number" property="candidateNumber" jdbcType="VARCHAR" />
+    <result column="student_type" property="studentType" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="college" property="college" jdbcType="VARCHAR" />
+    <result column="notice_number" property="noticeNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    student_id, examinee_number, candidate_number, student_type, name, college, notice_number
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.business.entity.StudentCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from business_student
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from business_student
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.business.entity.StudentCriteria" >
+    delete from business_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.business.entity.Student" >
+    insert into business_student (student_id, examinee_number, candidate_number, 
+      student_type, name, college, 
+      notice_number)
+    values (#{studentId,jdbcType=INTEGER}, #{examineeNumber,jdbcType=VARCHAR}, #{candidateNumber,jdbcType=VARCHAR}, 
+      #{studentType,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{college,jdbcType=VARCHAR}, 
+      #{noticeNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.business.entity.Student" >
+    insert into business_student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="examineeNumber != null" >
+        examinee_number,
+      </if>
+      <if test="candidateNumber != null" >
+        candidate_number,
+      </if>
+      <if test="studentType != null" >
+        student_type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="college != null" >
+        college,
+      </if>
+      <if test="noticeNumber != null" >
+        notice_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="examineeNumber != null" >
+        #{examineeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="candidateNumber != null" >
+        #{candidateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="studentType != null" >
+        #{studentType,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null" >
+        #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeNumber != null" >
+        #{noticeNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.business.entity.StudentCriteria" resultType="java.lang.Integer" >
+    select count(*) from business_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update business_student
+    <set >
+      <if test="record.studentId != null" >
+        student_id = #{record.studentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examineeNumber != null" >
+        examinee_number = #{record.examineeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.candidateNumber != null" >
+        candidate_number = #{record.candidateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentType != null" >
+        student_type = #{record.studentType,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.college != null" >
+        college = #{record.college,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noticeNumber != null" >
+        notice_number = #{record.noticeNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update business_student
+    set student_id = #{record.studentId,jdbcType=INTEGER},
+      examinee_number = #{record.examineeNumber,jdbcType=VARCHAR},
+      candidate_number = #{record.candidateNumber,jdbcType=VARCHAR},
+      student_type = #{record.studentType,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      college = #{record.college,jdbcType=VARCHAR},
+      notice_number = #{record.noticeNumber,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.business.entity.Student" >
+    update business_student
+    <set >
+      <if test="examineeNumber != null" >
+        examinee_number = #{examineeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="candidateNumber != null" >
+        candidate_number = #{candidateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="studentType != null" >
+        student_type = #{studentType,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null" >
+        college = #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeNumber != null" >
+        notice_number = #{noticeNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.business.entity.Student" >
+    update business_student
+    set examinee_number = #{examineeNumber,jdbcType=VARCHAR},
+      candidate_number = #{candidateNumber,jdbcType=VARCHAR},
+      student_type = #{studentType,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      college = #{college,jdbcType=VARCHAR},
+      notice_number = #{noticeNumber,jdbcType=VARCHAR}
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </update>
+</mapper>
