@@ -302,7 +302,7 @@ public class ImportsController extends BaseAction {
                         for (int j = 0; j < fieldHtml.size(); j++) {
                             if (StringUtils.equals(sourceFieldDBF.get(i).trim(), fieldHtml.get(j).trim())) {
                                 //通过反射将值保存
-                                methodName = "get" + StringUtil.firstCharacterToUpper(StringUtil.replaceUnderlineAndfirstToUpper(columnHtml.get(j).split("\\.")[1], "_", ""));
+                                methodName = "set" + StringUtil.firstCharacterToUpper(StringUtil.replaceUnderlineAndfirstToUpper(columnHtml.get(j).split("\\.")[1], "_", ""));
                                 initValue = String.valueOf(rowValues[i]);
                                 Student.class.getMethod(methodName, String.class).invoke(student, initValue);
                                 break Out;
