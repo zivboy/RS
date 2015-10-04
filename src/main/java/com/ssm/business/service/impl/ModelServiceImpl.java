@@ -2,11 +2,14 @@ package com.ssm.business.service.impl;
 
 import com.ssm.business.entity.Model;
 import com.ssm.business.entity.ModelCriteria;
+import com.ssm.business.mapper.ItemMapper;
 import com.ssm.business.mapper.ModelMapper;
+import com.ssm.business.service.ItemService;
 import com.ssm.business.service.ModelService;
 import com.ssm.common.basedao.BaseDao;
 import com.ssm.common.baseservice.BaseService;
 import com.ssm.common.mybatis.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +24,8 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class ModelServiceImpl  extends BaseService implements ModelService {
 
+    @Autowired
+    ItemService itemService;
 
     @Override
     public Page findByPage(Page page, Model model) {
@@ -83,6 +88,8 @@ public class ModelServiceImpl  extends BaseService implements ModelService {
     @Override
     public void delete(int id) {
         baseDao.getMapper(ModelMapper.class).deleteByPrimaryKey(id);
+        baseDao.getMapper(ItemMapper.class).deleteByModelId(id);
+
     }
 }
 

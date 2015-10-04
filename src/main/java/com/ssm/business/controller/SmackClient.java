@@ -1,5 +1,7 @@
 package com.ssm.business.controller;
 
+import com.ssm.business.entity.Student;
+import com.ssm.common.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.chat.Chat;
@@ -201,7 +203,18 @@ public class SmackClient {
         muc.sendMessage(msg);
     }
 
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         go();
+    } */
+    public static void main(String[] args) {
+        Student student = new Student();
+        try {
+            Student.class.getMethod("set" + StringUtil.firstCharacterToUpper("name"), String.class).invoke(student, String.valueOf("123"));
+            System.out.println(student.getName());
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 }

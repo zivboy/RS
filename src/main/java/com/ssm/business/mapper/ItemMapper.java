@@ -12,6 +12,7 @@ public interface ItemMapper {
     int deleteByExample(ItemCriteria example);
 
     int deleteByPrimaryKey(Integer itemId);
+    int deleteByModelId(Integer modelId);
 
     int insert(Item record);
 

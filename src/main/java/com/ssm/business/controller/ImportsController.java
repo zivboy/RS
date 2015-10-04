@@ -1,11 +1,13 @@
 package com.ssm.business.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.linuxense.javadbf.DBFField;
 import com.linuxense.javadbf.DBFReader;
 import com.ssm.business.entity.Imports;
 import com.ssm.business.entity.Item;
 import com.ssm.business.entity.Model;
+import com.ssm.business.entity.Student;
 import com.ssm.business.service.ImportService;
 import com.ssm.business.service.ItemService;
 import com.ssm.business.service.ModelService;
@@ -14,6 +16,7 @@ import com.ssm.common.baseaction.BaseAction;
 import com.ssm.common.mybatis.Page;
 import com.ssm.common.util.JacksonMapper;
 import com.ssm.common.util.Result;
+import com.ssm.common.util.StringUtil;
 import com.ssm.common.util.UploadUtils;
 import com.ssm.generator.entity.Columns;
 import com.ssm.generator.service.ColumnsService;
@@ -22,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -187,6 +191,7 @@ public class ImportsController extends BaseAction {
      *
      * @return Result
      */
+    @Transactional
     @RequestMapping(value = "/saveModel")
     @ResponseBody
     public Result saveModel(@ModelAttribute Imports imports) {
@@ -202,7 +207,7 @@ public class ImportsController extends BaseAction {
                 model.setState(1);
                 model.setCreateDate(new Date());
                 model.setUserId(Integer.parseInt(com.ssm.shiro.SecurityUtils.getShiroUser().getId()+""));
-                int model_count = modelService.save(model);//先增加模板
+                modelService.save(model);//先增加模板
                 imports.setModelId(model.getModelId());
             }
             else
@@ -216,22 +221,25 @@ public class ImportsController extends BaseAction {
             imports.setMessage("导入中");
             imports.setFieldCount(imports.getFieldHtml().size());
             imports.setTitle(model.getName()+imports.getTitle());
-            int importId = importService.save(imports);
+            int importId;
+            importService.save(imports);
             importId = imports.getImportId();
             result.setMsg("数据导入中");
             result.setSuccessful(true);
             result.setData(imports);
+            List<String> fieldHtml,columnHtml,sourceFieldDBF=new ArrayList<>();
+            fieldHtml = imports.getFieldHtml();
+            columnHtml = imports.getColumnHtml();
 
-            //导入模板数据
-            ImportThread importThread = new ImportThread(importId,model.getModelId(),imports.getTitle(),imports.getFieldHtml(),imports.getColumnHtml());
-            try {
-                Thread thread = new Thread(importThread);
-                thread.start();
-                System.out.println(" thread is running ");
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
+            if(imports.isModelFlag()) {
+                //导入模板数据
+                ImportThread importThread = new ImportThread(model.getModelId(), imports.getTitle(), fieldHtml, columnHtml);
+                try {
+                    Thread thread = new Thread(importThread);
+                    thread.start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             //导入表格数据
@@ -241,13 +249,21 @@ public class ImportsController extends BaseAction {
             DBFReader reader = new DBFReader(fis);
             reader.setCharactersetName("GBK");
             Object[] rowValues;
-            // 一条条取出path文件中记录
-            while ((rowValues = reader.nextRecord()) != null) {
-                for (int i = 0; i < rowValues.length; i++) {
-                    //System.out.println(rowValues[i]);
-                }
+
+            for (int i = 0; i < reader.getFieldCount(); i++) {
+                DBFField field = reader.getField(i);
+                sourceFieldDBF.add(field.getName());
             }
-            fis.close();
+            // 一条条取出path文件中记录
+            try {
+                ImportDateThread threadData = new ImportDateThread(importId,reader,fieldHtml,columnHtml,sourceFieldDBF);
+                Thread thread = new Thread(threadData);
+                thread.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //fis.close();
 
 
         } catch (Exception e) {
@@ -258,53 +274,68 @@ public class ImportsController extends BaseAction {
         return result;
     }
 
-    class ImportThread implements Runnable
-    {
-        private int importId,modelId;
-        private String fileName;
-        private List<String> fieldHtml,columnHtml;
-
-        public ImportThread(int importId,int modelId,String fileName,List<String> fieldHtml,List<String> columnHtml)
-        {
-            this.importId = importId;
-            this.modelId = modelId;
-            this.fileName = fileName;
-            this.fieldHtml = fieldHtml;
-            this.columnHtml = columnHtml;
-        }
-
-        @Override
-        public synchronized void run() {
-            List<Item> list = new ArrayList<Item>();
-            int i = 0;
-            for(String field: fieldHtml)
-            {
-                String [] columnArray = columnHtml.get(i).split("\\.");
-                Item item = new Item();
-                item.setModelId(modelId);
-                item.setState(1);
-                item.setSourceTabel(fileName);
-                item.setSourceField(field);
-                item.setTargetTable(columnArray[0]);
-                item.setTargetField(columnArray[1]);
-                i++;
-                list.add(item);
-            }
-            if(list!=null) {
-                int num =  itemService.saveBatch(list);
-            }
-        }
-    }
 
     class ImportDateThread implements Runnable
     {
-        private int importId,modelId;
+        private DBFReader reader;
+        private List<String> fieldHtml,columnHtml,sourceFieldDBF;
+        private int num=1,importId;
+        public ImportDateThread(int importId,DBFReader reader,List<String> fieldHtml,List<String> columnHtml,List<String> sourceFieldDBF)
+        {
+            this.importId = importId;
+            this.reader = reader;
+            this.fieldHtml = fieldHtml;
+            this.columnHtml = columnHtml;
+            this.sourceFieldDBF = sourceFieldDBF;
+        }
+
+        @Override
+        public synchronized void run() {
+            Object[] rowValues;
+            String methodName,initValue;
+            try {
+                while ((rowValues = reader.nextRecord()) != null) {
+                    Student student = new Student();
+                    for (int i = 0; i < rowValues.length; i++) {
+                        //System.out.println(rowValues[i]);
+                        Out:
+                        for (int j = 0; j < fieldHtml.size(); j++) {
+                            if (StringUtils.equals(sourceFieldDBF.get(i).trim(), fieldHtml.get(j).trim())) {
+                                //通过反射将值保存
+                                methodName = "get" + StringUtil.firstCharacterToUpper(StringUtil.replaceUnderlineAndfirstToUpper(columnHtml.get(j).split("\\.")[1], "_", ""));
+                                initValue = String.valueOf(rowValues[i]);
+                                Student.class.getMethod(methodName, String.class).invoke(student, initValue);
+                                break Out;
+                            }
+                        }
+                    }
+                    studentService.save(student);
+                    num++;
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            finally {
+                Imports imports = new Imports();
+                imports.setState(1);
+                imports.setImportId(importId);
+                imports.setMessage("导入成功");
+                imports.setRowSum(num);
+                importService.update(imports);
+            }
+        }
+    }
+
+    class ImportThread implements Runnable
+    {
+        private int modelId;
         private String fileName;
         private List<String> fieldHtml,columnHtml;
 
-        public ImportDateThread(int importId,int modelId,String fileName,List<String> fieldHtml,List<String> columnHtml)
+        public ImportThread(int modelId,String fileName,List<String> fieldHtml,List<String> columnHtml)
         {
-            this.importId = importId;
             this.modelId = modelId;
             this.fileName = fileName;
             this.fieldHtml = fieldHtml;
@@ -329,21 +360,11 @@ public class ImportsController extends BaseAction {
                 list.add(item);
             }
             if(list!=null) {
-                int num =  itemService.saveBatch(list);
-                if(num!=0)
-                {
-
-                    System.out.println(" thread is over ");
-                    Imports imports = new Imports();
-                    imports.setState(0);
-                    imports.setImportId(importId);
-                    imports.setMessage("导入成功");
-                    imports.setRowSum(num);
-                    importService.update(imports);
-                }
+                itemService.saveBatch(list);
             }
         }
     }
+
 
     /**
      * 查询单个数据导入

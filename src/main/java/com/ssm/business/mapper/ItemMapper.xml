@@ -97,6 +97,10 @@
     delete from business_model_item
     where item_id = #{itemId,jdbcType=INTEGER}
   </delete>
+    <delete id="deleteByModelId" parameterType="java.lang.Integer">
+        delete from business_model_item
+        where model_id = #{itemId,jdbcType=INTEGER}
+    </delete>
     <delete id="deleteByExample" parameterType="com.ssm.business.entity.ItemCriteria">
         delete from business_model_item
         <if test="_parameter != null">

@@ -66,12 +66,7 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
             e.preventDefault();
             var $form = $(e.target);
             var params = $form.serialize();
-            var fieldHtml = $("select[name='fieldHtml']");
-            var selectedCount =0;
-            $.each(fieldHtml, function (i, value) {
-                if(value.val()!="")
-                selectedCount++;
-            });
+            var selectedCount =$("select[name='fieldHtml']").length;
             var fv = $form.data('formValidation');
 
             if ($("#name").val() == '' && isModelFlag) {
@@ -85,8 +80,8 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
                 $.post(WEB_GLOBAL_CTX + "/business/imports/saveModel", params, function (rsp) {
                     if (rsp.successful) {
                         $.scojs_message(rsp.msg, $OK);
-                        $("#save").toggleClass("disabled");
-                        setTimeout("window.location.href='" + WEB_GLOBAL_CTX + "/business/imports/index'", 1000);
+                        //$("#save").toggleClass("disabled");
+                        //setTimeout("window.location.href='" + WEB_GLOBAL_CTX + "/business/imports/index'", 1000);
                     } else {
                         $.scojs_message(rsp.msg, $ERROR);
                     }
@@ -154,7 +149,7 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
                                 columnsList = importsBean.column;
                                 $("#filePath").val(importsBean.filePath);
                                 $("#title").val(importsBean.title);
-                                initFields(columnsList, fieldList);//以数据库列为第一列
+                                initFields(columnsList, fieldList);//以数据库列为第一列页面字段
                                 $.scojs_message(rsp.msg, $OK);
                                 parent.Loading.modal('hide');
                                 setHeight();

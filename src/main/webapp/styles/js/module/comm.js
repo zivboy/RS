@@ -90,7 +90,7 @@ function initSelect(id, ajaxUrl, ajaxDataParam, initData, sValue, sText,isQuery)
 //初始化下拉框函数
 function initSelectByData(data,id, sValue, sText) {
     //同步
-    var options = "<option   value=''></option>\n";;
+    var options = "<option   value=''></option>\n";
     $(data).each(function () {
 
         options += selectOption($(this), "", sValue, sText);
