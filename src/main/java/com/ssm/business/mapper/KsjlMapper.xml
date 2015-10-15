@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.business.mapper.KsjlMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.business.entity.Ksjl" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ksh" property="ksh" jdbcType="VARCHAR" />
+    <result column="qsrq" property="qsrq" jdbcType="DATE" />
+    <result column="zjrq" property="zjrq" jdbcType="DATE" />
+    <result column="jl" property="jl" jdbcType="VARCHAR" />
+    <result column="rhzw" property="rhzw" jdbcType="VARCHAR" />
+    <result column="zmr" property="zmr" jdbcType="VARCHAR" />
+    <result column="sf" property="sf" jdbcType="VARCHAR" />
+    <result column="pc" property="pc" jdbcType="VARCHAR" />
+    <result column="ny" property="ny" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ksh, qsrq, zjrq, jl, rhzw, zmr, sf, pc, ny
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.business.entity.KsjlCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_ksjl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from business_ksjl
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from business_ksjl
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.business.entity.KsjlCriteria" >
+    delete from business_ksjl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.business.entity.Ksjl" >
+    insert into business_ksjl (id, ksh, qsrq, zjrq, 
+      jl, rhzw, zmr, sf, 
+      pc, ny)
+    values (#{id,jdbcType=BIGINT}, #{ksh,jdbcType=VARCHAR}, #{qsrq,jdbcType=DATE}, #{zjrq,jdbcType=DATE}, 
+      #{jl,jdbcType=VARCHAR}, #{rhzw,jdbcType=VARCHAR}, #{zmr,jdbcType=VARCHAR}, #{sf,jdbcType=VARCHAR}, 
+      #{pc,jdbcType=VARCHAR}, #{ny,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.business.entity.Ksjl" >
+    insert into business_ksjl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ksh != null" >
+        ksh,
+      </if>
+      <if test="qsrq != null" >
+        qsrq,
+      </if>
+      <if test="zjrq != null" >
+        zjrq,
+      </if>
+      <if test="jl != null" >
+        jl,
+      </if>
+      <if test="rhzw != null" >
+        rhzw,
+      </if>
+      <if test="zmr != null" >
+        zmr,
+      </if>
+      <if test="sf != null" >
+        sf,
+      </if>
+      <if test="pc != null" >
+        pc,
+      </if>
+      <if test="ny != null" >
+        ny,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="ksh != null" >
+        #{ksh,jdbcType=VARCHAR},
+      </if>
+      <if test="qsrq != null" >
+        #{qsrq,jdbcType=DATE},
+      </if>
+      <if test="zjrq != null" >
+        #{zjrq,jdbcType=DATE},
+      </if>
+      <if test="jl != null" >
+        #{jl,jdbcType=VARCHAR},
+      </if>
+      <if test="rhzw != null" >
+        #{rhzw,jdbcType=VARCHAR},
+      </if>
+      <if test="zmr != null" >
+        #{zmr,jdbcType=VARCHAR},
+      </if>
+      <if test="sf != null" >
+        #{sf,jdbcType=VARCHAR},
+      </if>
+      <if test="pc != null" >
+        #{pc,jdbcType=VARCHAR},
+      </if>
+      <if test="ny != null" >
+        #{ny,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.business.entity.KsjlCriteria" resultType="java.lang.Integer" >
+    select count(*) from business_ksjl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update business_ksjl
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.ksh != null" >
+        ksh = #{record.ksh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qsrq != null" >
+        qsrq = #{record.qsrq,jdbcType=DATE},
+      </if>
+      <if test="record.zjrq != null" >
+        zjrq = #{record.zjrq,jdbcType=DATE},
+      </if>
+      <if test="record.jl != null" >
+        jl = #{record.jl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rhzw != null" >
+        rhzw = #{record.rhzw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zmr != null" >
+        zmr = #{record.zmr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf != null" >
+        sf = #{record.sf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pc != null" >
+        pc = #{record.pc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ny != null" >
+        ny = #{record.ny,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update business_ksjl
+    set id = #{record.id,jdbcType=BIGINT},
+      ksh = #{record.ksh,jdbcType=VARCHAR},
+      qsrq = #{record.qsrq,jdbcType=DATE},
+      zjrq = #{record.zjrq,jdbcType=DATE},
+      jl = #{record.jl,jdbcType=VARCHAR},
+      rhzw = #{record.rhzw,jdbcType=VARCHAR},
+      zmr = #{record.zmr,jdbcType=VARCHAR},
+      sf = #{record.sf,jdbcType=VARCHAR},
+      pc = #{record.pc,jdbcType=VARCHAR},
+      ny = #{record.ny,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.business.entity.Ksjl" >
+    update business_ksjl
+    <set >
+      <if test="ksh != null" >
+        ksh = #{ksh,jdbcType=VARCHAR},
+      </if>
+      <if test="qsrq != null" >
+        qsrq = #{qsrq,jdbcType=DATE},
+      </if>
+      <if test="zjrq != null" >
+        zjrq = #{zjrq,jdbcType=DATE},
+      </if>
+      <if test="jl != null" >
+        jl = #{jl,jdbcType=VARCHAR},
+      </if>
+      <if test="rhzw != null" >
+        rhzw = #{rhzw,jdbcType=VARCHAR},
+      </if>
+      <if test="zmr != null" >
+        zmr = #{zmr,jdbcType=VARCHAR},
+      </if>
+      <if test="sf != null" >
+        sf = #{sf,jdbcType=VARCHAR},
+      </if>
+      <if test="pc != null" >
+        pc = #{pc,jdbcType=VARCHAR},
+      </if>
+      <if test="ny != null" >
+        ny = #{ny,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.business.entity.Ksjl" >
+    update business_ksjl
+    set ksh = #{ksh,jdbcType=VARCHAR},
+      qsrq = #{qsrq,jdbcType=DATE},
+      zjrq = #{zjrq,jdbcType=DATE},
+      jl = #{jl,jdbcType=VARCHAR},
+      rhzw = #{rhzw,jdbcType=VARCHAR},
+      zmr = #{zmr,jdbcType=VARCHAR},
+      sf = #{sf,jdbcType=VARCHAR},
+      pc = #{pc,jdbcType=VARCHAR},
+      ny = #{ny,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

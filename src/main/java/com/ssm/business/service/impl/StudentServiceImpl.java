@@ -13,18 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Created by V on Sat Oct 03 14:22:22 GMT+08:00 2015.
+ * Created by V on Thu Oct 15 19:03:22 GMT+08:00 2015.
  */
 @Service("StudentService")
 @Transactional
 @SuppressWarnings("unchecked")
-public class StudentServiceImpl extends BaseService implements StudentService {
+public class StudentServiceImpl  extends BaseService implements StudentService {
 
 
     @Override
     public Page findByPage(Page page, Student student) {
         page.setCount(countByExample(page,student));
-        List<Student> list= baseDao.selectByPage("com.ssm.business.mapper.StudentMapper." + BaseDao.SELECT_BY_EXAMPLE, getCriteria(page, student), page);
+        List<Student> list= findAll(page,student);
         if(list!=null)
             return page.setRows(list);
         else
@@ -33,7 +33,7 @@ public class StudentServiceImpl extends BaseService implements StudentService {
     
     @Override
     public List<Student> findAll(Page page, Student student) {
-        return baseDao.selectList("com.ssm.business.mapper.StudentMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,student));
+        return baseDao.selectByPage("com.ssm.business.mapper.StudentMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,student),page);
     }
 
     @Override

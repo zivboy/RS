@@ -6,7 +6,7 @@ import com.ssm.common.mybatis.Page;
 import java.util.List;
 
 /**
- * Created by V on Sat Oct 03 14:22:22 GMT+08:00 2015.
+ * Created by V on Thu Oct 15 19:03:22 GMT+08:00 2015.
  */
 
 public interface StudentService {
