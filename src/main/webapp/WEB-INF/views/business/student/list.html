@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<#include "/console/layout/main.html"/>
+<@head/>
+<body>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">学生表管理</div>
+        <div class="panel-body">
+            <table id="tableB" class="table-hover table-condensed table-striped">
+                <thead>
+                <tr>
+                    <th data-field="state" data-radio="true"></th>
+                    <th data-field="tzsh" class="col-md-2"></th>
+                    <th data-field="ksh" class="col-md-6"></th>
+                    <th data-field="sfzh" class="col-md-1"></th>
+                    <th data-field="yy" class="col-md-100"></th>
+                    <th data-field="ncl" class="col-md-100"></th>
+                    <th data-field="pcdm" class="col-md-6"></th>
+                    <th data-field="pc" class="col-md-6"></th>
+                    <th data-field="pcfs" class="col-md-2"></th>
+                    <th data-field="xbdm" class="col-md-6"></th>
+                    <th data-field="xb" class="col-md-6"></th>
+                    <th data-field="xh" class="col-md-6"></th>
+                    <th data-field="xydm" class="col-md-6"></th>
+                    <th data-field="xy" class="col-md-6"></th>
+                    <th data-field="zydm" class="col-md-100"></th>
+                    <th data-field="zy" class="col-md-6"></th>
+                    <th data-field="zybj" class="col-md-100"></th>
+                    <th data-field="qsxx" class="col-md-100"></th>
+                    <th data-field="zkzh" class="col-md-100"></th>
+                    <th data-field="xslb" class="col-md-6"></th>
+                    <th data-field="zp" class="col-md-100"></th>
+                    <th data-field="xm" class="col-md-6"></th>
+                    <th data-field="xydm1" class="col-md-6"></th>
+                    <th data-field="xy1" class="col-md-6"></th>
+                    <th data-field="zhf" class="col-md-2"></th>
+                    <th data-field="sfdm" class="col-md-6"></th>
+                    <th data-field="sf" class="col-md-6"></th>
+                    <th data-field="kldm" class="col-md-6"></th>
+                    <th data-field="kskl" class="col-md-6"></th>
+                    <th data-field="rq" class="col-md-2"></th>
+                    <th data-field="xz" class="col-md-6"></th>
+                    <th data-field="zydm1" class="col-md-100"></th>
+                    <th data-field="zy1" class="col-md-6"></th>
+                    <th data-field="zzmmdm" class="col-md-6"></th>
+                    <th data-field="zzmm" class="col-md-6"></th>
+                    <th data-field="kslbdm" class="col-md-6"></th>
+                    <th data-field="kslb" class="col-md-6"></th>
+                    <th data-field="mzdm" class="col-md-6"></th>
+                    <th data-field="mz" class="col-md-6"></th>
+                    <th data-field="dqbm" class="col-md-6"></th>
+                    <th data-field="dqmc" class="col-md-6"></th>
+                    <th data-field="zyf" class="col-md-2"></th>
+                    <th data-field="yuw" class="col-md-2"></th>
+                    <th data-field="shux" class="col-md-2"></th>
+                    <th data-field="waiy" class="col-md-2"></th>
+                    <th data-field="wul" class="col-md-2"></th>
+                    <th data-field="huax" class="col-md-2"></th>
+                    <th data-field="shengw" class="col-md-2"></th>
+                    <th data-field="zhengz" class="col-md-2"></th>
+                    <th data-field="lis" class="col-md-2"></th>
+                    <th data-field="dil" class="col-md-2"></th>
+                    <th data-field="zonghl" class="col-md-2"></th>
+                    <th data-field="zonghw" class="col-md-2"></th>
+                    <th data-field="jiaf" class="col-md-2"></th>
+                    <th data-field="zxmk" class="col-md-2"></th>
+                    <th data-field="total111" class="col-md-2"></th>
+                    <th data-field="total" class="col-md-2"></th>
+                    <th data-field="csny" class="col-md-2"></th>
+                    <th data-field="bylbdm" class="col-md-6"></th>
+                    <th data-field="zxdm" class="col-md-6"></th>
+                    <th data-field="zxmc" class="col-md-6"></th>
+                    <th data-field="wyyzdm" class="col-md-6"></th>
+                    <th data-field="hkdj" class="col-md-6"></th>
+                    <th data-field="bmdw" class="col-md-6"></th>
+                    <th data-field="kstz" class="col-md-6"></th>
+                    <th data-field="xtdw" class="col-md-6"></th>
+                    <th data-field="dqdm" class="col-md-6"></th>
+                    <th data-field="jtdz" class="col-md-100"></th>
+                    <th data-field="yzbm" class="col-md-6"></th>
+                    <th data-field="lxdh" class="col-md-6"></th>
+                    <th data-field="hkkh" class="col-md-6"></th>
+                    <th data-field="kstc" class="col-md-6"></th>
+                    <th data-field="rhzw" class="col-md-6"></th>
+                    <th data-field="ksjlhcf" class="col-md-100"></th>
+                    <th data-field="wyks" class="col-md-6"></th>
+                    <th data-field="zsyj" class="col-md-6"></th>
+                    <th data-field="kslxdm" class="col-md-6"></th>
+                    <th data-field="sjr" class="col-md-6"></th>
+                    <th data-field="ysjzdm" class="col-md-6"></th>
+                    <th data-field="wytl" class="col-md-6"></th>
+                    <th data-field="tddw" class="col-md-6"></th>
+                    <th data-field="jhxz" class="col-md-6"></th>
+                    <th data-field="cj" class="col-md-2"></th>
+                    <th data-field="tzcj" class="col-md-2"></th>
+                    <th data-field="tdcj" class="col-md-2"></th>
+                    <th data-field="zgf" class="col-md-2"></th>
+                    <th data-field="yxdrcj" class="col-md-2"></th>
+                    <th data-field="zyytjzcj" class="col-md-2"></th>
+                    <th data-field="zyytfjcj" class="col-md-2"></th>
+                    <th data-field="tdzy" class="col-md-6"></th>
+                    <th data-field="dqtddw" class="col-md-6"></th>
+                    <th data-field="ytzy" class="col-md-6"></th>
+                    <th data-field="lqzy" class="col-md-6"></th>
+                    <th data-field="tdyydm" class="col-md-6"></th>
+                    <th data-field="bz" class="col-md-6"></th>
+                    <th data-field="zyhg" class="col-md-6"></th>
+                    <th data-field="tjhg" class="col-md-6"></th>
+                    <th data-field="lqfs" class="col-md-6"></th>
+                    <th data-field="kszt" class="col-md-6"></th>
+                    <th data-field="sdbz" class="col-md-6"></th>
+                    <th data-field="tddwdm1" class="col-md-6"></th>
+                    <th data-field="zydh1" class="col-md-6"></th>
+                    <th data-field="tddwdm2" class="col-md-6"></th>
+                    <th data-field="zydh2" class="col-md-6"></th>
+                    <th data-field="tddwdm3" class="col-md-6"></th>
+                    <th data-field="zydh3" class="col-md-6"></th>
+                    <th data-field="tddwdm4" class="col-md-6"></th>
+                    <th data-field="zydh4" class="col-md-6"></th>
+                    <th data-field="tddwdm5" class="col-md-6"></th>
+                    <th data-field="zydh5" class="col-md-6"></th>
+                    <th data-field="tddwdm6" class="col-md-6"></th>
+                    <th data-field="zydh6" class="col-md-6"></th>
+                    <th data-field="zytz" class="col-md-6"></th>
+                    <th data-field="zyzytj" class="col-md-6"></th>
+                    <th data-field="dxtj" class="col-md-6"></th>
+                    <th data-field="zytjfc" class="col-md-6"></th>
+                    <th data-field="tjsxbz" class="col-md-6"></th>
+                    <th data-field="tjjldm" class="col-md-6"></th>
+                    <th data-field="bh" class="col-md-6"></th>
+                    <th data-field="kslsczbz" class="col-md-6"></th>
+                    <th data-field="zysxdm1" class="col-md-6"></th>
+                    <th data-field="zysxdm2" class="col-md-6"></th>
+                    <th data-field="zysxdm3" class="col-md-6"></th>
+                    <th data-field="zysxdm4" class="col-md-6"></th>
+                    <th data-field="zysxdm5" class="col-md-6"></th>
+                    <th data-field="zysxdm6" class="col-md-6"></th>
+                    <th data-field="wkSg" class="col-md-6"></th>
+                    <th data-field="wkTz" class="col-md-6"></th>
+                    <th data-field="ny" class="col-md-2"></th>
+
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div><!--/.container-->
+<div id="custom-toolbar">
+    <form role="form" name="form" id="form1">
+        <div class="form-inline" role="form">
+            <div class="row">
+                <div class="col-md-3">
+                    <select class="form-control " id="search_select" name="search_select">
+                    
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="输入查询条件" id="search"
+                               name="search_username">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" id="query" name="query" title="查询"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="btn-group" id="do">
+                        <@shiro.hasPermission name="Student:save">
+                        <button type="button" class="btn btn-default" id="add" name="add" title="新增" ><span
+                                class="glyphicon glyphicon-plus"></span></button>
+                    </@shiro.hasPermission>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="to" style="display:none;">
+    <@shiro.hasPermission name="Student:edit">
+    <button type="button" class="btn btn-default" id="modify" name="modify" title="修改"><span
+            class="glyphicon glyphicon-edit"></span></button>
+</@shiro.hasPermission>
+<@shiro.hasPermission name="Student:delete">
+<button type="button" class="btn btn-default" id="delete" name="delete" title="删除"><span
+        class="glyphicon glyphicon-remove"></span></button>
+</@shiro.hasPermission>
+</div>
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/business/student/list.js"></script>
+</html>
+

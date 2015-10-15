@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<#include "/console/layout/main.html"/>
+<html class="fuelux" >
+<@headEdit/>
+<body>
+<div class="container">
+    <form role="form" id="formSubmit" commandName="student" class="form-horizontal"
+          data-fv-framework="bootstrap"
+          data-fv-message="This value is not valid"
+          data-fv-feedbackicons-valid="glyphicon glyphicon-ok"
+          data-fv-feedbackicons-invalid="glyphicon glyphicon-remove"
+          data-fv-feedbackicons-validating="glyphicon glyphicon-refresh">
+        <!-- Modal -->
+        <div class="panel panel-default">
+            <div class="panel-heading">学生表</div>
+            <div class="panel-body">
+                <div class="control-group">
+                         
+                </div>
+                          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tzsh"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tzsh" name="tzsh" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ksh"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="ksh" name="ksh" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sfzh"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="sfzh" name="sfzh" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="yy"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="yy" name="yy" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ncl"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="ncl" name="ncl" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="pcdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="pcdm" name="pcdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="pc"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="pc" name="pc" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="pcfs"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="pcfs" name="pcfs" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xbdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xbdm" name="xbdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xb"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xb" name="xb" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xh"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xh" name="xh" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xydm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xydm" name="xydm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xy"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xy" name="xy" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zydm" name="zydm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zy"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zy" name="zy" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zybj"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zybj" name="zybj" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="qsxx"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="qsxx" name="qsxx" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zkzh"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zkzh" name="zkzh" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xslb"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xslb" name="xslb" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zp"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zp" name="zp" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xm" name="xm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xydm1"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xydm1" name="xydm1" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xy1"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xy1" name="xy1" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zhf"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zhf" name="zhf" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sfdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="sfdm" name="sfdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sf"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="sf" name="sf" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kldm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="kldm" name="kldm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kskl"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="kskl" name="kskl" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="rq"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="date" class="form-control"  id="rq" name="rq" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xz" name="xz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydm1"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zydm1" name="zydm1" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zy1"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zy1" name="zy1" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zzmmdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zzmmdm" name="zzmmdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zzmm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zzmm" name="zzmm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kslbdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="kslbdm" name="kslbdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kslb"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="kslb" name="kslb" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="mzdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="mzdm" name="mzdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="mz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="mz" name="mz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dqbm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="dqbm" name="dqbm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dqmc"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="dqmc" name="dqmc" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zyf"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zyf" name="zyf" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="yuw"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="yuw" name="yuw" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="shux"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="shux" name="shux" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="waiy"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="waiy" name="waiy" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wul"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="wul" name="wul" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="huax"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="huax" name="huax" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="shengw"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="shengw" name="shengw" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zhengz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zhengz" name="zhengz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="lis"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="lis" name="lis" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dil"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="dil" name="dil" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zonghl"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zonghl" name="zonghl" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zonghw"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zonghw" name="zonghw" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="jiaf"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="jiaf" name="jiaf" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zxmk"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zxmk" name="zxmk" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="total111"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="total111" name="total111" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="total"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="total" name="total" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="csny"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="date" class="form-control"  id="csny" name="csny" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="bylbdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="bylbdm" name="bylbdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zxdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zxdm" name="zxdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zxmc"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zxmc" name="zxmc" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wyyzdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="wyyzdm" name="wyyzdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="hkdj"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="hkdj" name="hkdj" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="bmdw"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="bmdw" name="bmdw" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kstz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="kstz" name="kstz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xtdw"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xtdw" name="xtdw" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dqdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="dqdm" name="dqdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="jtdz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="jtdz" name="jtdz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="yzbm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="yzbm" name="yzbm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="lxdh"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="lxdh" name="lxdh" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="hkkh"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="hkkh" name="hkkh" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kstc"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="kstc" name="kstc" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="rhzw"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="rhzw" name="rhzw" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ksjlhcf"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="ksjlhcf" name="ksjlhcf" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wyks"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="wyks" name="wyks" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zsyj"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zsyj" name="zsyj" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kslxdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="kslxdm" name="kslxdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sjr"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="sjr" name="sjr" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ysjzdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="ysjzdm" name="ysjzdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wytl"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="wytl" name="wytl" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddw"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tddw" name="tddw" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="jhxz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="jhxz" name="jhxz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="cj"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="cj" name="cj" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tzcj"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tzcj" name="tzcj" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tdcj"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tdcj" name="tdcj" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zgf"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zgf" name="zgf" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="yxdrcj"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="yxdrcj" name="yxdrcj" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zyytjzcj"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zyytjzcj" name="zyytjzcj" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zyytfjcj"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zyytfjcj" name="zyytfjcj" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tdzy"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tdzy" name="tdzy" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dqtddw"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="dqtddw" name="dqtddw" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ytzy"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="ytzy" name="ytzy" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="lqzy"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="lqzy" name="lqzy" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tdyydm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tdyydm" name="tdyydm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="bz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="bz" name="bz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zyhg"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zyhg" name="zyhg" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tjhg"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tjhg" name="tjhg" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="lqfs"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="lqfs" name="lqfs" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kszt"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="kszt" name="kszt" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sdbz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="sdbz" name="sdbz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm1"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tddwdm1" name="tddwdm1" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh1"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zydh1" name="zydh1" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm2"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tddwdm2" name="tddwdm2" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh2"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zydh2" name="zydh2" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm3"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tddwdm3" name="tddwdm3" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh3"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zydh3" name="zydh3" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm4"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tddwdm4" name="tddwdm4" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh4"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zydh4" name="zydh4" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm5"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tddwdm5" name="tddwdm5" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh5"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zydh5" name="zydh5" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm6"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tddwdm6" name="tddwdm6" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh6"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zydh6" name="zydh6" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zytz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zytz" name="zytz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zyzytj"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zyzytj" name="zyzytj" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dxtj"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="dxtj" name="dxtj" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zytjfc"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zytjfc" name="zytjfc" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tjsxbz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tjsxbz" name="tjsxbz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tjjldm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tjjldm" name="tjjldm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="bh"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="bh" name="bh" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kslsczbz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="kslsczbz" name="kslsczbz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm1"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zysxdm1" name="zysxdm1" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm2"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zysxdm2" name="zysxdm2" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm3"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zysxdm3" name="zysxdm3" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm4"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zysxdm4" name="zysxdm4" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm5"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zysxdm5" name="zysxdm5" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm6"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zysxdm6" name="zysxdm6" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wkSg"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="wkSg" name="wkSg" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wkTz"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="wkTz" name="wkTz" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ny"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="date" class="form-control"  id="ny" name="ny" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+
+            </div>
+
+            <div class="panel-footer">
+                <div class="row control-group">
+                    <div class="col-sm-4 col-sm-offset-5">
+                        <div style="align-content: center">
+                            <button type="submit" id="save" class="btn btn-primary" >保存</button>
+                            <button type="button" id="back" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+<!-- /.container -->
+
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/business/student/edit.js"></script>
+<script type="text/javascript">
+    var student = JSON.parse(JSON.stringify(${student}));
+</script>
+</html>
+
