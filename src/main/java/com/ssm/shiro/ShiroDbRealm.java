@@ -7,7 +7,6 @@ import com.ssm.service.core.OrganizationRoleService;
 import com.ssm.service.core.RoleService;
 import com.ssm.service.core.UserRoleService;
 import com.ssm.service.core.UserService;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -70,7 +69,6 @@ public class ShiroDbRealm extends AuthorizingRealm {
         boolean flag = true;
         Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
         for (Object key : cache.keys()) {
-            log.debug("---key.toString()------------"+key.toString());
             if(id.equals(key.toString())) {
                 cache.remove(id);
                 flag = false;
@@ -79,6 +77,19 @@ public class ShiroDbRealm extends AuthorizingRealm {
         }
         return flag;
     }
+
+	public boolean isSuperRole(List<UserRole> list)
+	{
+		boolean flag = false;
+		for(UserRole role : list)
+		{
+			if(role.getRoleId()==1) {
+				flag = true;
+				break;
+			}
+		}
+		return flag;
+	}
 
 
 	/**
@@ -139,7 +150,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		Collection<String> hasPermissions = null;
 		Collection<String> hasRoles = null;
 		// 是否启用超级管理员 && id==1为超级管理员，构造所有权限 
-		if (activeRoot && shiroUser.getId() == 1) {
+		if (activeRoot && isSuperRole(shiroUser.getUser().getUserRoles())) {
 			hasRoles = new HashSet<String>();
 			List<Role> roles = roleService.findAll();
 			for (Role role : roles) {

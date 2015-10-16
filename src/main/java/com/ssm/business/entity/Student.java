@@ -3,6 +3,8 @@ package com.ssm.business.entity;
 import java.util.Date;
 
 public class Student {
+    private Long id;
+
     private Long tzsh;
 
     private String ksh;
@@ -258,6 +260,14 @@ public class Student {
     private String wkTz;
 
     private Date ny;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getTzsh() {
         return tzsh;

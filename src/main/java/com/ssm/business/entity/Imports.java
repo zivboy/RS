@@ -1,7 +1,7 @@
 package com.ssm.business.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.ssm.generator.entity.Columns;
+import com.ssm.entity.Columns;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;

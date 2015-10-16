@@ -1,27 +1,8 @@
 package com.ssm.controller.core;
 
-import com.ssm.common.util.UploadUtils;
 import com.ssm.common.baseaction.BaseAction;
-import com.ssm.common.util.Result;
-import com.mongodb.DB;
-import com.mongodb.gridfs.GridFS;
-import org.apache.commons.io.FileUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.convert.MongoConverter;
-import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.ServletException;
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by Alex on 2014/11/24.

@@ -1,6 +1,5 @@
 package com.ssm.common.util;
 
-import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,23 +33,4 @@ public class UploadUtils {
         }
         return filePath+"/"+newFilename;
     }
-
-    public static boolean uploadMongoDB(String key,MultipartFile file,GridFsTemplate gridFsTemplate)
-    {
-        boolean flag = false;
-        if (!file.isEmpty()) {
-            if (!file.isEmpty()) {
-                try {
-
-                    gridFsTemplate.store(file.getInputStream(), key);
-                    flag = true;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return flag;
-    }
-
-
 }

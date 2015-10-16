@@ -61,7 +61,7 @@ public class StudentServiceImpl  extends BaseService implements StudentService {
 
     @Override
     public Student get(int id) {
-        return baseDao.getMapper(StudentMapper.class).selectByPrimaryKey(id);
+        return baseDao.getMapper(StudentMapper.class).selectByPrimaryKey(Long.valueOf(id));
     }
 
     @Override
@@ -71,7 +71,7 @@ public class StudentServiceImpl  extends BaseService implements StudentService {
 
     @Override
     public void delete(int id) {
-        baseDao.getMapper(StudentMapper.class).deleteByPrimaryKey(id);
+        baseDao.getMapper(StudentMapper.class).deleteByPrimaryKey(Long.valueOf(id));
     }
 }
 

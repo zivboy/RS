@@ -11,13 +11,21 @@ public interface StudentMapper {
 
     int deleteByExample(StudentCriteria example);
 
+    int deleteByPrimaryKey(Long id);
+
     int insert(Student record);
 
     int insertSelective(Student record);
 
     List<Student> selectByExample(StudentCriteria example);
 
+    Student selectByPrimaryKey(Long id);
+
     int updateByExampleSelective(@Param("record") Student record, @Param("example") StudentCriteria example);
 
     int updateByExample(@Param("record") Student record, @Param("example") StudentCriteria example);
+
+    int updateByPrimaryKeySelective(Student record);
+
+    int updateByPrimaryKey(Student record);
 }

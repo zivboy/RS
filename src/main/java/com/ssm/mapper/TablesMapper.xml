@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.mapper.TablesMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.entity.Tables" >
+    <result column="TABLE_CATALOG" property="tableCatalog" jdbcType="VARCHAR" />
+    <result column="TABLE_SCHEMA" property="tableSchema" jdbcType="VARCHAR" />
+    <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+    <result column="TABLE_TYPE" property="tableType" jdbcType="VARCHAR" />
+    <result column="ENGINE" property="engine" jdbcType="VARCHAR" />
+    <result column="VERSION" property="version" jdbcType="BIGINT" />
+    <result column="ROW_FORMAT" property="rowFormat" jdbcType="VARCHAR" />
+    <result column="TABLE_ROWS" property="tableRows" jdbcType="BIGINT" />
+    <result column="AVG_ROW_LENGTH" property="avgRowLength" jdbcType="BIGINT" />
+    <result column="DATA_LENGTH" property="dataLength" jdbcType="BIGINT" />
+    <result column="MAX_DATA_LENGTH" property="maxDataLength" jdbcType="BIGINT" />
+    <result column="INDEX_LENGTH" property="indexLength" jdbcType="BIGINT" />
+    <result column="DATA_FREE" property="dataFree" jdbcType="BIGINT" />
+    <result column="AUTO_INCREMENT" property="autoIncrement" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CHECK_TIME" property="checkTime" jdbcType="TIMESTAMP" />
+    <result column="TABLE_COLLATION" property="tableCollation" jdbcType="VARCHAR" />
+    <result column="CHECKSUM" property="checksum" jdbcType="BIGINT" />
+    <result column="CREATE_OPTIONS" property="createOptions" jdbcType="VARCHAR" />
+    <result column="TABLE_COMMENT" property="tableComment" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <resultMap id="DataResultMap" type="com.ssm.entity.DataBase" >
+        <result column="Database" property="database" jdbcType="VARCHAR" />
+    </resultMap>
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, TABLE_TYPE, ENGINE, VERSION, ROW_FORMAT, 
+    TABLE_ROWS, AVG_ROW_LENGTH, DATA_LENGTH, MAX_DATA_LENGTH, INDEX_LENGTH, DATA_FREE, 
+    AUTO_INCREMENT, CREATE_TIME, UPDATE_TIME, CHECK_TIME, TABLE_COLLATION, CHECKSUM, 
+    CREATE_OPTIONS, TABLE_COMMENT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.entity.TablesCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TABLES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ssm.entity.TablesCriteria" >
+    delete from TABLES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.entity.Tables" >
+    insert into TABLES (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, 
+      TABLE_TYPE, ENGINE, VERSION, 
+      ROW_FORMAT, TABLE_ROWS, AVG_ROW_LENGTH, 
+      DATA_LENGTH, MAX_DATA_LENGTH, INDEX_LENGTH, 
+      DATA_FREE, AUTO_INCREMENT, CREATE_TIME, 
+      UPDATE_TIME, CHECK_TIME, TABLE_COLLATION, 
+      CHECKSUM, CREATE_OPTIONS, TABLE_COMMENT
+      )
+    values (#{tableCatalog,jdbcType=VARCHAR}, #{tableSchema,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, 
+      #{tableType,jdbcType=VARCHAR}, #{engine,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, 
+      #{rowFormat,jdbcType=VARCHAR}, #{tableRows,jdbcType=BIGINT}, #{avgRowLength,jdbcType=BIGINT}, 
+      #{dataLength,jdbcType=BIGINT}, #{maxDataLength,jdbcType=BIGINT}, #{indexLength,jdbcType=BIGINT}, 
+      #{dataFree,jdbcType=BIGINT}, #{autoIncrement,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{checkTime,jdbcType=TIMESTAMP}, #{tableCollation,jdbcType=VARCHAR}, 
+      #{checksum,jdbcType=BIGINT}, #{createOptions,jdbcType=VARCHAR}, #{tableComment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.entity.Tables" >
+    insert into TABLES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tableCatalog != null" >
+        TABLE_CATALOG,
+      </if>
+      <if test="tableSchema != null" >
+        TABLE_SCHEMA,
+      </if>
+      <if test="tableName != null" >
+        TABLE_NAME,
+      </if>
+      <if test="tableType != null" >
+        TABLE_TYPE,
+      </if>
+      <if test="engine != null" >
+        ENGINE,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="rowFormat != null" >
+        ROW_FORMAT,
+      </if>
+      <if test="tableRows != null" >
+        TABLE_ROWS,
+      </if>
+      <if test="avgRowLength != null" >
+        AVG_ROW_LENGTH,
+      </if>
+      <if test="dataLength != null" >
+        DATA_LENGTH,
+      </if>
+      <if test="maxDataLength != null" >
+        MAX_DATA_LENGTH,
+      </if>
+      <if test="indexLength != null" >
+        INDEX_LENGTH,
+      </if>
+      <if test="dataFree != null" >
+        DATA_FREE,
+      </if>
+      <if test="autoIncrement != null" >
+        AUTO_INCREMENT,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="checkTime != null" >
+        CHECK_TIME,
+      </if>
+      <if test="tableCollation != null" >
+        TABLE_COLLATION,
+      </if>
+      <if test="checksum != null" >
+        CHECKSUM,
+      </if>
+      <if test="createOptions != null" >
+        CREATE_OPTIONS,
+      </if>
+      <if test="tableComment != null" >
+        TABLE_COMMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tableCatalog != null" >
+        #{tableCatalog,jdbcType=VARCHAR},
+      </if>
+      <if test="tableSchema != null" >
+        #{tableSchema,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableType != null" >
+        #{tableType,jdbcType=VARCHAR},
+      </if>
+      <if test="engine != null" >
+        #{engine,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="rowFormat != null" >
+        #{rowFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="tableRows != null" >
+        #{tableRows,jdbcType=BIGINT},
+      </if>
+      <if test="avgRowLength != null" >
+        #{avgRowLength,jdbcType=BIGINT},
+      </if>
+      <if test="dataLength != null" >
+        #{dataLength,jdbcType=BIGINT},
+      </if>
+      <if test="maxDataLength != null" >
+        #{maxDataLength,jdbcType=BIGINT},
+      </if>
+      <if test="indexLength != null" >
+        #{indexLength,jdbcType=BIGINT},
+      </if>
+      <if test="dataFree != null" >
+        #{dataFree,jdbcType=BIGINT},
+      </if>
+      <if test="autoIncrement != null" >
+        #{autoIncrement,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkTime != null" >
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tableCollation != null" >
+        #{tableCollation,jdbcType=VARCHAR},
+      </if>
+      <if test="checksum != null" >
+        #{checksum,jdbcType=BIGINT},
+      </if>
+      <if test="createOptions != null" >
+        #{createOptions,jdbcType=VARCHAR},
+      </if>
+      <if test="tableComment != null" >
+        #{tableComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.entity.TablesCriteria" resultType="java.lang.Integer" >
+    select count(*) from TABLES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TABLES
+    <set >
+      <if test="record.tableCatalog != null" >
+        TABLE_CATALOG = #{record.tableCatalog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableSchema != null" >
+        TABLE_SCHEMA = #{record.tableSchema,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableName != null" >
+        TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableType != null" >
+        TABLE_TYPE = #{record.tableType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engine != null" >
+        ENGINE = #{record.engine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        VERSION = #{record.version,jdbcType=BIGINT},
+      </if>
+      <if test="record.rowFormat != null" >
+        ROW_FORMAT = #{record.rowFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableRows != null" >
+        TABLE_ROWS = #{record.tableRows,jdbcType=BIGINT},
+      </if>
+      <if test="record.avgRowLength != null" >
+        AVG_ROW_LENGTH = #{record.avgRowLength,jdbcType=BIGINT},
+      </if>
+      <if test="record.dataLength != null" >
+        DATA_LENGTH = #{record.dataLength,jdbcType=BIGINT},
+      </if>
+      <if test="record.maxDataLength != null" >
+        MAX_DATA_LENGTH = #{record.maxDataLength,jdbcType=BIGINT},
+      </if>
+      <if test="record.indexLength != null" >
+        INDEX_LENGTH = #{record.indexLength,jdbcType=BIGINT},
+      </if>
+      <if test="record.dataFree != null" >
+        DATA_FREE = #{record.dataFree,jdbcType=BIGINT},
+      </if>
+      <if test="record.autoIncrement != null" >
+        AUTO_INCREMENT = #{record.autoIncrement,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkTime != null" >
+        CHECK_TIME = #{record.checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tableCollation != null" >
+        TABLE_COLLATION = #{record.tableCollation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checksum != null" >
+        CHECKSUM = #{record.checksum,jdbcType=BIGINT},
+      </if>
+      <if test="record.createOptions != null" >
+        CREATE_OPTIONS = #{record.createOptions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableComment != null" >
+        TABLE_COMMENT = #{record.tableComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TABLES
+    set TABLE_CATALOG = #{record.tableCatalog,jdbcType=VARCHAR},
+      TABLE_SCHEMA = #{record.tableSchema,jdbcType=VARCHAR},
+      TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      TABLE_TYPE = #{record.tableType,jdbcType=VARCHAR},
+      ENGINE = #{record.engine,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=BIGINT},
+      ROW_FORMAT = #{record.rowFormat,jdbcType=VARCHAR},
+      TABLE_ROWS = #{record.tableRows,jdbcType=BIGINT},
+      AVG_ROW_LENGTH = #{record.avgRowLength,jdbcType=BIGINT},
+      DATA_LENGTH = #{record.dataLength,jdbcType=BIGINT},
+      MAX_DATA_LENGTH = #{record.maxDataLength,jdbcType=BIGINT},
+      INDEX_LENGTH = #{record.indexLength,jdbcType=BIGINT},
+      DATA_FREE = #{record.dataFree,jdbcType=BIGINT},
+      AUTO_INCREMENT = #{record.autoIncrement,jdbcType=BIGINT},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      CHECK_TIME = #{record.checkTime,jdbcType=TIMESTAMP},
+      TABLE_COLLATION = #{record.tableCollation,jdbcType=VARCHAR},
+      CHECKSUM = #{record.checksum,jdbcType=BIGINT},
+      CREATE_OPTIONS = #{record.createOptions,jdbcType=VARCHAR},
+      TABLE_COMMENT = #{record.tableComment,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+    <select id="dataBase" resultMap="DataResultMap" >
+        show databases
+    </select>
+</mapper>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<#include "/console/layout/main.html"/>
+<html class="fuelux" >
+<@headEdit/>
+<link href="${base}/styles/css/bootstrap-table.min.css" rel="stylesheet">
+<link href="${base}/styles/css/bootstrap-switch.min.css" rel="stylesheet">
+<body>
+<div class="container">
+    <form role="form" id="formSubmit" commandName="tables" class="form-horizontal"
+          data-fv-framework="bootstrap"
+          data-fv-message="This value is not valid"
+          data-fv-feedbackicons-valid="glyphicon glyphicon-ok"
+          data-fv-feedbackicons-invalid="glyphicon glyphicon-remove"
+          data-fv-feedbackicons-validating="glyphicon glyphicon-refresh">
+        <!-- Modal -->
+        <div class="panel panel-default">
+            <div class="panel-heading">编辑代码元素</div>
+            <div class="panel-body">
+                <div class="control-group">
+                    <input type="hidden" name="id" id="id"/>
+                </div>
+
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="moduleName">中文名称</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="text" class="form-control" id="moduleName" name="moduleName" maxlength="50"
+                               placeholder="" size="100" required   />
+                    </div>
+                </div>
+
+
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="moduleCode">模块编码</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="text" class="form-control" id="moduleCode" name="moduleCode"
+                               placeholder=""  required
+                               maxlength="50"
+                               minlength="2">
+                    </div>
+                </div>
+
+
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="moduleCodeUrl">模块路径</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="text" class="form-control" id="moduleCodeUrl" name="moduleCodeUrl" maxlength="100"
+                               placeholder=""  required
+                               maxlength="100"
+                               minlength="10">
+                    </div>
+                </div>
+
+
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="moduleCodeUrl">查询HTML</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="text" class="form-control" id="indexPageName" name="indexPageName"
+                               placeholder="" size="100" required
+                               maxlength="12"
+                               minlength="2">
+                    </div>
+                </div>
+
+
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="moduleCodeUrl">编辑HTML</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="text" class="form-control" id="editPageName" name="editPageName"
+                               placeholder="" size="100" required
+                               maxlength="12"
+                               minlength="2">
+                    </div>
+                </div>
+
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="override">是否覆盖</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="checkbox" id="override" name="override" checked >
+                    </div>
+                </div>
+
+                    <div class="container">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">字段信息</div>
+                            <div class="panel-body">
+                                <table id="tableB" class="table-hover table-condensed table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th data-field="state" data-radio="true">ID</th>
+                                        <th data-field="columnCode" class="col-xs-1" >编码</th>
+                                        <th data-field="columnName" class="col-xs-1" >列名</th>
+                                        <th data-field="dataType" class="col-xs-1" >类型</th>
+                                        <th data-field="characterMaximumLength" class="col-xs-1"  >长度</th>
+                                        <th data-field="isNullable" class="col-xs-1"  >可空</th>
+                                        <th data-field="key" class="col-xs-1" >主键</th>
+                                        <th data-field="type" class="col-xs-1"  >from类型</th>
+                                        <th data-field="list" class="col-xs-1" >字典</th>
+                                        <th data-field="essential" class="col-xs-1">必填</th>
+                                        <th data-field="validate" class="col-xs-1" >验证</th>
+                                        <th data-field="query" class="col-xs-1" >查询</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+
+            <div class="panel-footer">
+                <div class="row control-group">
+                    <div class="col-sm-4 col-sm-offset-5">
+                        <div style="align-content: center">
+                            <button type="submit" id="save" class="btn btn-primary" >保存</button>
+                            <button type="button" id="back" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+<!-- /.container -->
+
+<div id="custom-toolbar">
+    <form role="form" name="form" id="form2" commandName="tables" >
+        <div class="form-inline" role="form">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="btn-group" id="do">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="row" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">修改字段信息</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="control-group">
+                    <input type="hidden" name="state" id="state"/>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="columnCode">编码</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="text" class="form-control" id="columnCode" name="columnCode" maxlength="50"
+                               placeholder="" size="100" required/>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="columnName">列名</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="text" class="form-control" id="columnName" name="columnName" maxlength="50"
+                               placeholder="" size="100" required/>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="type">页面类型</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <select class="form-control " id="type" name="type">
+                        </select>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="list">字典</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="text" class="form-control" id="list" name="list" maxlength="50"
+                               placeholder="" size="100" required/>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="validate">验证</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="text" class="form-control" id="validate" name="validate" maxlength="50"
+                               placeholder="" size="100" required/>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="isNullable">可空</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="checkbox" id="isNullable" name="isNullable">
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="key">主键</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="checkbox" id="key" name="key">
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="essential">必填</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="checkbox" id="essential" name="essential">
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="query">查询</label>
+                    </div>
+                    <div class="col-sm-6 controls">
+                        <input type="checkbox" id="query" name="query">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="ok" class="btn btn-success" >更新</button>
+                <button type="button" id="exit" class="btn btn-danger" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="to" style="display:none;">
+    <button type="button" class="btn btn-default" id="modify" name="modify" title="修改"><span
+            class="glyphicon glyphicon-edit"></span></button>
+    <button type="button" class="btn btn-default" id="delete" name="delete" title="删除"><span
+            class="glyphicon glyphicon-remove"></span></button>
+</div>
+
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/generator/edit.js"></script>
+<script type="text/javascript">
+    var tableName = "${(tableName)!}";
+    var tableComment = "${(tableComment)!}";
+    var $table ;
+    var currentRow;
+    var currentIndex;
+</script>
+</html>

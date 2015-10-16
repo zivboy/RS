@@ -60,9 +60,6 @@
                 </table>-->
         <table schema="ssm" tableName="business_student" domainObjectName="Student" >
         </table>
-
-        <table schema="ssm" tableName="business_ksjl" domainObjectName="Ksjl" >
-        </table>
         <!--
         <table schema="ssm" tableName="business_visit_client" domainObjectName="VisitClient" >
         </table>

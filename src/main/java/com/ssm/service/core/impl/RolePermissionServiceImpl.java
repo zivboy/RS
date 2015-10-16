@@ -1,26 +1,23 @@
 package com.ssm.service.core.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.ssm.common.basedao.BaseDao;
-import com.ssm.common.mybatis.Page;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.ssm.common.baseservice.BaseService;
+import com.ssm.common.mybatis.Page;
 import com.ssm.entity.RolePermission;
 import com.ssm.entity.RolePermissionCriteria;
 import com.ssm.mapper.RolePermissionMapper;
 import com.ssm.service.core.PermissionService;
 import com.ssm.service.core.RolePermissionDataControlService;
 import com.ssm.service.core.RolePermissionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service("rolePermissionService")
 @Transactional
-@SuppressWarnings("unchecked")
 public class RolePermissionServiceImpl extends BaseService implements RolePermissionService {
 
 	@Autowired
@@ -58,7 +55,7 @@ public class RolePermissionServiceImpl extends BaseService implements RolePermis
 		if(roleId != null){
 			cri.andRoleIdEqualTo(roleId);
 		}
-		List<RolePermission> list = new ArrayList<RolePermission>();
+		List<RolePermission> list;
 		list = baseDao.getMapper(RolePermissionMapper.class).selectByExample(criteria);
 		for(RolePermission rp:list){
 			if(rp.getPermissionId() != null){
@@ -69,6 +66,7 @@ public class RolePermissionServiceImpl extends BaseService implements RolePermis
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
     @Override
     public List<RolePermission> findByRoleId(Page page,Long roleId) {
         RolePermissionCriteria criteria = new RolePermissionCriteria();
@@ -81,19 +79,25 @@ public class RolePermissionServiceImpl extends BaseService implements RolePermis
             criteria.setOrderByClause(page.getSort() + " " + page.getOrder());
         }
 
-        List<RolePermission> list = new ArrayList<RolePermission>();
+        List<RolePermission> list = new ArrayList<>();
 
         if(page == null){
             list = baseDao.getMapper(RolePermissionMapper.class).selectByExample(criteria);
         }
         else {
-            list = baseDao.selectByPage("com.ssm.mapper.RolePermissionMapper." + BaseDao.SELECT_BY_EXAMPLE, criteria, page);
-        }
-        for(RolePermission rp:list){
-            if(rp.getPermissionId() != null){
-                rp.setPermission(permissionService.get(rp.getPermissionId()));
-                rp.setRolePermissionDataControls(rolePermissionDataControlService.findByRolePermissionId(rp.getPermissionId()));
-            }
+			try {
+				list = (List<RolePermission>)baseDao.selectByPage("com.ssm.mapper.RolePermissionMapper." + BaseDao.SELECT_BY_EXAMPLE, criteria, page);
+
+				for(RolePermission rp:list)
+					if (null != rp.getPermissionId()) {
+						rp.setPermission(permissionService.get(rp.getPermissionId()));
+						rp.setRolePermissionDataControls(rolePermissionDataControlService.findByRolePermissionId(rp.getPermissionId()));
+					}
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
         }
         return list;
     }

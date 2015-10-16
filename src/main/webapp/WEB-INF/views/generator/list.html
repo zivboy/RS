@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<#include "/console/layout/main.html"/>
+<@head/>
+<body>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">代码生成</div>
+        <div class="panel-body">
+            <table id="tableB" class="table-hover table-condensed table-striped">
+                <thead>
+                <tr>
+                    <th data-field="state" data-radio="true">ID</th>
+                    <th data-field="tableName" class="col-md-2">系统表名</th>
+                    <th data-field="tableSchema" class="col-md-2">库名</th>
+                    <th data-field="tableComment" class="col-md-2">备注</th>
+                    <th data-field="tableType" class="col-md-2">类型</th>
+                    <th data-field="engine" class="col-md-1">引擎</th>
+                    <th data-field="createTime" class="col-md-3">修改时间</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div><!--/.container-->
+<div id="custom-toolbar">
+    <form role="form" name="form" id="form1" commandName="tables" >
+        <div class="form-inline" role="form">
+            <div class="row">
+
+                <div class="col-md-7">
+                    <select  class="form-control" id="search_tableSchema" name="search_tableSchema">
+                    </select>
+                    <select class="form-control " id="search_select" name="search_select">
+                        <option value="search_tableName">表名</option>
+                        <option value="search_tableComment">备注</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="输入查询条件" id="search"
+                               name="search_username">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" id="query" name="query" title="查询"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-1">
+                    <div class="btn-group" id="do">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="to" style="display:none;">
+    <button type="button" class="btn btn-default" id="compressed" name="compressed" title="代码生成"><span
+            class="glyphicon glyphicon-compressed"></span></button>
+</div>
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/generator/list.js"></script>
+</html>

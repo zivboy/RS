@@ -96,16 +96,78 @@
 
     </bean>
 
+    <!-- 配置数据源 -->
+    <bean name="dataSourceGenerator" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!--        <property name="url" value="jdbc:mysql://localhost:3306/ssm?useUnicode=true&amp;characterEncoding=UTF-8" />
+                <property name="username" value="vincent" />
+                <property name="password" value="123qwe" />-->
+
+        <property name="url" value="${jdbc.url.generator}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="0" />
+        <!-- 连接池最大使用连接数量 -->
+        <property name="maxActive" value="20" />
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="0" />
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="60000" />
+
+        <!-- <property name="poolPreparedStatements" value="true" /> <property name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->
+
+        <property name="validationQuery" value="SELECT 1" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+        <property name="testWhileIdle" value="true" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="25200000" />
+
+        <!-- 打开removeAbandoned功能 -->
+        <property name="removeAbandoned" value="true" />
+        <!-- 1800秒，也就是30分钟 -->
+        <property name="removeAbandonedTimeout" value="1800" />
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="true" />
+
+        <!--  防御SQL注入攻击 监控数据库-->
+        <!-- <property name="filters" value="mergeStat"  /> -->
+        <property name="filters" value="wall,stat,log4j" />
+        <property name="connectionProperties" value="druid.stat.mergeSql=true" />
+
+        <!--是的DruidDataSource无法正确识别数据库的类型 -->
+        <property name="proxyFilters">
+            <list>
+                <ref bean="wall-filter"/>
+                <ref bean="stat-filter"/>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="multipleDataSource" class="com.ssm.common.mybatis.MultipleDataSource">
+        <property name="defaultTargetDataSource" ref="dataSource"/>
+        <property name="targetDataSources">
+            <map>
+                <!-- 注意这里的value是和上面的DataSource的id对应，key要和下面的CustomerContextHolder中的常量对应 -->
+                <entry value-ref="dataSource" key="dataSource"/>
+                <entry value-ref="dataSourceGenerator" key="dataSourceGenerator"/>
+            </map>
+        </property>
+    </bean>
 
     <!-- mybatis会话工厂 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="multipleDataSource" />
         <property name="configLocation" value="classpath:mybatis.xml" />
     </bean>
 
     <!--扫描mapper -->
     <bean name="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.ssm.mapper,com.ssm.business.mapper,com.ssm.generator.mapper" />
+        <property name="basePackage" value="com.ssm.mapper,com.ssm.business.mapper,com.ssm.mapper" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" /> <!--
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>-->
     </bean>

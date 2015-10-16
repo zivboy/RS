@@ -15,7 +15,7 @@
       >
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="multipleDataSource" />
     </bean>
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
@@ -55,7 +55,7 @@
                 <value>com.ssm.common.*</value>
                 <value>com.ssm.service.*</value>
                 <value>com.ssm.business.service.*</value>
-                <value>com.ssm.generator.service.*</value>
+                <value>com.ssm.service.*</value>
             </list>
         </property>
     </bean>
