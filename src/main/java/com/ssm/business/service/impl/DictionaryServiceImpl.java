@@ -8,34 +8,40 @@ import com.ssm.common.basedao.BaseDao;
 import com.ssm.common.baseservice.BaseService;
 import com.ssm.common.mybatis.Page;
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * Created by ZHEJIANG RUIZHENG  on 2014/7/28.
+ * Created by V on Sat Oct 17 10:30:06 GMT+08:00 2015.
  */
-@Service("dictionaryService")
+@Service("DictionaryService")
 @Transactional
 @SuppressWarnings("unchecked")
-public class DictionaryImpl extends BaseService implements DictionaryService  {
+public class DictionaryServiceImpl  extends BaseService implements DictionaryService {
 
-
-    private static final Logger logger = LoggerFactory.getLogger(DictionaryImpl.class);
 
     @Override
     public Page findByPage(Page page, Dictionary dictionary) {
-        page.setCount(findAll(page,dictionary).size());
-        return page.setRows(baseDao.selectByPage("com.ssm.business.mapper.DictionaryMapper."+ BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,dictionary),page));
+        page.setCount(countByExample(page,dictionary));
+        List<Dictionary> list= baseDao.selectByPage("com.ssm.business.mapper.DictionaryMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,dictionary),page);
+        if(list!=null)
+            return page.setRows(list);
+        else
+            return null;
     }
-
+    
     @Override
     public List<Dictionary> findAll(Page page, Dictionary dictionary) {
         return baseDao.selectList("com.ssm.business.mapper.DictionaryMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,dictionary));
     }
+
+    @Override
+    public int countByExample(Page page, Dictionary dictionary) {
+        return baseDao.getMapper(DictionaryMapper.class).countByExample(getCriteria(page,dictionary));
+    }
+
 
     public DictionaryCriteria getCriteria(Page page,Dictionary dictionary)
     {
@@ -71,7 +77,6 @@ public class DictionaryImpl extends BaseService implements DictionaryService  {
         }
         return criteria;
     }
-
     public Dictionary findByKeyAndName(String dicKey,String dicName){
         return baseDao.getMapper(DictionaryMapper.class).selectByKeyAndName(dicKey,dicName);
     }
@@ -144,11 +149,17 @@ public class DictionaryImpl extends BaseService implements DictionaryService  {
         return baseDao.getMapper(DictionaryMapper.class).findAllDicListForExport(dictionary);
     }
 
+
+    @Override
+    public void save(Dictionary dictionary) {
+        baseDao.getMapper(DictionaryMapper.class).insertSelective(dictionary);
+    }
+
     @Override
     public Dictionary get(int id) {
-        Dictionary dictionary =  baseDao.getMapper(DictionaryMapper.class).selectByPrimaryKey(id);
-        return dictionary;
+        return baseDao.getMapper(DictionaryMapper.class).selectByPrimaryKey(id);
     }
+
 
     @Override
     public int findMaxDicIdByName(String dicName) {
@@ -159,4 +170,15 @@ public class DictionaryImpl extends BaseService implements DictionaryService  {
     public String findDicCodeByDicName(String dicName){
         return baseDao.getMapper(DictionaryMapper.class).findDicCodeByDicName(dicName);
     }
+
+    @Override
+    public void update(Dictionary dictionary) {
+        baseDao.getMapper(DictionaryMapper.class).updateByPrimaryKeySelective(dictionary);
+    }
+
+    @Override
+    public void delete(int id) {
+        baseDao.getMapper(DictionaryMapper.class).deleteByPrimaryKey(id);
+    }
 }
+

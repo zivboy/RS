@@ -5,104 +5,84 @@
 <body>
 <div class="container">
     <div class="panel panel-default">
-        <div class="panel-heading">学生表管理</div>
+        <div class="panel-heading">学生管理</div>
         <div class="panel-body">
             <table id="tableB" class="table-hover table-condensed table-striped">
                 <thead>
                 <tr>
                     <th data-field="state" data-radio="true"></th>
-                    <th data-field="tzsh" class="col-md-2"></th>
-                    <th data-field="ksh" class="col-md-6"></th>
-                    <th data-field="sfzh" class="col-md-1"></th>
-                    <th data-field="yy" class="col-md-100"></th>
-                    <th data-field="ncl" class="col-md-100"></th>
-                    <th data-field="pcdm" class="col-md-6"></th>
-                    <th data-field="pc" class="col-md-6"></th>
-                    <th data-field="pcfs" class="col-md-2"></th>
-                    <th data-field="xbdm" class="col-md-6"></th>
-                    <th data-field="xb" class="col-md-6"></th>
-                    <th data-field="xh" class="col-md-6"></th>
-                    <th data-field="xydm" class="col-md-6"></th>
-                    <th data-field="xy" class="col-md-6"></th>
-                    <th data-field="zydm" class="col-md-100"></th>
-                    <th data-field="zy" class="col-md-6"></th>
-                    <th data-field="zybj" class="col-md-100"></th>
-                    <th data-field="qsxx" class="col-md-100"></th>
-                    <th data-field="zkzh" class="col-md-100"></th>
-                    <th data-field="xslb" class="col-md-6"></th>
-                    <th data-field="zp" class="col-md-100"></th>
-                    <th data-field="xm" class="col-md-6"></th>
-                    <th data-field="xydm1" class="col-md-6"></th>
-                    <th data-field="xy1" class="col-md-6"></th>
-                    <th data-field="zhf" class="col-md-2"></th>
-                    <th data-field="sfdm" class="col-md-6"></th>
-                    <th data-field="sf" class="col-md-6"></th>
-                    <th data-field="kldm" class="col-md-6"></th>
-                    <th data-field="kskl" class="col-md-6"></th>
-                    <th data-field="rq" class="col-md-2"></th>
-                    <th data-field="xz" class="col-md-6"></th>
-                    <th data-field="zydm1" class="col-md-100"></th>
-                    <th data-field="zy1" class="col-md-6"></th>
-                    <th data-field="zzmmdm" class="col-md-6"></th>
-                    <th data-field="zzmm" class="col-md-6"></th>
-                    <th data-field="kslbdm" class="col-md-6"></th>
-                    <th data-field="kslb" class="col-md-6"></th>
-                    <th data-field="mzdm" class="col-md-6"></th>
-                    <th data-field="mz" class="col-md-6"></th>
-                    <th data-field="dqbm" class="col-md-6"></th>
-                    <th data-field="dqmc" class="col-md-6"></th>
-                    <th data-field="zyf" class="col-md-2"></th>
-                    <th data-field="yuw" class="col-md-2"></th>
-                    <th data-field="shux" class="col-md-2"></th>
-                    <th data-field="waiy" class="col-md-2"></th>
-                    <th data-field="wul" class="col-md-2"></th>
-                    <th data-field="huax" class="col-md-2"></th>
-                    <th data-field="shengw" class="col-md-2"></th>
-                    <th data-field="zhengz" class="col-md-2"></th>
-                    <th data-field="lis" class="col-md-2"></th>
-                    <th data-field="dil" class="col-md-2"></th>
-                    <th data-field="zonghl" class="col-md-2"></th>
-                    <th data-field="zonghw" class="col-md-2"></th>
-                    <th data-field="jiaf" class="col-md-2"></th>
-                    <th data-field="zxmk" class="col-md-2"></th>
-                    <th data-field="total111" class="col-md-2"></th>
-                    <th data-field="total" class="col-md-2"></th>
-                    <th data-field="csny" class="col-md-2"></th>
-                    <th data-field="bylbdm" class="col-md-6"></th>
-                    <th data-field="zxdm" class="col-md-6"></th>
-                    <th data-field="zxmc" class="col-md-6"></th>
-                    <th data-field="wyyzdm" class="col-md-6"></th>
-                    <th data-field="hkdj" class="col-md-6"></th>
-                    <th data-field="bmdw" class="col-md-6"></th>
-                    <th data-field="kstz" class="col-md-6"></th>
-                    <th data-field="xtdw" class="col-md-6"></th>
-                    <th data-field="dqdm" class="col-md-6"></th>
-                    <th data-field="jtdz" class="col-md-100"></th>
-                    <th data-field="yzbm" class="col-md-6"></th>
-                    <th data-field="lxdh" class="col-md-6"></th>
-                    <th data-field="hkkh" class="col-md-6"></th>
-                    <th data-field="kstc" class="col-md-6"></th>
+                    <th data-field="xm" class="col-md-6">姓名</th>
+                    <th data-field="sfzh" class="col-md-6">身份证号</th>
+                    <th data-field="xb" class="col-md-6">性别</th>
+                    <th data-field="xbdm" class="col-md-6">性别代码</th>
+                    <th data-field="sf" class="col-md-6">省份</th>
+                    <th data-field="sfdm" class="col-md-6">省份代码</th>
+                    <th data-field="dqmc" class="col-md-6">地区</th>
+                    <th data-field="dqdm" class="col-md-6">地区代码</th>
+                    <th data-field="mz" class="col-md-6">民族</th>
+                    <th data-field="mzdm" class="col-md-6">民族代码</th>
+                    <th data-field="csny" class="col-md-2">出生年月</th>
+                    <th data-field="zzmmdm" class="col-md-6">政治面貌代码</th>
+                    <th data-field="zzmm" class="col-md-6">政治面貌</th>
+                    <th data-field="zxdm" class="col-md-6">中学代码</th>
+                    <th data-field="zxmc" class="col-md-6">中学名称</th>
+                    <th data-field="bylbdm" class="col-md-6">毕业类别代码</th>
+                    <th data-field="jtdz" class="col-md-51">家庭地址</th>
+                    <th data-field="yzbm" class="col-md-6">邮政编码</th>
+                    <th data-field="lxdh" class="col-md-6">联系电话</th>
+                    <th data-field="hkkh" class="col-md-6">（不用）</th>
+                    <th data-field="kstc" class="col-md-6">考生特长</th>
                     <th data-field="rhzw" class="col-md-6"></th>
-                    <th data-field="ksjlhcf" class="col-md-100"></th>
-                    <th data-field="wyks" class="col-md-6"></th>
-                    <th data-field="zsyj" class="col-md-6"></th>
-                    <th data-field="kslxdm" class="col-md-6"></th>
-                    <th data-field="sjr" class="col-md-6"></th>
-                    <th data-field="ysjzdm" class="col-md-6"></th>
-                    <th data-field="wytl" class="col-md-6"></th>
-                    <th data-field="tddw" class="col-md-6"></th>
-                    <th data-field="jhxz" class="col-md-6"></th>
-                    <th data-field="cj" class="col-md-2"></th>
-                    <th data-field="tzcj" class="col-md-2"></th>
-                    <th data-field="tdcj" class="col-md-2"></th>
+                    <th data-field="ksjlhcf" class="col-md-51">考生获奖情况</th>
+                    <th data-field="zp" class="col-md-51">照片地址</th>
+                    <th data-field="ksh" class="col-md-6">考生号</th>
+                    <th data-field="zkzh" class="col-md-51">准考证号</th>
+                    <th data-field="kldm" class="col-md-6">考生科类代码</th>
+                    <th data-field="kskl" class="col-md-6">考生科类</th>
+                    <th data-field="kslbdm" class="col-md-6">考生类别代码</th>
+                    <th data-field="kslb" class="col-md-6">考生类别</th>
+                    <th data-field="kslxdm" class="col-md-6">考试类型代码</th>
+                    <th data-field="zhf" class="col-md-2">综合分</th>
+                    <th data-field="zyf" class="col-md-2">专业分</th>
+                    <th data-field="yuw" class="col-md-2">语文</th>
+                    <th data-field="shux" class="col-md-2">数学</th>
+                    <th data-field="waiy" class="col-md-2">外语</th>
+                    <th data-field="wul" class="col-md-2">物理</th>
+                    <th data-field="huax" class="col-md-2">化学</th>
+                    <th data-field="shengw" class="col-md-2">生物</th>
+                    <th data-field="zhengz" class="col-md-2">政治</th>
+                    <th data-field="lis" class="col-md-2">历史</th>
+                    <th data-field="dil" class="col-md-2">地理</th>
+                    <th data-field="zonghl" class="col-md-2">理综</th>
+                    <th data-field="zonghw" class="col-md-2">文综</th>
+                    <th data-field="jiaf" class="col-md-2">加分</th>
+                    <th data-field="zxmk" class="col-md-2">模块分</th>
+                    <th data-field="wyyzdm" class="col-md-6">外语语种代码</th>
+                    <th data-field="wyks" class="col-md-6">外语口试</th>
+                    <th data-field="total111" class="col-md-2">总分</th>
+                    <th data-field="total" class="col-md-2">总分（带排名）</th>
+                    <th data-field="zsyj" class="col-md-51">政审意见</th>
+                    <th data-field="cj" class="col-md-2">成绩</th>
+                    <th data-field="tzcj" class="col-md-2">特征成绩</th>
+                    <th data-field="tdcj" class="col-md-2">投档成绩</th>
                     <th data-field="zgf" class="col-md-2"></th>
                     <th data-field="yxdrcj" class="col-md-2"></th>
                     <th data-field="zyytjzcj" class="col-md-2"></th>
                     <th data-field="zyytfjcj" class="col-md-2"></th>
-                    <th data-field="tdzy" class="col-md-6"></th>
+                    <th data-field="hkdj" class="col-md-6">（不用）</th>
+                    <th data-field="bmdw" class="col-md-6">报名单位（不用）</th>
+                    <th data-field="kstz" class="col-md-6">考生特征（政策代码，取TD_ZCDM)</th>
+                    <th data-field="xtdw" class="col-md-6">(不用）</th>
+                    <th data-field="sjr" class="col-md-6">收件人</th>
+                    <th data-field="ysjzdm" class="col-md-6"></th>
+                    <th data-field="wytl" class="col-md-6"></th>
+                    <th data-field="tddw" class="col-md-6">投档单位（不需要）</th>
+                    <th data-field="jhxz" class="col-md-6">计划性质（不需要）</th>
+                    <th data-field="zsls" class="col-md-6">招生老师</th>
+                    <th data-field="tdzy" class="col-md-6">投档志愿（判断一个学校是不是第一志愿录取，是平行志愿，还是征求意见。 第几次派发中的）</th>
                     <th data-field="dqtddw" class="col-md-6"></th>
                     <th data-field="ytzy" class="col-md-6"></th>
-                    <th data-field="lqzy" class="col-md-6"></th>
+                    <th data-field="lqzy" class="col-md-6">录取专业</th>
                     <th data-field="tdyydm" class="col-md-6"></th>
                     <th data-field="bz" class="col-md-6"></th>
                     <th data-field="zyhg" class="col-md-6"></th>
@@ -110,18 +90,18 @@
                     <th data-field="lqfs" class="col-md-6"></th>
                     <th data-field="kszt" class="col-md-6"></th>
                     <th data-field="sdbz" class="col-md-6"></th>
-                    <th data-field="tddwdm1" class="col-md-6"></th>
-                    <th data-field="zydh1" class="col-md-6"></th>
-                    <th data-field="tddwdm2" class="col-md-6"></th>
-                    <th data-field="zydh2" class="col-md-6"></th>
-                    <th data-field="tddwdm3" class="col-md-6"></th>
-                    <th data-field="zydh3" class="col-md-6"></th>
-                    <th data-field="tddwdm4" class="col-md-6"></th>
-                    <th data-field="zydh4" class="col-md-6"></th>
-                    <th data-field="tddwdm5" class="col-md-6"></th>
-                    <th data-field="zydh5" class="col-md-6"></th>
-                    <th data-field="tddwdm6" class="col-md-6"></th>
-                    <th data-field="zydh6" class="col-md-6"></th>
+                    <th data-field="tddwdm1" class="col-md-6">投档单位代码1</th>
+                    <th data-field="zydh1" class="col-md-6">专业代号1  （第一志愿填报）</th>
+                    <th data-field="tddwdm2" class="col-md-6">投档单位代码2</th>
+                    <th data-field="zydh2" class="col-md-6">专业代号2</th>
+                    <th data-field="tddwdm3" class="col-md-6">投档单位代码3</th>
+                    <th data-field="zydh3" class="col-md-6">专业代号3</th>
+                    <th data-field="tddwdm4" class="col-md-6">投档单位代码4</th>
+                    <th data-field="zydh4" class="col-md-6">专业代号4</th>
+                    <th data-field="tddwdm5" class="col-md-6">投档单位代码5</th>
+                    <th data-field="zydh5" class="col-md-6">专业代号5</th>
+                    <th data-field="tddwdm6" class="col-md-6">投档单位代码6</th>
+                    <th data-field="zydh6" class="col-md-6">专业代号6</th>
                     <th data-field="zytz" class="col-md-6"></th>
                     <th data-field="zyzytj" class="col-md-6"></th>
                     <th data-field="dxtj" class="col-md-6"></th>
@@ -130,15 +110,39 @@
                     <th data-field="tjjldm" class="col-md-6"></th>
                     <th data-field="bh" class="col-md-6"></th>
                     <th data-field="kslsczbz" class="col-md-6"></th>
-                    <th data-field="zysxdm1" class="col-md-6"></th>
-                    <th data-field="zysxdm2" class="col-md-6"></th>
-                    <th data-field="zysxdm3" class="col-md-6"></th>
-                    <th data-field="zysxdm4" class="col-md-6"></th>
-                    <th data-field="zysxdm5" class="col-md-6"></th>
-                    <th data-field="zysxdm6" class="col-md-6"></th>
-                    <th data-field="wkSg" class="col-md-6"></th>
-                    <th data-field="wkTz" class="col-md-6"></th>
-                    <th data-field="ny" class="col-md-2"></th>
+                    <th data-field="zysxdm1" class="col-md-6">体检信息代码1</th>
+                    <th data-field="zysxdm2" class="col-md-6">体检信息代码2</th>
+                    <th data-field="zysxdm3" class="col-md-6">体检信息代码3</th>
+                    <th data-field="zysxdm4" class="col-md-6">体检信息代码4</th>
+                    <th data-field="zysxdm5" class="col-md-6">体检信息代码5</th>
+                    <th data-field="zysxdm6" class="col-md-6">体检信息代码6</th>
+                    <th data-field="wkSg" class="col-md-6">身高</th>
+                    <th data-field="wkTz" class="col-md-6">体重</th>
+                    <th data-field="pcdm" class="col-md-6">批次代码</th>
+                    <th data-field="pc" class="col-md-6">批次</th>
+                    <th data-field="pcfs" class="col-md-2">批次分数线</th>
+                    <th data-field="tzsh" class="col-md-2">通知书号</th>
+                    <th data-field="xh" class="col-md-6">学号</th>
+                    <th data-field="xslb" class="col-md-6">学生类别</th>
+                    <th data-field="xqdm" class="col-md-6">校区代码</th>
+                    <th data-field="xq" class="col-md-6">校区</th>
+                    <th data-field="xydm" class="col-md-6">学院代码</th>
+                    <th data-field="xy" class="col-md-6">学院</th>
+                    <th data-field="xydm1" class="col-md-6">学院代码</th>
+                    <th data-field="xy1" class="col-md-6">学院</th>
+                    <th data-field="zydm" class="col-md-51">专业代码</th>
+                    <th data-field="zy" class="col-md-6">专业</th>
+                    <th data-field="zydm1" class="col-md-51">专业代码</th>
+                    <th data-field="zy1" class="col-md-6">专业</th>
+                    <th data-field="xz" class="col-md-6">学制</th>
+                    <th data-field="zybj" class="col-md-51">专业班级</th>
+                    <th data-field="qsxx" class="col-md-51">寝室信息</th>
+                    <th data-field="rq" class="col-md-2">报到日期</th>
+                    <th data-field="yy" class="col-md-51">未报到原因</th>
+                    <th data-field="ncl" class="col-md-51">拟处理</th>
+                    <th data-field="ny" class="col-md-2">导入年月</th>
+                    <th data-field="drpc" class="col-md-2">导入批次</th>
+                    <th data-field="drrid" class="col-md-2">导入人ID</th>
 
                 </tr>
                 </thead>

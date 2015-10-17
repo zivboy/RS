@@ -41,10 +41,38 @@
             </foreach>
         </where>
     </sql>
-
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
     <sql id="Base_Column_List" >
-    pk_id, dic_id, dic_name, dic_code, dic_parent_id, dic_key, dic_value, state, state_time
-  </sql>
+        pk_id, dic_id, dic_name, dic_code, dic_parent_id, dic_key, dic_value, state, state_time
+    </sql>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.business.entity.DictionaryCriteria" >
         select
         <if test="distinct" >
@@ -78,10 +106,223 @@
         from business_dictionary
         where dic_name = #{dicName,jdbcType=VARCHAR}
     </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from business_dictionary
+        where pk_id = #{pkId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.ssm.business.entity.DictionaryCriteria" >
+        delete from business_dictionary
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ssm.business.entity.Dictionary" >
+        insert into business_dictionary (pk_id, dic_id, dic_name,
+        dic_code, dic_parent_id, dic_key,
+        dic_value, state, state_time
+        )
+        values (#{pkId,jdbcType=INTEGER}, #{dicId,jdbcType=INTEGER}, #{dicName,jdbcType=VARCHAR},
+        #{dicCode,jdbcType=VARCHAR}, #{dicParentId,jdbcType=INTEGER}, #{dicKey,jdbcType=VARCHAR},
+        #{dicValue,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{stateTime,jdbcType=DATE}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.ssm.business.entity.Dictionary" >
+        insert into business_dictionary
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="pkId != null" >
+                pk_id,
+            </if>
+            <if test="dicId != null" >
+                dic_id,
+            </if>
+            <if test="dicName != null" >
+                dic_name,
+            </if>
+            <if test="dicCode != null" >
+                dic_code,
+            </if>
+            <if test="dicParentId != null" >
+                dic_parent_id,
+            </if>
+            <if test="dicKey != null" >
+                dic_key,
+            </if>
+            <if test="dicValue != null" >
+                dic_value,
+            </if>
+            <if test="state != null" >
+                state,
+            </if>
+            <if test="stateTime != null" >
+                state_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="pkId != null" >
+                #{pkId,jdbcType=INTEGER},
+            </if>
+            <if test="dicId != null" >
+                #{dicId,jdbcType=INTEGER},
+            </if>
+            <if test="dicName != null" >
+                #{dicName,jdbcType=VARCHAR},
+            </if>
+            <if test="dicCode != null" >
+                #{dicCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dicParentId != null" >
+                #{dicParentId,jdbcType=INTEGER},
+            </if>
+            <if test="dicKey != null" >
+                #{dicKey,jdbcType=VARCHAR},
+            </if>
+            <if test="dicValue != null" >
+                #{dicValue,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null" >
+                #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="stateTime != null" >
+                #{stateTime,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
     <select id="countByExample" parameterType="com.ssm.business.entity.DictionaryCriteria" resultType="java.lang.Integer" >
         select count(*) from business_dictionary
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update business_dictionary
+        <set >
+            <if test="record.pkId != null" >
+                pk_id = #{record.pkId,jdbcType=INTEGER},
+            </if>
+            <if test="record.dicId != null" >
+                dic_id = #{record.dicId,jdbcType=INTEGER},
+            </if>
+            <if test="record.dicName != null" >
+                dic_name = #{record.dicName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dicCode != null" >
+                dic_code = #{record.dicCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dicParentId != null" >
+                dic_parent_id = #{record.dicParentId,jdbcType=INTEGER},
+            </if>
+            <if test="record.dicKey != null" >
+                dic_key = #{record.dicKey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dicValue != null" >
+                dic_value = #{record.dicValue,jdbcType=VARCHAR},
+            </if>
+            <if test="record.state != null" >
+                state = #{record.state,jdbcType=VARCHAR},
+            </if>
+            <if test="record.stateTime != null" >
+                state_time = #{record.stateTime,jdbcType=DATE},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update business_dictionary
+        set pk_id = #{record.pkId,jdbcType=INTEGER},
+        dic_id = #{record.dicId,jdbcType=INTEGER},
+        dic_name = #{record.dicName,jdbcType=VARCHAR},
+        dic_code = #{record.dicCode,jdbcType=VARCHAR},
+        dic_parent_id = #{record.dicParentId,jdbcType=INTEGER},
+        dic_key = #{record.dicKey,jdbcType=VARCHAR},
+        dic_value = #{record.dicValue,jdbcType=VARCHAR},
+        state = #{record.state,jdbcType=VARCHAR},
+        state_time = #{record.stateTime,jdbcType=DATE}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ssm.business.entity.Dictionary" >
+        update business_dictionary
+        <set >
+            <if test="dicId != null" >
+                dic_id = #{dicId,jdbcType=INTEGER},
+            </if>
+            <if test="dicName != null" >
+                dic_name = #{dicName,jdbcType=VARCHAR},
+            </if>
+            <if test="dicCode != null" >
+                dic_code = #{dicCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dicParentId != null" >
+                dic_parent_id = #{dicParentId,jdbcType=INTEGER},
+            </if>
+            <if test="dicKey != null" >
+                dic_key = #{dicKey,jdbcType=VARCHAR},
+            </if>
+            <if test="dicValue != null" >
+                dic_value = #{dicValue,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null" >
+                state = #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="stateTime != null" >
+                state_time = #{stateTime,jdbcType=DATE},
+            </if>
+        </set>
+        where pk_id = #{pkId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ssm.business.entity.Dictionary" >
+        update business_dictionary
+        set dic_id = #{dicId,jdbcType=INTEGER},
+        dic_name = #{dicName,jdbcType=VARCHAR},
+        dic_code = #{dicCode,jdbcType=VARCHAR},
+        dic_parent_id = #{dicParentId,jdbcType=INTEGER},
+        dic_key = #{dicKey,jdbcType=VARCHAR},
+        dic_value = #{dicValue,jdbcType=VARCHAR},
+        state = #{state,jdbcType=VARCHAR},
+        state_time = #{stateTime,jdbcType=DATE}
+        where pk_id = #{pkId,jdbcType=INTEGER}
+    </update>
+    <select id="findParent" resultMap="BaseResultMap" parameterType="com.ssm.business.entity.DictionaryCriteria" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from business_dictionary
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        group by dic_name
+        order by pk_id
+    </select>
+    <select id="findChildren" resultMap="BaseResultMap" parameterType="com.ssm.business.entity.DictionaryCriteria" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from business_dictionary
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        order by dic_id
+    </select>
+    <select id="findAllDicListForExport" resultMap="BaseResultMap" parameterType="com.ssm.business.entity.Dictionary" >
+        SELECT c.pk_id,c.dic_id,c.dic_name,c.dic_code,c.dic_key,c.dic_value,c.state_time,c.state
+        FROM
+        (SELECT a.pk_id,a.dic_id,a.dic_name,a.dic_code,a.dic_key,a.dic_value,a.state_time,'P' state
+        FROM business_dictionary a
+        GROUP BY dic_name
+        UNION ALL
+        SELECT b.pk_id,b.dic_id,b.dic_name,b.dic_code,b.dic_key,b.dic_value,b.state_time,'S' state
+        FROM business_dictionary b
+        )  AS c
+        ORDER BY c.dic_name,c.state
+    </select>
+    <select id="findDicCodeByDicName" resultType="java.lang.String" parameterType="java.lang.String" >
+        SELECT max(dic_code) dic_code from business_dictionary d where d.dic_name = #{dicName,jdbcType=VARCHAR}
     </select>
 </mapper>

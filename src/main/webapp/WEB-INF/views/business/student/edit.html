@@ -12,506 +12,157 @@
           data-fv-feedbackicons-validating="glyphicon glyphicon-refresh">
         <!-- Modal -->
         <div class="panel panel-default">
-            <div class="panel-heading">学生表</div>
+            <div class="panel-heading">学生</div>
             <div class="panel-body">
                 <div class="control-group">
-                         
+                                   <input type="hidden" name="id" id="id" /> 
+
                 </div>
                           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tzsh"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xm">姓名</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="tzsh" name="tzsh" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="xm" name="xm" maxlength="50" placeholder="输入姓名" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ksh"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sfzh">身份证号</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="ksh" name="ksh" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="sfzh" name="sfzh" maxlength="50" placeholder="输入身份证号" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sfzh"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xb">性别</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="sfzh" name="sfzh" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="xb" name="xb" maxlength="50" placeholder="输入性别" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="yy"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xbdm">性别代码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="yy" name="yy" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="xbdm" name="xbdm" maxlength="50" placeholder="输入性别代码" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ncl"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sf">省份</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="ncl" name="ncl" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="sf" name="sf" maxlength="50" placeholder="输入省份" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="pcdm"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sfdm">省份代码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="pcdm" name="pcdm" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="sfdm" name="sfdm" maxlength="50" placeholder="输入省份代码" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="pc"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dqmc">地区</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="pc" name="pc" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="dqmc" name="dqmc" maxlength="50" placeholder="输入地区" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="pcfs"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dqdm">地区代码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="pcfs" name="pcfs" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="dqdm" name="dqdm" maxlength="50" placeholder="输入地区代码" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xbdm"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="mz">民族</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="xbdm" name="xbdm" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="mz" name="mz" maxlength="50" placeholder="输入民族" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xb"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="mzdm">民族代码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="xb" name="xb" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="mzdm" name="mzdm" maxlength="50" placeholder="输入民族代码" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xh"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="csny">出生年月</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="xh" name="xh" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="date" class="form-control"  id="csny" name="csny" maxlength="50" placeholder="输入出生年月" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xydm"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zzmmdm">政治面貌代码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="xydm" name="xydm" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zzmmdm" name="zzmmdm" maxlength="50" placeholder="输入政治面貌代码" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xy"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zzmm">政治面貌</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="xy" name="xy" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zzmm" name="zzmm" maxlength="50" placeholder="输入政治面貌" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydm"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zxdm">中学代码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zydm" name="zydm" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zxdm" name="zxdm" maxlength="50" placeholder="输入中学代码" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zy"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zxmc">中学名称</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zy" name="zy" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zxmc" name="zxmc" maxlength="50" placeholder="输入中学名称" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zybj"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="bylbdm">毕业类别代码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zybj" name="zybj" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="bylbdm" name="bylbdm" maxlength="50" placeholder="输入毕业类别代码" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="qsxx"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="jtdz">家庭地址</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="qsxx" name="qsxx" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="jtdz" name="jtdz" maxlength="50" placeholder="输入家庭地址" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zkzh"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="yzbm">邮政编码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zkzh" name="zkzh" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="yzbm" name="yzbm" maxlength="50" placeholder="输入邮政编码" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xslb"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="lxdh">联系电话</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="xslb" name="xslb" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="lxdh" name="lxdh" maxlength="50" placeholder="输入联系电话" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zp"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="hkkh">（不用）</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zp" name="zp" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="hkkh" name="hkkh" maxlength="50" placeholder="输入（不用）" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xm"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kstc">考生特长</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="xm" name="xm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xydm1"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="xydm1" name="xydm1" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xy1"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="xy1" name="xy1" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zhf"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zhf" name="zhf" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sfdm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="sfdm" name="sfdm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sf"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="sf" name="sf" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kldm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="kldm" name="kldm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kskl"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="kskl" name="kskl" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="rq"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="date" class="form-control"  id="rq" name="rq" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xz"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="xz" name="xz" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydm1"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zydm1" name="zydm1" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zy1"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zy1" name="zy1" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zzmmdm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zzmmdm" name="zzmmdm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zzmm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zzmm" name="zzmm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kslbdm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="kslbdm" name="kslbdm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kslb"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="kslb" name="kslb" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="mzdm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="mzdm" name="mzdm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="mz"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="mz" name="mz" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dqbm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="dqbm" name="dqbm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dqmc"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="dqmc" name="dqmc" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zyf"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zyf" name="zyf" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="yuw"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="yuw" name="yuw" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="shux"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="shux" name="shux" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="waiy"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="waiy" name="waiy" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wul"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="wul" name="wul" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="huax"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="huax" name="huax" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="shengw"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="shengw" name="shengw" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zhengz"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zhengz" name="zhengz" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="lis"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="lis" name="lis" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dil"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="dil" name="dil" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zonghl"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zonghl" name="zonghl" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zonghw"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zonghw" name="zonghw" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="jiaf"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="jiaf" name="jiaf" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zxmk"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zxmk" name="zxmk" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="total111"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="total111" name="total111" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="total"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="total" name="total" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="csny"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="date" class="form-control"  id="csny" name="csny" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="bylbdm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="bylbdm" name="bylbdm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zxdm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zxdm" name="zxdm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zxmc"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zxmc" name="zxmc" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wyyzdm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="wyyzdm" name="wyyzdm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="hkdj"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="hkdj" name="hkdj" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="bmdw"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="bmdw" name="bmdw" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kstz"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="kstz" name="kstz" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xtdw"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="xtdw" name="xtdw" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dqdm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="dqdm" name="dqdm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="jtdz"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="jtdz" name="jtdz" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="yzbm"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="yzbm" name="yzbm" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="lxdh"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="lxdh" name="lxdh" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="hkkh"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="hkkh" name="hkkh" maxlength="50" placeholder="输入" size="100" required   />
-                </div> 
-          </div> 
-          <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kstc"></label>
-                </div>
-                    <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="kstc" name="kstc" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="kstc" name="kstc" maxlength="50" placeholder="输入考生特长" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
@@ -522,87 +173,227 @@
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ksjlhcf"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ksjlhcf">考生获奖情况</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="ksjlhcf" name="ksjlhcf" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="ksjlhcf" name="ksjlhcf" maxlength="50" placeholder="输入考生获奖情况" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wyks"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zp">照片地址</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="wyks" name="wyks" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zp" name="zp" maxlength="50" placeholder="输入照片地址" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zsyj"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ksh">考生号</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zsyj" name="zsyj" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="ksh" name="ksh" maxlength="50" placeholder="输入考生号" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kslxdm"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zkzh">准考证号</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="kslxdm" name="kslxdm" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zkzh" name="zkzh" maxlength="50" placeholder="输入准考证号" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sjr"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kldm">考生科类代码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="sjr" name="sjr" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="kldm" name="kldm" maxlength="50" placeholder="输入考生科类代码" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ysjzdm"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kskl">考生科类</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="ysjzdm" name="ysjzdm" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="kskl" name="kskl" maxlength="50" placeholder="输入考生科类" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wytl"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kslbdm">考生类别代码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="wytl" name="wytl" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="kslbdm" name="kslbdm" maxlength="50" placeholder="输入考生类别代码" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddw"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kslb">考生类别</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="tddw" name="tddw" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="kslb" name="kslb" maxlength="50" placeholder="输入考生类别" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="jhxz"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kslxdm">考试类型代码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="jhxz" name="jhxz" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="kslxdm" name="kslxdm" maxlength="50" placeholder="输入考试类型代码" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="cj"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zhf">综合分</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="cj" name="cj" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zhf" name="zhf" maxlength="50" placeholder="输入综合分" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tzcj"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zyf">专业分</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="tzcj" name="tzcj" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zyf" name="zyf" maxlength="50" placeholder="输入专业分" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tdcj"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="yuw">语文</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="tdcj" name="tdcj" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="yuw" name="yuw" maxlength="50" placeholder="输入语文" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="shux">数学</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="shux" name="shux" maxlength="50" placeholder="输入数学" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="waiy">外语</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="waiy" name="waiy" maxlength="50" placeholder="输入外语" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wul">物理</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="wul" name="wul" maxlength="50" placeholder="输入物理" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="huax">化学</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="huax" name="huax" maxlength="50" placeholder="输入化学" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="shengw">生物</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="shengw" name="shengw" maxlength="50" placeholder="输入生物" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zhengz">政治</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zhengz" name="zhengz" maxlength="50" placeholder="输入政治" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="lis">历史</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="lis" name="lis" maxlength="50" placeholder="输入历史" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dil">地理</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="dil" name="dil" maxlength="50" placeholder="输入地理" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zonghl">理综</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zonghl" name="zonghl" maxlength="50" placeholder="输入理综" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zonghw">文综</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zonghw" name="zonghw" maxlength="50" placeholder="输入文综" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="jiaf">加分</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="jiaf" name="jiaf" maxlength="50" placeholder="输入加分" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zxmk">模块分</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zxmk" name="zxmk" maxlength="50" placeholder="输入模块分" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wyyzdm">外语语种代码</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="wyyzdm" name="wyyzdm" maxlength="50" placeholder="输入外语语种代码" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wyks">外语口试</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="wyks" name="wyks" maxlength="50" placeholder="输入外语口试" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="total111">总分</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="total111" name="total111" maxlength="50" placeholder="输入总分" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="total">总分（带排名）</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="total" name="total" maxlength="50" placeholder="输入总分（带排名）" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zsyj">政审意见</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zsyj" name="zsyj" maxlength="50" placeholder="输入政审意见" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="cj">成绩</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="cj" name="cj" maxlength="50" placeholder="输入成绩" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tzcj">特征成绩</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tzcj" name="tzcj" maxlength="50" placeholder="输入特征成绩" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tdcj">投档成绩</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tdcj" name="tdcj" maxlength="50" placeholder="输入投档成绩" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
@@ -634,10 +425,80 @@
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tdzy"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="hkdj">（不用）</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="tdzy" name="tdzy" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="hkdj" name="hkdj" maxlength="50" placeholder="输入（不用）" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="bmdw">报名单位（不用）</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="bmdw" name="bmdw" maxlength="50" placeholder="输入报名单位（不用）" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="kstz">考生特征（政策代码，取TD_ZCDM)</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="kstz" name="kstz" maxlength="50" placeholder="输入考生特征（政策代码，取TD_ZCDM)" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xtdw">(不用）</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xtdw" name="xtdw" maxlength="50" placeholder="输入(不用）" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sjr">收件人</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="sjr" name="sjr" maxlength="50" placeholder="输入收件人" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ysjzdm"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="ysjzdm" name="ysjzdm" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wytl"></label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="wytl" name="wytl" maxlength="50" placeholder="输入" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddw">投档单位（不需要）</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tddw" name="tddw" maxlength="50" placeholder="输入投档单位（不需要）" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="jhxz">计划性质（不需要）</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="jhxz" name="jhxz" maxlength="50" placeholder="输入计划性质（不需要）" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zsls">招生老师</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zsls" name="zsls" maxlength="50" placeholder="输入招生老师" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tdzy">投档志愿（判断一个学校是不是第一志愿录取，是平行志愿，还是征求意见。 第几次派发中的）</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tdzy" name="tdzy" maxlength="50" placeholder="输入投档志愿（判断一个学校是不是第一志愿录取，是平行志愿，还是征求意见。 第几次派发中的）" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
@@ -655,10 +516,10 @@
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="lqzy"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="lqzy">录取专业</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="lqzy" name="lqzy" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="lqzy" name="lqzy" maxlength="50" placeholder="输入录取专业" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
@@ -711,87 +572,87 @@
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm1"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm1">投档单位代码1</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="tddwdm1" name="tddwdm1" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="tddwdm1" name="tddwdm1" maxlength="50" placeholder="输入投档单位代码1" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh1"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh1">专业代号1  （第一志愿填报）</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zydh1" name="zydh1" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zydh1" name="zydh1" maxlength="50" placeholder="输入专业代号1  （第一志愿填报）" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm2"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm2">投档单位代码2</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="tddwdm2" name="tddwdm2" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="tddwdm2" name="tddwdm2" maxlength="50" placeholder="输入投档单位代码2" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh2"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh2">专业代号2</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zydh2" name="zydh2" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zydh2" name="zydh2" maxlength="50" placeholder="输入专业代号2" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm3"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm3">投档单位代码3</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="tddwdm3" name="tddwdm3" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="tddwdm3" name="tddwdm3" maxlength="50" placeholder="输入投档单位代码3" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh3"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh3">专业代号3</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zydh3" name="zydh3" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zydh3" name="zydh3" maxlength="50" placeholder="输入专业代号3" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm4"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm4">投档单位代码4</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="tddwdm4" name="tddwdm4" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="tddwdm4" name="tddwdm4" maxlength="50" placeholder="输入投档单位代码4" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh4"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh4">专业代号4</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zydh4" name="zydh4" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zydh4" name="zydh4" maxlength="50" placeholder="输入专业代号4" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm5"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm5">投档单位代码5</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="tddwdm5" name="tddwdm5" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="tddwdm5" name="tddwdm5" maxlength="50" placeholder="输入投档单位代码5" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh5"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh5">专业代号5</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zydh5" name="zydh5" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zydh5" name="zydh5" maxlength="50" placeholder="输入专业代号5" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm6"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tddwdm6">投档单位代码6</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="tddwdm6" name="tddwdm6" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="tddwdm6" name="tddwdm6" maxlength="50" placeholder="输入投档单位代码6" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh6"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydh6">专业代号6</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zydh6" name="zydh6" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zydh6" name="zydh6" maxlength="50" placeholder="输入专业代号6" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
@@ -851,66 +712,234 @@
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm1"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm1">体检信息代码1</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zysxdm1" name="zysxdm1" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zysxdm1" name="zysxdm1" maxlength="50" placeholder="输入体检信息代码1" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm2"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm2">体检信息代码2</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zysxdm2" name="zysxdm2" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zysxdm2" name="zysxdm2" maxlength="50" placeholder="输入体检信息代码2" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm3"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm3">体检信息代码3</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zysxdm3" name="zysxdm3" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zysxdm3" name="zysxdm3" maxlength="50" placeholder="输入体检信息代码3" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm4"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm4">体检信息代码4</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zysxdm4" name="zysxdm4" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zysxdm4" name="zysxdm4" maxlength="50" placeholder="输入体检信息代码4" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm5"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm5">体检信息代码5</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zysxdm5" name="zysxdm5" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zysxdm5" name="zysxdm5" maxlength="50" placeholder="输入体检信息代码5" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm6"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zysxdm6">体检信息代码6</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="zysxdm6" name="zysxdm6" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="zysxdm6" name="zysxdm6" maxlength="50" placeholder="输入体检信息代码6" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wkSg"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wkSg">身高</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="wkSg" name="wkSg" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="wkSg" name="wkSg" maxlength="50" placeholder="输入身高" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wkTz"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="wkTz">体重</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="text" class="form-control"  id="wkTz" name="wkTz" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="wkTz" name="wkTz" maxlength="50" placeholder="输入体重" size="100" required   />
                 </div> 
           </div> 
           <div class="row control-group">
-                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ny"></label>
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="pcdm">批次代码</label>
                 </div>
                     <div class="col-sm-8 controls">
-                   <input type="date" class="form-control"  id="ny" name="ny" maxlength="50" placeholder="输入" size="100" required   />
+                   <input type="text" class="form-control"  id="pcdm" name="pcdm" maxlength="50" placeholder="输入批次代码" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="pc">批次</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="pc" name="pc" maxlength="50" placeholder="输入批次" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="pcfs">批次分数线</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="pcfs" name="pcfs" maxlength="50" placeholder="输入批次分数线" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tzsh">通知书号</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="tzsh" name="tzsh" maxlength="50" placeholder="输入通知书号" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xh">学号</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xh" name="xh" maxlength="50" placeholder="输入学号" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xslb">学生类别</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xslb" name="xslb" maxlength="50" placeholder="输入学生类别" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xqdm">校区代码</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xqdm" name="xqdm" maxlength="50" placeholder="输入校区代码" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xq">校区</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xq" name="xq" maxlength="50" placeholder="输入校区" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xydm">学院代码</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xydm" name="xydm" maxlength="50" placeholder="输入学院代码" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xy">学院</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xy" name="xy" maxlength="50" placeholder="输入学院" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xydm1">学院代码</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xydm1" name="xydm1" maxlength="50" placeholder="输入学院代码" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xy1">学院</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xy1" name="xy1" maxlength="50" placeholder="输入学院" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydm">专业代码</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zydm" name="zydm" maxlength="50" placeholder="输入专业代码" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zy">专业</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zy" name="zy" maxlength="50" placeholder="输入专业" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zydm1">专业代码</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zydm1" name="zydm1" maxlength="50" placeholder="输入专业代码" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zy1">专业</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zy1" name="zy1" maxlength="50" placeholder="输入专业" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xz">学制</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xz" name="xz" maxlength="50" placeholder="输入学制" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zybj">专业班级</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zybj" name="zybj" maxlength="50" placeholder="输入专业班级" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="qsxx">寝室信息</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="qsxx" name="qsxx" maxlength="50" placeholder="输入寝室信息" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="rq">报到日期</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="date" class="form-control"  id="rq" name="rq" maxlength="50" placeholder="输入报到日期" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="yy">未报到原因</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="yy" name="yy" maxlength="50" placeholder="输入未报到原因" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ncl">拟处理</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="ncl" name="ncl" maxlength="50" placeholder="输入拟处理" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="ny">导入年月</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="date" class="form-control"  id="ny" name="ny" maxlength="50" placeholder="输入导入年月" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="drpc">导入批次</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="drpc" name="drpc" maxlength="50" placeholder="输入导入批次" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="drrid">导入人ID</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="drrid" name="drrid" maxlength="50" placeholder="输入导入人ID" size="100" required   />
                 </div> 
           </div> 
 

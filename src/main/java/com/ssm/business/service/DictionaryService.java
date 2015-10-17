@@ -6,12 +6,24 @@ import com.ssm.common.mybatis.Page;
 import java.util.List;
 
 /**
- * Created by ZHEJIANG RUIZHENG  on 2014/7/28.
+ * Created by V on Sat Oct 17 10:30:06 GMT+08:00 2015.
  */
+
 public interface DictionaryService {
+
     Page findByPage(Page page, Dictionary dictionary);
 
     List<Dictionary> findAll(Page page, Dictionary dictionary);
+
+    int countByExample(Page page,Dictionary dictionary);
+
+    void save(Dictionary dictionary);
+
+    Dictionary get(int id);
+
+    void update(Dictionary dictionary);
+
+    void delete(int id);
 
     Dictionary findByKeyAndName(String name, String key);
 
@@ -23,11 +35,8 @@ public interface DictionaryService {
 
     List<Dictionary> findAllDicListForExport(Dictionary dictionary);
 
-
-    Dictionary get(int id);
-
     int findMaxDicIdByName(String dicName);
 
     String findDicCodeByDicName(String dicName);
-
 }
+

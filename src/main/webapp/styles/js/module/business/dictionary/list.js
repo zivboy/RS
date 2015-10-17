@@ -1,6 +1,6 @@
 
 /**
- * Created by xecoder on Sat Oct 17 14:49:26 GMT+08:00 2015.
+ * Created by xecoder on Sat Oct 17 10:30:06 GMT+08:00 2015.
  */
 
 requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'base64', 'comm', 'message'],
@@ -13,7 +13,7 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'ba
 
         //列表
         var $table = $('#tableB').bootstrapTable({
-            url: WEB_GLOBAL_CTX + '/business/student/list',
+            url: WEB_GLOBAL_CTX + '/business/dictionary/list',
             dataType: 'json',
             cache:false,
             showToggle:true,
@@ -29,7 +29,7 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'ba
             smartDisplay: false,
             queryParams: 'queryParamsF',
             pagination: true,
-            pageSize: 5,
+            pageSize: 10,
             pageList: [5, 10, 20, 100]
         }).on('check.bs.table', function (e, row) {
             showEdit($table, 'to', 'do', 'in');
@@ -42,7 +42,7 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'ba
         //查询动作
         $('#query').click(function () {
             $table.bootstrapTable('refresh', {
-                url: WEB_GLOBAL_CTX + '/business/student/list',
+                url: WEB_GLOBAL_CTX + '/business/dictionary/list',
                 queryParams: 'queryParamsF'
             });
         });
@@ -52,10 +52,10 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'ba
             var objects = $table.bootstrapTable('getSelections');
             console.debug('Selected values: ' + objects.length);
             $.each(objects, function () {
-                $.post(WEB_GLOBAL_CTX + "/business/student/delete/" + this.id, function (rsp) {
+                $.post(WEB_GLOBAL_CTX + "/business/dictionary/delete/" + this.pkId, function (rsp) {
                     if (rsp.successful) {
                         $.scojs_message(rsp.msg, $OK);
-                        flashTable('tableB', '/business/student/list');
+                        flashTable('tableB', '/business/dictionary/list');
                     } else {
                         $.scojs_message(rsp.msg, $ERROR);
                     }
@@ -68,7 +68,7 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'ba
         //添加
         $('#add').click(function () {
             parent.Loading.modal('show');
-            self.location = WEB_GLOBAL_CTX + "/business/student/add";
+            self.location = WEB_GLOBAL_CTX + "/business/dictionary/add";
         });
 
         //修改
@@ -76,7 +76,7 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'ba
             parent.Loading.modal('show');
             var objects = $table.bootstrapTable('getSelections');
             $.each(objects, function () {
-                self.location = WEB_GLOBAL_CTX + "/business/student/edit/"+this.id;
+                self.location = WEB_GLOBAL_CTX + "/business/dictionary/edit/"+this.pkId;
             });
         });
 

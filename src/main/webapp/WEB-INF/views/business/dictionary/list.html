@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<#include "/console/layout/main.html"/>
+<@head/>
+<body>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">字典维护管理</div>
+        <div class="panel-body">
+            <table id="tableB" class="table-hover table-condensed table-striped">
+                <thead>
+                <tr>
+                    <th data-field="state" data-radio="true"></th>
+                    <th data-field="dicId" class="col-md-2">编码</th>
+                    <th data-field="dicName" class="col-md-5">名称</th>
+                    <th data-field="dicKey" class="col-md-2">存储值</th>
+                    <th data-field="dicValue" class="col-md-4">显示名</th>
+
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div><!--/.container-->
+<div id="custom-toolbar">
+    <form role="form" name="form" id="form1">
+        <div class="form-inline" role="form">
+            <div class="row">
+                <div class="col-md-3">
+                    <select class="form-control " id="search_select" name="search_select">
+                        <option value="search_dicName">名称</option>
+                        <option value="search_dicValue">显示名</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="输入查询条件" id="search"
+                               name="search_username">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" id="query" name="query" title="查询"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="btn-group" id="do">
+                        <@shiro.hasPermission name="Dictionary:save">
+                        <button type="button" class="btn btn-default" id="add" name="add" title="新增" ><span
+                                class="glyphicon glyphicon-plus"></span></button>
+                    </@shiro.hasPermission>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="to" style="display:none;">
+    <@shiro.hasPermission name="Dictionary:edit">
+    <button type="button" class="btn btn-default" id="modify" name="modify" title="修改"><span
+            class="glyphicon glyphicon-edit"></span></button>
+</@shiro.hasPermission>
+<@shiro.hasPermission name="Dictionary:delete">
+<button type="button" class="btn btn-default" id="delete" name="delete" title="删除"><span
+        class="glyphicon glyphicon-remove"></span></button>
+</@shiro.hasPermission>
+</div>
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/business/dictionary/list.js"></script>
+</html>
+

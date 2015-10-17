@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<#include "/console/layout/main.html"/>
+<html class="fuelux">
+<@headEdit/>
+<body>
+<div class="container">
+    <form role="form" id="formSubmit" commandName="dictionary" class="form-horizontal"
+          data-fv-framework="bootstrap"
+          data-fv-message="This value is not valid"
+          data-fv-feedbackicons-valid="glyphicon glyphicon-ok"
+          data-fv-feedbackicons-invalid="glyphicon glyphicon-remove"
+          data-fv-feedbackicons-validating="glyphicon glyphicon-refresh">
+        <!-- Modal -->
+        <div class="panel panel-default">
+            <div class="panel-heading">字典维护</div>
+            <div class="panel-body">
+                <div class="control-group">
+                    <input type="hidden" name="pkId" id="pkId"/>
+                    <input type="hidden" name="dicId" id="dicId"/>
+                    <input type="hidden" name="dicCode" id="dicCode"/>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dicName">KEY对</label>
+                    </div>
+                    <div class="col-sm-8 controls">
+                        <input type="text" class="form-control" id="dicName" name="dicName" maxlength="50"
+                               placeholder="输入" size="100" required/>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dicParentId">上级</label>
+                    </div>
+                    <div class="col-sm-8 controls">
+                        <input type="text" class="form-control" id="dicParentId" name="dicParentId" maxlength="50"
+                               placeholder="输入" size="100" required/>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dicKey">存储值</label>
+                    </div>
+                    <div class="col-sm-8 controls">
+                        <input type="text" class="form-control" id="dicKey" name="dicKey" maxlength="50"
+                               placeholder="输入" size="100" required/>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dicValue">显示名</label>
+                    </div>
+                    <div class="col-sm-8 controls">
+                        <input type="text" class="form-control" id="dicValue" name="dicValue" maxlength="50"
+                               placeholder="输入" size="100" required/>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="state">状态</label>
+                    </div>
+                    <div class="col-sm-8 controls">
+                        <input type="text" class="form-control" id="state" name="state" maxlength="50" placeholder="输入"
+                               size="100" required/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+                <div class="row control-group">
+                    <div class="col-sm-4 col-sm-offset-5">
+                        <div style="align-content: center">
+                            <button type="submit" id="save" class="btn btn-primary">保存</button>
+                            <button type="button" id="back" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+<!-- /.container -->
+
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/business/dictionary/edit.js"></script>
+<script type="text/javascript">
+    var dictionary = JSON.parse(JSON.stringify(${dictionary}));
+</script>
+</html>
+

@@ -2,11 +2,12 @@ package com.ssm.business.service;
 
 import com.ssm.business.entity.Student;
 import com.ssm.common.mybatis.Page;
+import com.ssm.exception.ServiceException;
 
 import java.util.List;
 
 /**
- * Created by V on Thu Oct 15 19:03:22 GMT+08:00 2015.
+ * Created by V on Sat Oct 17 14:49:26 GMT+08:00 2015.
  */
 
 public interface StudentService {
@@ -15,7 +16,7 @@ public interface StudentService {
 
     List<Student> findAll(Page page, Student student);
 
-    int countByExample(Page page, Student student);
+    int countByExample(Page page,Student student);
 
     void save(Student student);
 

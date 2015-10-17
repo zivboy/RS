@@ -7,13 +7,16 @@ import com.ssm.business.service.StudentService;
 import com.ssm.common.basedao.BaseDao;
 import com.ssm.common.baseservice.BaseService;
 import com.ssm.common.mybatis.Page;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by V on Thu Oct 15 19:03:22 GMT+08:00 2015.
+ * Created by V on Sat Oct 17 14:49:26 GMT+08:00 2015.
  */
 @Service("StudentService")
 @Transactional
@@ -24,7 +27,7 @@ public class StudentServiceImpl  extends BaseService implements StudentService {
     @Override
     public Page findByPage(Page page, Student student) {
         page.setCount(countByExample(page,student));
-        List<Student> list= findAll(page,student);
+        List<Student> list= baseDao.selectByPage("com.ssm.business.mapper.StudentMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,student),page);
         if(list!=null)
             return page.setRows(list);
         else
@@ -33,7 +36,7 @@ public class StudentServiceImpl  extends BaseService implements StudentService {
     
     @Override
     public List<Student> findAll(Page page, Student student) {
-        return baseDao.selectByPage("com.ssm.business.mapper.StudentMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,student),page);
+        return baseDao.selectList("com.ssm.business.mapper.StudentMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,student));
     }
 
     @Override
@@ -61,7 +64,7 @@ public class StudentServiceImpl  extends BaseService implements StudentService {
 
     @Override
     public Student get(int id) {
-        return baseDao.getMapper(StudentMapper.class).selectByPrimaryKey(Long.valueOf(id));
+        return baseDao.getMapper(StudentMapper.class).selectByPrimaryKey(id);
     }
 
     @Override
@@ -71,7 +74,7 @@ public class StudentServiceImpl  extends BaseService implements StudentService {
 
     @Override
     public void delete(int id) {
-        baseDao.getMapper(StudentMapper.class).deleteByPrimaryKey(Long.valueOf(id));
+        baseDao.getMapper(StudentMapper.class).deleteByPrimaryKey(id);
     }
 }
 
