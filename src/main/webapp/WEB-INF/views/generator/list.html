@@ -29,7 +29,8 @@
             <div class="row">
 
                 <div class="col-md-7">
-                    <select  class="form-control" id="search_tableSchema" name="search_tableSchema">
+                    <select  class="form-control" id="search_tableSchema" name="search_tableSchema" required>
+                        <option value=""></option>
                     </select>
                     <select class="form-control " id="search_select" name="search_select">
                         <option value="search_tableName">表名</option>
@@ -39,7 +40,7 @@
                 <div class="col-md-4">
                     <div class="input-group">
                         <input class="form-control" type="text" placeholder="输入查询条件" id="search"
-                               name="search_username">
+                               name="search_username" required>
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" id="query" name="query" title="查询"><span
                                     class="glyphicon glyphicon-search"></span></button>

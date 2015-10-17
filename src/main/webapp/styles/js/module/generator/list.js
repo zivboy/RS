@@ -52,7 +52,7 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'select','selectCN','tExpo
             parent.Loading.modal('show');
             var objects = $table.bootstrapTable('getSelections');
             $.each(objects, function () {
-                self.location = WEB_GLOBAL_CTX + "/generator/tablesEdit/"+this.tableName;
+                self.location = WEB_GLOBAL_CTX + "/generator/tablesEdit/"+this.tableName+"/"+this.tableSchema;
             });
 
         });

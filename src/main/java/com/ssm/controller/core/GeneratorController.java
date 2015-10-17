@@ -65,14 +65,16 @@ public class GeneratorController extends BaseAction {
      * @param tableName
      * @return
      */
-    @RequestMapping(value = "/tablesEdit/{tableName}", method = RequestMethod.GET)
-    public ModelAndView tablesEdit(@PathVariable String tableName) {
+    @RequestMapping(value = "/tablesEdit/{tableName}/{schema}", method = RequestMethod.GET)
+    public ModelAndView tablesEdit(@PathVariable String tableName,@PathVariable String schema) {
         ModelAndView modelAndView = new ModelAndView(T_EDIT);
         Tables tables = new Tables();
         tables.setTableName(tableName);
+        tables.setTableSchema(schema);
         List<Tables> list = tablesService.selectByExample(page(), tables);
         for (Tables tables1 : list) {
             modelAndView.addObject("tableName", StringUtils.lowerCase(tableName));
+            modelAndView.addObject("schema", StringUtils.lowerCase(schema));
             modelAndView.addObject("tableComment", StringUtils.lowerCase(tables1.getTableComment()));
         }
         return modelAndView;
@@ -102,11 +104,12 @@ public class GeneratorController extends BaseAction {
      * @param tableName
      * @return
      */
-    @RequestMapping(value = "/columnsDataList/{tableName}")
+    @RequestMapping(value = "/columnsDataList/{tableName}/{schema}")
     @ResponseBody
-    public GridModel columnsDataList(@PathVariable String tableName) {
+    public GridModel columnsDataList(@PathVariable String tableName,@PathVariable String schema) {
         Columns columns = SearchForm(Columns.class);
         columns.setTableName(tableName);
+        columns.setTableSchema(schema);
         Page info = columnsService.findByPage(page(), columns);
         GridModel m = new GridModel();
         List<CodeColumn> CodeColumn = new ArrayList<>();

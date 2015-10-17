@@ -52,7 +52,7 @@ requirejs(['jquery','bootstrap','fuelux','table', 'tablezn','select','switchs','
         var $ERROR = $.scojs_message.TYPE_ERROR;
 
         $table = $('#tableB').bootstrapTable({
-            url: WEB_GLOBAL_CTX + '/generator/columnsDataList/'+tableName,
+            url: WEB_GLOBAL_CTX + '/generator/columnsDataList/'+tableName+"/"+schema,
             dataType: 'json',
             cache:false,
             showRefresh:true,
