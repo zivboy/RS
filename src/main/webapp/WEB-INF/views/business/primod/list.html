@@ -10,13 +10,12 @@
             <table id="tableB" class="table-hover table-condensed table-striped">
                 <thead>
                 <tr>
-                    <th data-field="state" data-radio="true"></th>
-                    <th data-field="modName" class="col-md-10">模板名称</th>
-                    <th data-field="modWidth" class="col-md-2">模板图宽</th>
-                    <th data-field="modHeight" class="col-md-2">模板图高</th>
-                    <th data-field="url" class="col-md-10">模板图地址</th>
+                    <th data-field="state" data-radio="true">ID</th>
+                    <th data-field="modName" class="col-md-3">模板名称</th>
+                    <th data-field="modWidth" class="col-md-2">模板图宽(px)</th>
+                    <th data-field="modHeight" class="col-md-2">模板图高(px)</th>
+                    <th data-field="url" class="col-md-3" data-formatter="imgFormatter">模板图</th>
                     <th data-field="stateTime" class="col-md-2">更新时间</th>
-
                 </tr>
                 </thead>
             </table>
@@ -29,13 +28,13 @@
             <div class="row">
                 <div class="col-md-3">
                     <select class="form-control " id="search_select" name="search_select">
-                    
+                        <option value="search_modName">模板名称</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group">
-                        <input class="form-control" type="text" placeholder="输入查询条件" id="search"
-                               name="search_username">
+                        <input class="form-control" type="text" placeholder="输入模板名称" id="search"
+                               name="search_modName">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" id="query" name="query" title="查询"><span
                                     class="glyphicon glyphicon-search"></span></button>

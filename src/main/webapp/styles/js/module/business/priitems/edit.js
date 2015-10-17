@@ -10,17 +10,20 @@ requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'selectCN', 'validator', 
         //提示框
         var $OK = $.scojs_message.TYPE_OK;
         var $ERROR = $.scojs_message.TYPE_ERROR;
-
+        var modIdVal = "";
         if (priitems != undefined && priitems != null && priitems != "") {
             //初始化页面
             meForm($('#formSubmit'), priitems);
-                        $('.selectpicker').selectpicker('refresh');
-
+            $('.selectpicker').selectpicker('refresh');
+            modIdVal = priitems.modId;
         }
         else {
 
         }
         //修改页面结束
+
+        //初始化下拉框
+        initSelect("modId", WEB_GLOBAL_CTX+"/business/priitems/getAllPrimod", {}, modIdVal, "modId", "modName",true);
 
         parent.Loading.modal('hide');
 

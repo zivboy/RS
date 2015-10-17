@@ -1,7 +1,9 @@
 package com.ssm.business.controller;
 
 import com.ssm.business.entity.Priitems;
+import com.ssm.business.entity.Primod;
 import com.ssm.business.service.PriitemsService;
+import com.ssm.business.service.PrimodService;
 import com.ssm.common.baseaction.BaseAction;
 import com.ssm.common.mybatis.Page;
 import com.ssm.common.util.JacksonMapper;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 /**
  * Created by xecoder on Sat Oct 03 17:25:39 GMT+08:00 2015.
  */
@@ -26,6 +30,8 @@ public class PriitemsController extends BaseAction {
 
     @Autowired
     PriitemsService priitemsService;
+    @Autowired
+    PrimodService primodService;
 
     private static final String INDEX = "/business/priitems/list";
     private static final String EDIT = "/business/priitems/edit";
@@ -121,7 +127,8 @@ public class PriitemsController extends BaseAction {
                 result.setMsg("成功");
                 result.setSuccessful(true);
             }
-        } finally {
+        }catch(Exception e){
+                e.printStackTrace();
                 result.setMsg("失败");
                 result.setSuccessful(false);
         }
@@ -152,6 +159,17 @@ public class PriitemsController extends BaseAction {
         result.setSuccessful(true);
         result.setMsg("删除成功");
         return result;
+    }
+
+    /**
+     * 获取打印模板集合
+     */
+    @RequestMapping(value="/getAllPrimod")
+    @ResponseBody
+    public List<Primod> getAllPrimod() {
+        Primod primod = new Primod();
+        List<Primod> list = primodService.findAll(null,primod);
+        return list;
     }
 }
 

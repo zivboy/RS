@@ -38,12 +38,11 @@ requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'selectCN', 'validator', 
             if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
                 data.fv.disableSubmitButtons(true);
             }
-        })
-            .on('success.form.fv', function (e) {
+        }).on('success.form.fv', function (e) {
                 e.preventDefault();
                 var $form = $(e.target);
                 var params = $form.serialize();
-                $.post(WEB_GLOBAL_CTX + "/business/primod/save", params, function (rsp) {
+                /*$.post(WEB_GLOBAL_CTX + "/business/primod/save", params, function (rsp) {
                     if (rsp.successful) {
                         $.scojs_message(rsp.msg, $OK);
                         $("#save").toggleClass("disabled");
@@ -52,10 +51,53 @@ requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'selectCN', 'validator', 
                         $.scojs_message(rsp.msg, $ERROR);
                     }
                 }).error(function () {
+                });*/
+                var formData = new FormData($("#formSubmit")[0]);
+                $.ajax({
+                    url: WEB_GLOBAL_CTX+'/business/primod/save',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (rsp) {
+                        if (rsp.successful) {
+                            $.scojs_message(rsp.msg, $OK);
+                            setTimeout("window.location.href='" + WEB_GLOBAL_CTX + "/business/primod/index'", 1000);
+                        } else {
+                            $.scojs_message(rsp.msg, $ERROR);
+                        }
+                    }
                 });
+            });
                 return true;
             });
 
-    });
+        /*$('#formSubmit').submit(function(e){
+            e.preventDefault();
+            var formData = new FormData($("#formSubmit")[0]);
+            $.ajax({
+                url: WEB_GLOBAL_CTX+'/business/primod/save',
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (rsp) {
+                    if (rsp.successful) {
+                        $.scojs_message(rsp.msg, $OK);
+                        setTimeout("window.location.href='" + WEB_GLOBAL_CTX + "/business/primod/index'", 1000);
+                    } else {
+                        $.scojs_message(rsp.msg, $ERROR);
+                    }
+                }
+            });
+    });*/
+
+
+
+
 
 

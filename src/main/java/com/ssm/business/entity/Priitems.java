@@ -1,5 +1,8 @@
 package com.ssm.business.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Priitems {
@@ -22,7 +25,8 @@ public class Priitems {
     private Integer priHeight;
 
     private Integer priOrder;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date stateTime;
 
     public Integer getPriId() {

@@ -11,15 +11,15 @@
                 <thead>
                 <tr>
                     <th data-field="state" data-radio="true"></th>
-                    <th data-field="modId" class="col-md-2">打印模板ID</th>
-                    <th data-field="priName" class="col-md-10">打印项名称</th>
-                    <th data-field="priCode" class="col-md-10">打印项字段</th>
-                    <th data-field="priValue" class="col-md-10">打印项字段值</th>
-                    <th data-field="priLeft" class="col-md-2">左边距</th>
-                    <th data-field="priTop" class="col-md-2">上边距</th>
-                    <th data-field="priWidth" class="col-md-2">宽</th>
-                    <th data-field="priHeight" class="col-md-2">高</th>
-                    <th data-field="priOrder" class="col-md-2">排序序列</th>
+                    <th data-field="modId" class="col-md-1">打印模板ID</th>
+                    <th data-field="priName" class="col-md-2">打印项名称</th>
+                    <th data-field="priCode" class="col-md-2">打印项字段</th>
+                    <!--<th data-field="priValue" class="col-md-2">打印项字段值</th>-->
+                    <th data-field="priTop" class="col-md-1">上边距(单位:px)</th>
+                    <th data-field="priLeft" class="col-md-1">左边距(单位:px)</th>
+                    <th data-field="priWidth" class="col-md-1">宽(单位:px)</th>
+                    <th data-field="priHeight" class="col-md-1">高(单位:px)</th>
+                    <!--<th data-field="priOrder" class="col-md-2">排序序列</th>-->
                     <th data-field="stateTime" class="col-md-2">更新时间</th>
 
                 </tr>
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <select class="form-control " id="search_select" name="search_select">
-                    
+                        <option value="search_priName">名称</option>
                     </select>
                 </div>
                 <div class="col-md-4">

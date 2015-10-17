@@ -6,6 +6,8 @@ import com.ssm.common.baseaction.BaseAction;
 import com.ssm.common.mybatis.Page;
 import com.ssm.common.util.JacksonMapper;
 import com.ssm.common.util.Result;
+import com.ssm.common.util.SimpleDate;
+import com.ssm.common.util.UploadUtils;
 import com.ssm.viewModel.GridModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -13,7 +15,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.InputStream;
 
 /**
  * Created by xecoder on Sat Oct 03 17:24:55 GMT+08:00 2015.
@@ -106,27 +111,51 @@ public class PrimodController extends BaseAction {
      */
     @RequestMapping(value="/save")
     @ResponseBody
-    public Result saveAddPrimod(@ModelAttribute Primod primod) {
+    public Result saveAddPrimod(@ModelAttribute Primod primod,@RequestParam("file") MultipartFile file) {
         Result result = new Result();
         try {
-            if (primod.getModId() != null)
-            {
-                primodService.update(primod);
-                result.setMsg("成功");
-                result.setSuccessful(true);
+            if(!file.isEmpty()){
+                String path = UploadUtils.upload(file, request);
+                primod.setFilePath(path);
+                primod.setUrl(path);
             }
-            else
-            {
-                primodService.save(primod);
-                result.setMsg("成功");
-                result.setSuccessful(true);
-            }
-        } finally {
-                result.setMsg("失败");
-                result.setSuccessful(false);
+            primod.setStateTime(SimpleDate.getDateTime());
+            if (primod.getModId() != null) primodService.update(primod);
+            else primodService.save(primod);
+            result.setMsg("操作成功");
+            result.setSuccessful(true);
+        }catch (Exception e) {
+            e.printStackTrace();
+            result.setMsg("操作失败");
+            result.setSuccessful(false);
         }
         return result;
     }
+
+    /*@RequestMapping(value="/save", method = RequestMethod.POST)
+    public String saveAddPrimod(@ModelAttribute Primod primod,@RequestParam("file") MultipartFile file) {
+        String page = INDEX;
+        try {
+            if (primod.getModId() != null)
+            {
+                primod.setStateTime(SimpleDate.getDateTime());
+                primodService.update(primod);
+            }
+            else
+            {
+                if(!file.isEmpty()){
+                    String path = UploadUtils.upload(file, request);
+                    primod.setFilePath(path);
+                    primod.setUrl(path);
+                }
+                primod.setStateTime(SimpleDate.getDateTime());
+                primodService.save(primod);
+            }
+        }catch (Exception e){
+            page = EDIT;
+        }
+        return page;
+    }*/
 
     /**
      * 查询单个打印模板
@@ -153,5 +182,7 @@ public class PrimodController extends BaseAction {
         result.setMsg("删除成功");
         return result;
     }
+
+
 }
 

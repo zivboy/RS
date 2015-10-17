@@ -7,6 +7,7 @@ import com.ssm.business.service.PrimodService;
 import com.ssm.common.basedao.BaseDao;
 import com.ssm.common.baseservice.BaseService;
 import com.ssm.common.mybatis.Page;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +47,9 @@ public class PrimodServiceImpl  extends BaseService implements PrimodService {
         PrimodCriteria criteria = new PrimodCriteria();
         PrimodCriteria.Criteria cri = criteria.createCriteria();
         if (primod != null) {
-                
+            if(StringUtils.isNotBlank(primod.getModName())) {
+                cri.andModNameEqualTo(primod.getModName());
+            }
         }
         if(page != null && page.getSort() != null && page.getOrder() != null){
             criteria.setOrderByClause(page.getSort() + " " + page.getOrder());

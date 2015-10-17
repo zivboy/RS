@@ -43,4 +43,23 @@ public class DownloadController   extends BaseAction {
 
         return null;
     }
+
+    @RequestMapping(value = "/getImg")
+    public String downloadImg(
+            HttpServletRequest request, HttpServletResponse response,
+            @RequestParam(value = "filePath") String filePath) throws Exception {
+
+        filePath = filePath.replace("/", "\\");
+
+        if (StringUtils.isEmpty(filePath) || filePath.contains("\\.\\.")) {
+            response.setContentType("text/html;charset=utf-8");
+            return null;
+        }
+        filePath = URLDecoder.decode(filePath, "UTF-8");
+
+
+        DownloadUtils.download(request, response, filePath);
+
+        return null;
+    }
 }

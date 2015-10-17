@@ -96,4 +96,9 @@ function queryParamsF(params) {
     return $.extend({}, params, data);
 }
 
+function imgFormatter(value, row, index){
+    var temp = '<img width="150px" height="80px" src="/download/get?filePath='+value+'" />';
+    return temp;
+}
+
 

@@ -192,6 +192,66 @@ public class PrimodCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andModStateIsNull() {
+            addCriterion("mod_state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andModStateIsNotNull() {
+            addCriterion("mod_state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andModStateEqualTo(Integer value) {
+            addCriterion("mod_state =", value, "modState");
+            return (Criteria) this;
+        }
+
+        public Criteria andModStateNotEqualTo(Integer value) {
+            addCriterion("mod_state <>", value, "modState");
+            return (Criteria) this;
+        }
+
+        public Criteria andModStateGreaterThan(Integer value) {
+            addCriterion("mod_state >", value, "modState");
+            return (Criteria) this;
+        }
+
+        public Criteria andModStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("mod_state >=", value, "modState");
+            return (Criteria) this;
+        }
+
+        public Criteria andModStateLessThan(Integer value) {
+            addCriterion("mod_state <", value, "modState");
+            return (Criteria) this;
+        }
+
+        public Criteria andModStateLessThanOrEqualTo(Integer value) {
+            addCriterion("mod_state <=", value, "modState");
+            return (Criteria) this;
+        }
+
+        public Criteria andModStateIn(List<Integer> values) {
+            addCriterion("mod_state in", values, "modState");
+            return (Criteria) this;
+        }
+
+        public Criteria andModStateNotIn(List<Integer> values) {
+            addCriterion("mod_state not in", values, "modState");
+            return (Criteria) this;
+        }
+
+        public Criteria andModStateBetween(Integer value1, Integer value2) {
+            addCriterion("mod_state between", value1, value2, "modState");
+            return (Criteria) this;
+        }
+
+        public Criteria andModStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("mod_state not between", value1, value2, "modState");
+            return (Criteria) this;
+        }
+
         public Criteria andModNameIsNull() {
             addCriterion("mod_name is null");
             return (Criteria) this;
