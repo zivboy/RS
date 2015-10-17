@@ -11,10 +11,8 @@
                 <thead>
                 <tr>
                     <th data-field="state" data-radio="true"></th>
-                    <th data-field="dicId" class="col-md-2">编码</th>
-                    <th data-field="dicName" class="col-md-5">名称</th>
-                    <th data-field="dicKey" class="col-md-2">存储值</th>
-                    <th data-field="dicValue" class="col-md-4">显示名</th>
+                    <th data-field="dicKey" class="col-md-4">存储值</th>
+                    <th data-field="dicValue" class="col-md-8">显示名</th>
 
                 </tr>
                 </thead>
@@ -28,7 +26,6 @@
             <div class="row">
                 <div class="col-md-3">
                     <select class="form-control " id="search_select" name="search_select">
-                        <option value="search_dicName">名称</option>
                         <option value="search_dicValue">显示名</option>
                     </select>
                 </div>
@@ -68,5 +65,8 @@
 </body>
 <@foot/>
 <script src="${base}/styles/js/module/business/dictionary/list.js"></script>
+<script type="text/javascript">
+    var type = "${type}";
+</script>
 </html>
 

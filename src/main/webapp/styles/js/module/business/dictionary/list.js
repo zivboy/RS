@@ -13,7 +13,7 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'ba
 
         //列表
         var $table = $('#tableB').bootstrapTable({
-            url: WEB_GLOBAL_CTX + '/business/dictionary/list',
+            url: WEB_GLOBAL_CTX + '/business/dictionary/list/'+type,
             dataType: 'json',
             cache:false,
             showToggle:true,
@@ -42,7 +42,7 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'ba
         //查询动作
         $('#query').click(function () {
             $table.bootstrapTable('refresh', {
-                url: WEB_GLOBAL_CTX + '/business/dictionary/list',
+                url: WEB_GLOBAL_CTX + '/business/dictionary/list/'+type,
                 queryParams: 'queryParamsF'
             });
         });
@@ -55,7 +55,7 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'ba
                 $.post(WEB_GLOBAL_CTX + "/business/dictionary/delete/" + this.pkId, function (rsp) {
                     if (rsp.successful) {
                         $.scojs_message(rsp.msg, $OK);
-                        flashTable('tableB', '/business/dictionary/list');
+                        flashTable('tableB', '/business/dictionary/list/'+type);
                     } else {
                         $.scojs_message(rsp.msg, $ERROR);
                     }
@@ -68,7 +68,7 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'ba
         //添加
         $('#add').click(function () {
             parent.Loading.modal('show');
-            self.location = WEB_GLOBAL_CTX + "/business/dictionary/add";
+            self.location = WEB_GLOBAL_CTX + "/business/dictionary/add/"+type;
         });
 
         //修改

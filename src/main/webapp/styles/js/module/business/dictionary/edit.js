@@ -1,5 +1,5 @@
 //加载插件
-requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'selectCN', 'validator', 'vb', 'validatorLAG', 'comm', 'form', 'message'],
+requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'switchs','selectCN', 'validator', 'vb', 'validatorLAG', 'comm', 'form', 'message'],
     function ($, _) {
 
         //返回
@@ -11,16 +11,20 @@ requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'selectCN', 'validator', 
         var $OK = $.scojs_message.TYPE_OK;
         var $ERROR = $.scojs_message.TYPE_ERROR;
 
-        if (dictionary != undefined && dictionary != null && dictionary != "") {
+        if (dictionary != undefined ) {
             //初始化页面
             meForm($('#formSubmit'), dictionary);
-                        $('.selectpicker').selectpicker('refresh');
-
         }
         else {
-
         }
         //修改页面结束
+
+        //状态插件
+        $("input[type=\"checkbox\"], input[type=\"radio\"]").not("[data-switch-no-init]").bootstrapSwitch()
+            .on('switchChange.bootstrapSwitch', function(event, state) {
+                console.log(state); // true | false
+                $("#state").val(state?"A":"X");
+            });
 
         parent.Loading.modal('hide');
 
@@ -47,7 +51,7 @@ requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'selectCN', 'validator', 
                     if (rsp.successful) {
                         $.scojs_message(rsp.msg, $OK);
                         $("#save").toggleClass("disabled");
-                        setTimeout("window.location.href='" + WEB_GLOBAL_CTX + "/business/dictionary/index'", 1000);
+                        setTimeout("window.location.href='" + WEB_GLOBAL_CTX + "/business/dictionary/index/"+type+"'", 1000);
                     } else {
                         $.scojs_message(rsp.msg, $ERROR);
                     }

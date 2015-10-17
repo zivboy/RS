@@ -121,9 +121,11 @@ public class KsjlController extends BaseAction {
                 result.setMsg("成功");
                 result.setSuccessful(true);
             }
-        } finally {
-                result.setMsg("失败");
-                result.setSuccessful(false);
+        }
+        catch (Exception e)
+        {
+            result.setMsg("失败"+e.getMessage());
+            result.setSuccessful(false);
         }
         return result;
     }

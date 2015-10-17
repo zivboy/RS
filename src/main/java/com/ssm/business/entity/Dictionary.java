@@ -28,6 +28,8 @@ public class Dictionary implements Serializable {
 
     private String state;
 
+    private String type;
+
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date stateTime;
@@ -113,5 +115,13 @@ public class Dictionary implements Serializable {
 
     public void setDicRowNum(Integer dicRowNum) {
         this.dicRowNum = dicRowNum;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

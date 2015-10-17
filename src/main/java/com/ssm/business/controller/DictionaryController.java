@@ -15,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by xecoder on Sat Oct 17 10:30:06 GMT+08:00 2015.
  */
@@ -30,9 +33,11 @@ public class DictionaryController extends BaseAction {
     private static final String INDEX = "/business/dictionary/list";
     private static final String EDIT = "/business/dictionary/edit";
 
-    @RequestMapping(value="/index", method= RequestMethod.GET)
-    public String index() {
-        return INDEX;
+    @RequestMapping(value="/index/{type}", method= RequestMethod.GET)
+    public ModelAndView index(@PathVariable String type) {
+        ModelAndView mav = new ModelAndView(INDEX);
+        mav.addObject("type", type);
+        return mav;
     }
 
 
@@ -40,11 +45,12 @@ public class DictionaryController extends BaseAction {
      * 表格字典维护
      * @return GridModel
      */
-    @RequestMapping(value="/list", method= RequestMethod.GET)
+    @RequestMapping(value="/list/{type}", method= RequestMethod.GET)
     @ResponseBody
-    public GridModel list() {
+    public GridModel list(@PathVariable String type) {
         Dictionary dictionary = SearchForm(Dictionary.class);
         dictionary.setDicCode("bus-san");
+        dictionary.setDicName(type);
         Page info = dictionaryService.findByPage(page(), dictionary);
         GridModel m = new GridModel();
         m.setRows(info.getRows());
@@ -52,20 +58,22 @@ public class DictionaryController extends BaseAction {
         return m;
     }
 
-
     /**
      * 添加字典维护
      * @return ModelAndView
      */
-    @RequestMapping(value="/add")
+    @RequestMapping(value="/add/{type}")
     @ResponseBody
-    public ModelAndView add() {
+    public ModelAndView add(@PathVariable String type) {
         ModelAndView mav = new ModelAndView(EDIT);
         Dictionary dictionary = new Dictionary();
         try {
             ObjectMapper mapper = JacksonMapper.getInstance();
+            dictionary.setType(type);
+            dictionary.setState("A");
             String json =mapper.writeValueAsString(dictionary);
             mav.addObject("message", "完成");
+            mav.addObject("type", type);
             mav.addObject("dictionary",json);
         }
         catch (Exception e)
@@ -90,6 +98,7 @@ public class DictionaryController extends BaseAction {
             String json =mapper.writeValueAsString(dictionary);
             mav.addObject("message", "完成");
             mav.addObject("dictionary",json);
+            mav.addObject("type",dictionary.getDicName());
         }
         catch (Exception e)
         {
@@ -110,21 +119,66 @@ public class DictionaryController extends BaseAction {
     public Result saveAddDictionary(@ModelAttribute Dictionary dictionary) {
         Result result = new Result();
         try {
+            Dictionary dictionaryS = new Dictionary();
             if (dictionary.getPkId() != null)
             {
-                dictionaryService.update(dictionary);
-                result.setMsg("成功");
-                result.setSuccessful(true);
+
+                dictionaryS.setDicValue(dictionary.getDicValue());
+                dictionaryS.setDicKey(dictionary.getDicKey());
+                dictionaryS.setState("A");
+                List<Dictionary> list = dictionaryService.findAll(page(),dictionaryS);
+                if(list.size()==1)
+                {
+                    for(Dictionary d:list){
+                        if(d.getPkId()!=dictionary.getPkId())
+                        {
+                            result.setMsg("数据重复");
+                            result.setSuccessful(false);
+                        }
+                    }
+                }
+                else if(list.size()>1)
+                {
+                    result.setMsg("数据重复");
+                    result.setSuccessful(false);
+                }
+                else {
+                    dictionaryService.update(dictionary);
+                    result.setMsg("成功");
+                    result.setSuccessful(true);
+                }
             }
             else
             {
-                dictionaryService.save(dictionary);
-                result.setMsg("成功");
-                result.setSuccessful(true);
+                dictionaryS.setDicValue(dictionary.getDicValue());
+                dictionaryS.setDicKey(dictionary.getDicKey());
+                dictionaryS.setState("A");
+                List<Dictionary> list = dictionaryService.findAll(page(),dictionaryS);
+                if(list.size()>=1)
+                {
+                            result.setMsg("数据重复");
+                            result.setSuccessful(false);
+                }
+                else {
+                    dictionary.setDicCode("bus-san");
+                    dictionary.setDicName(dictionary.getType());
+                    Dictionary dictionaryP = dictionaryService.findByKeyAndName("0", dictionary.getType());
+                    dictionaryS.setDicCode("bus-san");
+                    dictionaryS.setDicName(dictionary.getType());
+                    dictionary.setStateTime(new Date());
+                    int count = dictionaryService.countByExample(page(), dictionaryS);
+                    dictionary.setDicId(count);
+                    dictionary.setDicParentId(dictionaryP.getDicId());
+                    dictionaryService.save(dictionary);
+                    result.setMsg("成功");
+                    result.setSuccessful(true);
+                }
             }
-        } finally {
-                result.setMsg("失败");
-                result.setSuccessful(false);
+        }
+        catch (Exception e)
+        {
+            result.setMsg("失败"+e.getMessage());
+            result.setSuccessful(false);
         }
         return result;
     }

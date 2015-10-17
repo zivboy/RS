@@ -1,9 +1,6 @@
 package com.ssm.business.controller;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.JsonEncoding;
 import com.ssm.business.entity.Student;
 import com.ssm.business.service.StudentService;
 import com.ssm.common.baseaction.BaseAction;
@@ -17,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.List;
 
 /**
  * Created by xecoder on Sat Oct 17 14:49:26 GMT+08:00 2015.
@@ -125,9 +121,11 @@ public class StudentController extends BaseAction {
                 result.setMsg("成功");
                 result.setSuccessful(true);
             }
-        } finally {
-                result.setMsg("失败");
-                result.setSuccessful(false);
+        }
+        catch (Exception e)
+        {
+            result.setMsg("失败"+e.getMessage());
+            result.setSuccessful(false);
         }
         return result;
     }
