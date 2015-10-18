@@ -3,9 +3,9 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/aop
-            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd"
+            http://www.springframework.org/schema/aop/spring-aop.xsd"
 	default-lazy-init="true">
 
 	<description>Shiro安全配置</description>
@@ -130,12 +130,9 @@
 			<value>
                 /home = anon
                 /index = anon
-                /sale/** = anon
+                /img/** = anon
 				/styles/** = anon
-				/reset/** = anon
                 /captcha/** = anon
-                /styles/images/logo/** = anon
-                /styles/images/logo = anon
 				/login/timeout = anon
                 /login/autoLoad = anon
 				/login/load = anon

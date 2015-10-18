@@ -42,37 +42,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <servlet>
-        <servlet-name>ExplorerRestletServlet</servlet-name>
-        <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
-        <init-param>
-            <!-- Application class name -->
-            <param-name>org.restlet.application</param-name>
-            <param-value>com.ssm.activiti.rest.ExplorerRestApplication</param-value>
-        </init-param>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ExplorerRestletServlet</servlet-name>
-        <url-pattern>/service/*</url-pattern>
-    </servlet-mapping>
-
-    <!-- Catch all service requests -->
-    <servlet>
-        <servlet-name>RestletServlet</servlet-name>
-        <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
-        <init-param>
-            <!-- Application class name -->
-            <param-name>org.restlet.application</param-name>
-            <param-value>org.activiti.rest.service.application.ActivitiRestServicesApplication</param-value>
-        </init-param>
-    </servlet>
-
-
-    <servlet-mapping>
-        <servlet-name>RestletServlet</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
-    </servlet-mapping>
 
     <!-- Druid内置监控   http://***/druid/index.html-->
     <servlet>

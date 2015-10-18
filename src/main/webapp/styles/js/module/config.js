@@ -33,6 +33,7 @@ require.config({
         comm: '../module/comm',
         form: '../module/form',
         async: '../libs/async',
+        fileinput: '../fileinput/js/fileinput.min',
         newsbox: '../libs/jquery.bootstrap.newsbox',
         ie10: '../libs/ie10-viewport-bug-workaround'
     },
@@ -41,6 +42,7 @@ require.config({
         validator: { deps: ['jquery'], exports : 'validator'},
         select: { deps: ['jquery'] , exports :'select'},
         switchs: { deps: ['jquery'] , exports :'switchs'},
+        fileinput: { deps: ['jquery'] , exports :'fileinput'},
         fuelux: { deps: ['jquery'] , exports :'fuelux' },
         table: { deps: ['jquery']  , exports :'table'},
         editable: { deps: ['jquery']  , exports :'editable'},

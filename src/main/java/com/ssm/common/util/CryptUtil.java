@@ -1,9 +1,9 @@
 package com.ssm.common.util;
 
-import java.security.*;
+import javax.crypto.Cipher;
+import java.security.Key;
 import java.util.Date;
 import java.util.UUID;
-import javax.crypto.*;
 public class CryptUtil {
 
 
