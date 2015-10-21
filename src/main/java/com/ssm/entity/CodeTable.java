@@ -17,7 +17,25 @@ public class CodeTable implements Serializable {
     private String moduleName;//模块中文名称
     private String indexPageName;//查询页面
     private String editPageName;//编辑页面
+    private String parentId;//父级
+    private String className;//图标
     private List<CodeColumn> columns;
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
     public String getLowerModuleCode() {
         return lowerModuleCode;

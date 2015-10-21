@@ -31,6 +31,17 @@ requirejs(['jquery','bootstrap','fuelux','table', 'tablezn','select','switchs','
             updateRowEdit(currentRow[0]);
         });
 
+        //初始树
+        meTreeInit('myTree',"","/console/security/module/findJsonById/",false,true,0);
+
+        //同步值
+        $('#myTree').on('updated.fu.tree', function (e, selected) {
+            asyncTreeValue("myTree","parentId");
+        });
+        $('#myTree').on('selected.fu.tree', function (e, info) {
+            asyncTreeValue("myTree","parentId");
+        });
+
         //修改
         $('#ok').click(function () {
             currentIndex=currentRow[0].number;
@@ -128,11 +139,17 @@ requirejs(['jquery','bootstrap','fuelux','table', 'tablezn','select','switchs','
                             message: '不要包含特殊字符'
                         }
                     }
+                },
+                'parentId': {
+                    validators: {
+                        notEmpty: {
+                        }
+                    }
                 }
             }
         }).on('success.field.fv', function(e, data) {
             if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
-                data.fv.disableSubmitButtons(true);
+                //data.fv.disableSubmitButtons(true);
             }
         }).on('success.form.fv', function (e) {
             e.preventDefault();
@@ -147,6 +164,8 @@ requirejs(['jquery','bootstrap','fuelux','table', 'tablezn','select','switchs','
             codeTable += ","+"\"moduleCodeUrl\":\"" + $("#moduleCodeUrl").val() + "\"";
             codeTable += ","+"\"indexPageName\":\"" + $("#indexPageName").val() + "\"";
             codeTable += ","+"\"editPageName\":\"" + $("#editPageName").val() + "\"";
+            codeTable += ","+"\"parentId\":\"" + $("#parentId").val() + "\"";
+            codeTable += ","+"\"className\":\"" + $("#className").val() + "\"";
 
             effectRow["codeTable"] = JSON.stringify(JSON.parse("{"+codeTable+"}"));
             console.debug(JSON.stringify(effectRow));

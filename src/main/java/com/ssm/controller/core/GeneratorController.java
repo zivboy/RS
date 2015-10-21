@@ -10,6 +10,7 @@ import com.ssm.common.util.Result;
 import com.ssm.common.util.StringUtil;
 import com.ssm.entity.*;
 import com.ssm.service.core.ColumnsService;
+import com.ssm.service.core.ModuleService;
 import com.ssm.service.core.TablesService;
 import com.ssm.viewModel.GridModel;
 import org.apache.commons.lang3.StringUtils;
@@ -49,6 +50,9 @@ public class GeneratorController extends BaseAction {
     private ColumnsService columnsService;
     @Autowired
     private TablesService tablesService;
+
+    @Autowired
+    private ModuleService moduleService;
 
     @Autowired
     private DictionaryService dictionaryService;
@@ -385,6 +389,15 @@ public class GeneratorController extends BaseAction {
             FileUtil.createFile(javaScriptPath + "/edit.js", editPageJSTemplate, "UTF-8");
             logger.info("---------------edit js---------------");
 
+            Module module = new Module();
+            module.setName(moduleName);
+            module.setParentId(Long.valueOf(codeTable.getParentId()));
+            module.setClassName(codeTable.getClassName());
+            module.setPriority(99);
+            module.setUrl("/business/"+lowerModuleCode+"/index");
+            module.setDescription(moduleName);
+            module.setSn(moduleCode);
+            moduleService.save(module);
 
             //后缀
             result.setMsg("生成成功");
@@ -509,7 +522,7 @@ public class GeneratorController extends BaseAction {
                 upperColumnCode = StringUtil.firstCharacterToUpper(upperColumnCode);
                 lowerColumnCode = StringUtil.firstCharacterToLower(upperColumnCode);
                 //if(!StringUtils.equals(column.getType(),"hidden")&&StringUtils.isBlank(column.getList())) {
-                b.append("    <div name=\"search_").append(lowerColumnCode).append("\">").append(column.getColumnName()).append("</div>\n");
+                b.append("    <option value=\"search_").append(lowerColumnCode).append("\">").append(column.getColumnName()).append("</option>\n");
                 //}
             }
         }
