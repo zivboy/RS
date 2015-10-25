@@ -1,6 +1,5 @@
 package com.ssm.business.controller;
 
-import com.alibaba.druid.util.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.linuxense.javadbf.DBFField;
 import com.linuxense.javadbf.DBFReader;
@@ -144,7 +143,8 @@ public class ImportsController extends BaseAction {
         try {
             InputStream fis;
             String fileName ;
-            List<Item> list = new ArrayList<>();
+            List<Item> showList = new ArrayList<>();//配置对应字段使用
+            List<Item> dataList = new ArrayList<>();//存储使用
             if (!file.isEmpty()) {
                 fileName = file.getOriginalFilename();
                 imports.setTitle(fileName);
@@ -152,16 +152,21 @@ public class ImportsController extends BaseAction {
                 imports.setFilePath(path);
                 Columns columns = new Columns();
                 columns.setTableName("business_student");
+                columns.setTableSchema("recruit");
+                //TODO 只需要对应的字段条件
+                List<Columns> dataColumnsList = columnsService.selectByExample(null, columns);
+                columns.setDataType("double");
                 List<Columns> columnsList = columnsService.selectByExample(null, columns);
-                imports.setTitle(fileName);
-                imports.setColumn(columnsList);
+                imports.setTitle(fileName);//文件名称
+                imports.setColumn(columnsList);//数据库的表字段
+
                 fis = new FileInputStream(path);
                 // 根据输入流初始化一个DBFReader实例，用来读取DBF文件信息
                 DBFReader reader = new DBFReader(fis);
                 reader.setCharactersetName("GBK");
                 // 调用DBFReader对实例方法得到path文件中字段的个数
                 int fieldsCount = reader.getFieldCount();
-                imports.setFieldCount(fieldsCount);
+                imports.setFieldCount(fieldsCount);//字段个数
                 // 取出字段信息
                 for (int i = 0; i < fieldsCount; i++) {
                     DBFField field = reader.getField(i);
@@ -170,9 +175,14 @@ public class ImportsController extends BaseAction {
                     item.setSourceTabel(fileName);
                     item.setSourceField(field.getName());
                     item.setItemId(i);
-                    list.add(item);
+                    if(field.getName().toString().indexOf("CJ")>1||field.getName().toString().indexOf("GK")>1) {
+                        showList.add(item);
+                    }
+                    dataList.add(item);
                 }
-                imports.setItemList(list);
+                imports.setItemList(showList);//dbf 文件字段
+                session.setAttribute("dataList",dataList);
+                session.setAttribute("dataColumnsList",dataColumnsList);
             }
             result.setMsg("文件加载完成，请对应字段");
             result.setSuccessful(true);
@@ -248,15 +258,19 @@ public class ImportsController extends BaseAction {
             // 根据输入流初始化一个DBFReader实例，用来读取DBF文件信息
             DBFReader reader = new DBFReader(fis);
             reader.setCharactersetName("GBK");
-            Object[] rowValues;
+/*            Object[] rowValues;
 
             for (int i = 0; i < reader.getFieldCount(); i++) {
                 DBFField field = reader.getField(i);
                 sourceFieldDBF.add(field.getName());
-            }
+            }*/
             // 一条条取出path文件中记录
+
+            List<String> dataList = (List<String>) session.getAttribute("dataList");
+            List<String> dataColumnsList = (List<String>) session.getAttribute("dataColumnsList");
+
             try {
-                ImportDateThread threadData = new ImportDateThread(importId,reader,fieldHtml,columnHtml,sourceFieldDBF);
+                ImportDateThread threadData = new ImportDateThread(importId,reader,fieldHtml,columnHtml,/*sourceFieldDBF,*/dataList,dataColumnsList);
                 Thread thread = new Thread(threadData);
                 thread.start();
             } catch (Exception e) {
@@ -278,38 +292,48 @@ public class ImportsController extends BaseAction {
     class ImportDateThread implements Runnable
     {
         private DBFReader reader;
-        private List<String> fieldHtml,columnHtml,sourceFieldDBF;
+        private List<String> fieldHtml,columnHtml,sourceFieldDBF,dataList,dataColumnsList;
         private int num=1,importId;
-        public ImportDateThread(int importId,DBFReader reader,List<String> fieldHtml,List<String> columnHtml,List<String> sourceFieldDBF)
+        public ImportDateThread(int importId,DBFReader reader,List<String> fieldHtml,List<String> columnHtml,/*List<String> sourceFieldDBF,*/List<String> dataList,List<String> dataColumnsList)
         {
             this.importId = importId;
             this.reader = reader;
             this.fieldHtml = fieldHtml;
             this.columnHtml = columnHtml;
-            this.sourceFieldDBF = sourceFieldDBF;
+//            this.sourceFieldDBF = sourceFieldDBF;
+            this.dataList = dataList;//所有的dbf数据字段
+            this.dataColumnsList = dataColumnsList; //界面存储对应关系的dbf数据字段
+        }
+
+        /**
+         * 获取字段的set方法
+         * @param orginString
+         * @return
+         */
+        private String getMethodName(String orginString)
+        {
+            return "set" + StringUtil.firstCharacterToUpper(StringUtil.replaceUnderlineAndfirstToUpper(orginString.split("\\.")[1], "_", ""));
         }
 
         @Override
         public synchronized void run() {
             Object[] rowValues;
             String methodName,initValue;
+            int location;
             try {
-                while ((rowValues = reader.nextRecord()) != null) {
+                while ((rowValues = reader.nextRecord()) != null) {//取dbf文件的每一行
                     Student student = new Student();
-                    for (int i = 0; i < rowValues.length; i++) {
-                        //System.out.println(rowValues[i]);
+                    for (int i = 0; i < rowValues.length; i++) {//循环每一行的每一个字段的值
+                        initValue = String.valueOf(rowValues[i]);
                         Out:
-                        for (int j = 0; j < fieldHtml.size(); j++) {
-                            if (StringUtils.equals(sourceFieldDBF.get(i).trim(), fieldHtml.get(j).trim())) {
-                                //通过反射将值保存
-                                methodName = "set" + StringUtil.firstCharacterToUpper(StringUtil.replaceUnderlineAndfirstToUpper(columnHtml.get(j).split("\\.")[1], "_", ""));
-                                initValue = String.valueOf(rowValues[i]);
-                                Student.class.getMethod(methodName, String.class).invoke(student, initValue);
-                                break Out;
-                            }
+                        for(int x=0;x<dataList.size();x++) {//循环比较dbf文件行表头，以便对应bean的属性
+                            location = fieldHtml.lastIndexOf(dataList.get(x).trim());//如果表头在界面的配置里面
+                            methodName = getMethodName((location>-1)?columnHtml.get(location):dataList.get(x));//界面dbf展现字段名等于界面表的字段
+                            Student.class.getMethod(methodName, String.class).invoke(student, initValue);//通过反射将值保存到bean
+                            break Out;
                         }
                     }
-                    studentService.save(student);
+                    studentService.save(student);//保存一行
                     num++;
                 }
             }

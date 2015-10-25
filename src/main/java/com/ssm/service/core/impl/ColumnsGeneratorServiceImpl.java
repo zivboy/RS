@@ -50,6 +50,10 @@ public class ColumnsGeneratorServiceImpl extends BaseService implements ColumnsS
             if (StringUtils.isNotBlank(columns.getTableName())) {
                 cri.andTableNameEqualTo(columns.getTableName());
             }
+            if(StringUtils.isNotBlank(columns.getDataType()))
+            {
+                cri.andDataTypeEqualTo(columns.getDataType());
+            }
         }
         if (page != null && page.getSort() != null && page.getOrder() != null) {
             criteria.setOrderByClause(page.getSort() + " " + page.getOrder());

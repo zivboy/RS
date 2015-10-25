@@ -28,7 +28,7 @@ requirejs(['jquery'],
                     $('#top_memu').toggleClass('glyphicon glyphicon-chevron-down');
                 });
 
-                $(window).resize(function () {
+/*                $(window).resize(function () {
                     $(window).scroll(function () {
                         if ($(window).width() >= 751) {
                             if ($(window).scrollTop() > 50) {
@@ -41,7 +41,7 @@ requirejs(['jquery'],
                             }
                         }
                     });
-                });
+                });*/
 
                 var temp  = getModuleString(1);
                 $("#accordion").append(temp);
