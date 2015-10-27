@@ -5,85 +5,69 @@ import java.util.Date;
 public class Student {
     private Long id;
 
-    private Long tzsh;
-
-    private String ksh;
+    private String xm;
 
     private String sfzh;
 
-    private String yy;
-
-    private String ncl;
-
-    private String pcdm;
-
-    private String pc;
-
-    private Double pcfs;
+    private String xb;
 
     private String xbdm;
 
-    private String xb;
-
-    private String xh;
-
-    private String xydm;
-
-    private String xy;
-
-    private String zydm;
-
-    private String zy;
-
-    private String zybj;
-
-    private String qsxx;
-
-    private String zkzh;
-
-    private String xslb;
-
-    private String zp;
-
-    private String xm;
-
-    private String xydm1;
-
-    private String xy1;
-
-    private Double zhf;
+    private String sf;
 
     private String sfdm;
 
-    private String sf;
+    private String dqmc;
 
-    private String kldm;
+    private String dqdm;
 
-    private String kskl;
+    private String mz;
 
-    private Date rq;
+    private String mzdm;
 
-    private String xz;
-
-    private String zydm1;
-
-    private String zy1;
+    private Date csny;
 
     private String zzmmdm;
 
     private String zzmm;
 
+    private String zxdm;
+
+    private String zxmc;
+
+    private String bylbdm;
+
+    private String jtdz;
+
+    private String yzbm;
+
+    private String lxdh;
+
+    private String hkkh;
+
+    private String kstc;
+
+    private String rhzw;
+
+    private String ksjlhcf;
+
+    private String zp;
+
+    private String ksh;
+
+    private String zkzh;
+
+    private String kldm;
+
+    private String kskl;
+
     private String kslbdm;
 
     private String kslb;
 
-    private String mzdm;
+    private String kslxdm;
 
-    private String mz;
-
-    private String dqbm;
-
-    private String dqmc;
+    private Double zhf;
 
     private Double zyf;
 
@@ -113,59 +97,15 @@ public class Student {
 
     private Double zxmk;
 
+    private String wyyzdm;
+
+    private String wyks;
+
     private Double total111;
 
     private Double total;
 
-    private Date csny;
-
-    private String bylbdm;
-
-    private String zxdm;
-
-    private String zxmc;
-
-    private String wyyzdm;
-
-    private String hkdj;
-
-    private String bmdw;
-
-    private String kstz;
-
-    private String xtdw;
-
-    private String dqdm;
-
-    private String jtdz;
-
-    private String yzbm;
-
-    private String lxdh;
-
-    private String hkkh;
-
-    private String kstc;
-
-    private String rhzw;
-
-    private String ksjlhcf;
-
-    private String wyks;
-
     private String zsyj;
-
-    private String kslxdm;
-
-    private String sjr;
-
-    private String ysjzdm;
-
-    private String wytl;
-
-    private String tddw;
-
-    private String jhxz;
 
     private Double cj;
 
@@ -180,6 +120,26 @@ public class Student {
     private Double zyytjzcj;
 
     private Double zyytfjcj;
+
+    private String hkdj;
+
+    private String bmdw;
+
+    private String kstz;
+
+    private String xtdw;
+
+    private String sjr;
+
+    private String ysjzdm;
+
+    private String wytl;
+
+    private String tddw;
+
+    private String jhxz;
+
+    private String zsls;
 
     private String tdzy;
 
@@ -259,7 +219,55 @@ public class Student {
 
     private String wkTz;
 
+    private String pcdm;
+
+    private String pc;
+
+    private Double pcfs;
+
+    private String tzsh;
+
+    private String xh;
+
+    private String xslb;
+
+    private String xqdm;
+
+    private String xq;
+
+    private String xydm;
+
+    private String xy;
+
+    private String xydm1;
+
+    private String xy1;
+
+    private String zydm;
+
+    private String zy;
+
+    private String zydm1;
+
+    private String zy1;
+
+    private String xz;
+
+    private String zybj;
+
+    private String qsxx;
+
+    private Date rq;
+
+    private String yy;
+
+    private String ncl;
+
     private Date ny;
+
+    private Long drpc;
+
+    private Long drrid;
 
     public Long getId() {
         return id;
@@ -267,166 +275,6 @@ public class Student {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getTzsh() {
-        return tzsh;
-    }
-
-    public void setTzsh(Long tzsh) {
-        this.tzsh = tzsh;
-    }
-
-    public String getKsh() {
-        return ksh;
-    }
-
-    public void setKsh(String ksh) {
-        this.ksh = ksh == null ? null : ksh.trim();
-    }
-
-    public String getSfzh() {
-        return sfzh;
-    }
-
-    public void setSfzh(String sfzh) {
-        this.sfzh = sfzh == null ? null : sfzh.trim();
-    }
-
-    public String getYy() {
-        return yy;
-    }
-
-    public void setYy(String yy) {
-        this.yy = yy == null ? null : yy.trim();
-    }
-
-    public String getNcl() {
-        return ncl;
-    }
-
-    public void setNcl(String ncl) {
-        this.ncl = ncl == null ? null : ncl.trim();
-    }
-
-    public String getPcdm() {
-        return pcdm;
-    }
-
-    public void setPcdm(String pcdm) {
-        this.pcdm = pcdm == null ? null : pcdm.trim();
-    }
-
-    public String getPc() {
-        return pc;
-    }
-
-    public void setPc(String pc) {
-        this.pc = pc == null ? null : pc.trim();
-    }
-
-    public Double getPcfs() {
-        return pcfs;
-    }
-
-    public void setPcfs(Double pcfs) {
-        this.pcfs = pcfs;
-    }
-
-    public String getXbdm() {
-        return xbdm;
-    }
-
-    public void setXbdm(String xbdm) {
-        this.xbdm = xbdm == null ? null : xbdm.trim();
-    }
-
-    public String getXb() {
-        return xb;
-    }
-
-    public void setXb(String xb) {
-        this.xb = xb == null ? null : xb.trim();
-    }
-
-    public String getXh() {
-        return xh;
-    }
-
-    public void setXh(String xh) {
-        this.xh = xh == null ? null : xh.trim();
-    }
-
-    public String getXydm() {
-        return xydm;
-    }
-
-    public void setXydm(String xydm) {
-        this.xydm = xydm == null ? null : xydm.trim();
-    }
-
-    public String getXy() {
-        return xy;
-    }
-
-    public void setXy(String xy) {
-        this.xy = xy == null ? null : xy.trim();
-    }
-
-    public String getZydm() {
-        return zydm;
-    }
-
-    public void setZydm(String zydm) {
-        this.zydm = zydm == null ? null : zydm.trim();
-    }
-
-    public String getZy() {
-        return zy;
-    }
-
-    public void setZy(String zy) {
-        this.zy = zy == null ? null : zy.trim();
-    }
-
-    public String getZybj() {
-        return zybj;
-    }
-
-    public void setZybj(String zybj) {
-        this.zybj = zybj == null ? null : zybj.trim();
-    }
-
-    public String getQsxx() {
-        return qsxx;
-    }
-
-    public void setQsxx(String qsxx) {
-        this.qsxx = qsxx == null ? null : qsxx.trim();
-    }
-
-    public String getZkzh() {
-        return zkzh;
-    }
-
-    public void setZkzh(String zkzh) {
-        this.zkzh = zkzh == null ? null : zkzh.trim();
-    }
-
-    public String getXslb() {
-        return xslb;
-    }
-
-    public void setXslb(String xslb) {
-        this.xslb = xslb == null ? null : xslb.trim();
-    }
-
-    public String getZp() {
-        return zp;
-    }
-
-    public void setZp(String zp) {
-        this.zp = zp == null ? null : zp.trim();
     }
 
     public String getXm() {
@@ -437,36 +285,28 @@ public class Student {
         this.xm = xm == null ? null : xm.trim();
     }
 
-    public String getXydm1() {
-        return xydm1;
+    public String getSfzh() {
+        return sfzh;
     }
 
-    public void setXydm1(String xydm1) {
-        this.xydm1 = xydm1 == null ? null : xydm1.trim();
+    public void setSfzh(String sfzh) {
+        this.sfzh = sfzh == null ? null : sfzh.trim();
     }
 
-    public String getXy1() {
-        return xy1;
+    public String getXb() {
+        return xb;
     }
 
-    public void setXy1(String xy1) {
-        this.xy1 = xy1 == null ? null : xy1.trim();
+    public void setXb(String xb) {
+        this.xb = xb == null ? null : xb.trim();
     }
 
-    public Double getZhf() {
-        return zhf;
+    public String getXbdm() {
+        return xbdm;
     }
 
-    public void setZhf(Double zhf) {
-        this.zhf = zhf;
-    }
-
-    public String getSfdm() {
-        return sfdm;
-    }
-
-    public void setSfdm(String sfdm) {
-        this.sfdm = sfdm == null ? null : sfdm.trim();
+    public void setXbdm(String xbdm) {
+        this.xbdm = xbdm == null ? null : xbdm.trim();
     }
 
     public String getSf() {
@@ -477,52 +317,52 @@ public class Student {
         this.sf = sf == null ? null : sf.trim();
     }
 
-    public String getKldm() {
-        return kldm;
+    public String getSfdm() {
+        return sfdm;
     }
 
-    public void setKldm(String kldm) {
-        this.kldm = kldm == null ? null : kldm.trim();
+    public void setSfdm(String sfdm) {
+        this.sfdm = sfdm == null ? null : sfdm.trim();
     }
 
-    public String getKskl() {
-        return kskl;
+    public String getDqmc() {
+        return dqmc;
     }
 
-    public void setKskl(String kskl) {
-        this.kskl = kskl == null ? null : kskl.trim();
+    public void setDqmc(String dqmc) {
+        this.dqmc = dqmc == null ? null : dqmc.trim();
     }
 
-    public Date getRq() {
-        return rq;
+    public String getDqdm() {
+        return dqdm;
     }
 
-    public void setRq(Date rq) {
-        this.rq = rq;
+    public void setDqdm(String dqdm) {
+        this.dqdm = dqdm == null ? null : dqdm.trim();
     }
 
-    public String getXz() {
-        return xz;
+    public String getMz() {
+        return mz;
     }
 
-    public void setXz(String xz) {
-        this.xz = xz == null ? null : xz.trim();
+    public void setMz(String mz) {
+        this.mz = mz == null ? null : mz.trim();
     }
 
-    public String getZydm1() {
-        return zydm1;
+    public String getMzdm() {
+        return mzdm;
     }
 
-    public void setZydm1(String zydm1) {
-        this.zydm1 = zydm1 == null ? null : zydm1.trim();
+    public void setMzdm(String mzdm) {
+        this.mzdm = mzdm == null ? null : mzdm.trim();
     }
 
-    public String getZy1() {
-        return zy1;
+    public Date getCsny() {
+        return csny;
     }
 
-    public void setZy1(String zy1) {
-        this.zy1 = zy1 == null ? null : zy1.trim();
+    public void setCsny(Date csny) {
+        this.csny = csny;
     }
 
     public String getZzmmdm() {
@@ -541,6 +381,126 @@ public class Student {
         this.zzmm = zzmm == null ? null : zzmm.trim();
     }
 
+    public String getZxdm() {
+        return zxdm;
+    }
+
+    public void setZxdm(String zxdm) {
+        this.zxdm = zxdm == null ? null : zxdm.trim();
+    }
+
+    public String getZxmc() {
+        return zxmc;
+    }
+
+    public void setZxmc(String zxmc) {
+        this.zxmc = zxmc == null ? null : zxmc.trim();
+    }
+
+    public String getBylbdm() {
+        return bylbdm;
+    }
+
+    public void setBylbdm(String bylbdm) {
+        this.bylbdm = bylbdm == null ? null : bylbdm.trim();
+    }
+
+    public String getJtdz() {
+        return jtdz;
+    }
+
+    public void setJtdz(String jtdz) {
+        this.jtdz = jtdz == null ? null : jtdz.trim();
+    }
+
+    public String getYzbm() {
+        return yzbm;
+    }
+
+    public void setYzbm(String yzbm) {
+        this.yzbm = yzbm == null ? null : yzbm.trim();
+    }
+
+    public String getLxdh() {
+        return lxdh;
+    }
+
+    public void setLxdh(String lxdh) {
+        this.lxdh = lxdh == null ? null : lxdh.trim();
+    }
+
+    public String getHkkh() {
+        return hkkh;
+    }
+
+    public void setHkkh(String hkkh) {
+        this.hkkh = hkkh == null ? null : hkkh.trim();
+    }
+
+    public String getKstc() {
+        return kstc;
+    }
+
+    public void setKstc(String kstc) {
+        this.kstc = kstc == null ? null : kstc.trim();
+    }
+
+    public String getRhzw() {
+        return rhzw;
+    }
+
+    public void setRhzw(String rhzw) {
+        this.rhzw = rhzw == null ? null : rhzw.trim();
+    }
+
+    public String getKsjlhcf() {
+        return ksjlhcf;
+    }
+
+    public void setKsjlhcf(String ksjlhcf) {
+        this.ksjlhcf = ksjlhcf == null ? null : ksjlhcf.trim();
+    }
+
+    public String getZp() {
+        return zp;
+    }
+
+    public void setZp(String zp) {
+        this.zp = zp == null ? null : zp.trim();
+    }
+
+    public String getKsh() {
+        return ksh;
+    }
+
+    public void setKsh(String ksh) {
+        this.ksh = ksh == null ? null : ksh.trim();
+    }
+
+    public String getZkzh() {
+        return zkzh;
+    }
+
+    public void setZkzh(String zkzh) {
+        this.zkzh = zkzh == null ? null : zkzh.trim();
+    }
+
+    public String getKldm() {
+        return kldm;
+    }
+
+    public void setKldm(String kldm) {
+        this.kldm = kldm == null ? null : kldm.trim();
+    }
+
+    public String getKskl() {
+        return kskl;
+    }
+
+    public void setKskl(String kskl) {
+        this.kskl = kskl == null ? null : kskl.trim();
+    }
+
     public String getKslbdm() {
         return kslbdm;
     }
@@ -557,36 +517,20 @@ public class Student {
         this.kslb = kslb == null ? null : kslb.trim();
     }
 
-    public String getMzdm() {
-        return mzdm;
+    public String getKslxdm() {
+        return kslxdm;
     }
 
-    public void setMzdm(String mzdm) {
-        this.mzdm = mzdm == null ? null : mzdm.trim();
+    public void setKslxdm(String kslxdm) {
+        this.kslxdm = kslxdm == null ? null : kslxdm.trim();
     }
 
-    public String getMz() {
-        return mz;
+    public Double getZhf() {
+        return zhf;
     }
 
-    public void setMz(String mz) {
-        this.mz = mz == null ? null : mz.trim();
-    }
-
-    public String getDqbm() {
-        return dqbm;
-    }
-
-    public void setDqbm(String dqbm) {
-        this.dqbm = dqbm == null ? null : dqbm.trim();
-    }
-
-    public String getDqmc() {
-        return dqmc;
-    }
-
-    public void setDqmc(String dqmc) {
-        this.dqmc = dqmc == null ? null : dqmc.trim();
+    public void setZhf(Double zhf) {
+        this.zhf = zhf;
     }
 
     public Double getZyf() {
@@ -701,6 +645,22 @@ public class Student {
         this.zxmk = zxmk;
     }
 
+    public String getWyyzdm() {
+        return wyyzdm;
+    }
+
+    public void setWyyzdm(String wyyzdm) {
+        this.wyyzdm = wyyzdm == null ? null : wyyzdm.trim();
+    }
+
+    public String getWyks() {
+        return wyks;
+    }
+
+    public void setWyks(String wyks) {
+        this.wyks = wyks == null ? null : wyks.trim();
+    }
+
     public Double getTotal111() {
         return total111;
     }
@@ -717,204 +677,12 @@ public class Student {
         this.total = total;
     }
 
-    public Date getCsny() {
-        return csny;
-    }
-
-    public void setCsny(Date csny) {
-        this.csny = csny;
-    }
-
-    public String getBylbdm() {
-        return bylbdm;
-    }
-
-    public void setBylbdm(String bylbdm) {
-        this.bylbdm = bylbdm == null ? null : bylbdm.trim();
-    }
-
-    public String getZxdm() {
-        return zxdm;
-    }
-
-    public void setZxdm(String zxdm) {
-        this.zxdm = zxdm == null ? null : zxdm.trim();
-    }
-
-    public String getZxmc() {
-        return zxmc;
-    }
-
-    public void setZxmc(String zxmc) {
-        this.zxmc = zxmc == null ? null : zxmc.trim();
-    }
-
-    public String getWyyzdm() {
-        return wyyzdm;
-    }
-
-    public void setWyyzdm(String wyyzdm) {
-        this.wyyzdm = wyyzdm == null ? null : wyyzdm.trim();
-    }
-
-    public String getHkdj() {
-        return hkdj;
-    }
-
-    public void setHkdj(String hkdj) {
-        this.hkdj = hkdj == null ? null : hkdj.trim();
-    }
-
-    public String getBmdw() {
-        return bmdw;
-    }
-
-    public void setBmdw(String bmdw) {
-        this.bmdw = bmdw == null ? null : bmdw.trim();
-    }
-
-    public String getKstz() {
-        return kstz;
-    }
-
-    public void setKstz(String kstz) {
-        this.kstz = kstz == null ? null : kstz.trim();
-    }
-
-    public String getXtdw() {
-        return xtdw;
-    }
-
-    public void setXtdw(String xtdw) {
-        this.xtdw = xtdw == null ? null : xtdw.trim();
-    }
-
-    public String getDqdm() {
-        return dqdm;
-    }
-
-    public void setDqdm(String dqdm) {
-        this.dqdm = dqdm == null ? null : dqdm.trim();
-    }
-
-    public String getJtdz() {
-        return jtdz;
-    }
-
-    public void setJtdz(String jtdz) {
-        this.jtdz = jtdz == null ? null : jtdz.trim();
-    }
-
-    public String getYzbm() {
-        return yzbm;
-    }
-
-    public void setYzbm(String yzbm) {
-        this.yzbm = yzbm == null ? null : yzbm.trim();
-    }
-
-    public String getLxdh() {
-        return lxdh;
-    }
-
-    public void setLxdh(String lxdh) {
-        this.lxdh = lxdh == null ? null : lxdh.trim();
-    }
-
-    public String getHkkh() {
-        return hkkh;
-    }
-
-    public void setHkkh(String hkkh) {
-        this.hkkh = hkkh == null ? null : hkkh.trim();
-    }
-
-    public String getKstc() {
-        return kstc;
-    }
-
-    public void setKstc(String kstc) {
-        this.kstc = kstc == null ? null : kstc.trim();
-    }
-
-    public String getRhzw() {
-        return rhzw;
-    }
-
-    public void setRhzw(String rhzw) {
-        this.rhzw = rhzw == null ? null : rhzw.trim();
-    }
-
-    public String getKsjlhcf() {
-        return ksjlhcf;
-    }
-
-    public void setKsjlhcf(String ksjlhcf) {
-        this.ksjlhcf = ksjlhcf == null ? null : ksjlhcf.trim();
-    }
-
-    public String getWyks() {
-        return wyks;
-    }
-
-    public void setWyks(String wyks) {
-        this.wyks = wyks == null ? null : wyks.trim();
-    }
-
     public String getZsyj() {
         return zsyj;
     }
 
     public void setZsyj(String zsyj) {
         this.zsyj = zsyj == null ? null : zsyj.trim();
-    }
-
-    public String getKslxdm() {
-        return kslxdm;
-    }
-
-    public void setKslxdm(String kslxdm) {
-        this.kslxdm = kslxdm == null ? null : kslxdm.trim();
-    }
-
-    public String getSjr() {
-        return sjr;
-    }
-
-    public void setSjr(String sjr) {
-        this.sjr = sjr == null ? null : sjr.trim();
-    }
-
-    public String getYsjzdm() {
-        return ysjzdm;
-    }
-
-    public void setYsjzdm(String ysjzdm) {
-        this.ysjzdm = ysjzdm == null ? null : ysjzdm.trim();
-    }
-
-    public String getWytl() {
-        return wytl;
-    }
-
-    public void setWytl(String wytl) {
-        this.wytl = wytl == null ? null : wytl.trim();
-    }
-
-    public String getTddw() {
-        return tddw;
-    }
-
-    public void setTddw(String tddw) {
-        this.tddw = tddw == null ? null : tddw.trim();
-    }
-
-    public String getJhxz() {
-        return jhxz;
-    }
-
-    public void setJhxz(String jhxz) {
-        this.jhxz = jhxz == null ? null : jhxz.trim();
     }
 
     public Double getCj() {
@@ -971,6 +739,86 @@ public class Student {
 
     public void setZyytfjcj(Double zyytfjcj) {
         this.zyytfjcj = zyytfjcj;
+    }
+
+    public String getHkdj() {
+        return hkdj;
+    }
+
+    public void setHkdj(String hkdj) {
+        this.hkdj = hkdj == null ? null : hkdj.trim();
+    }
+
+    public String getBmdw() {
+        return bmdw;
+    }
+
+    public void setBmdw(String bmdw) {
+        this.bmdw = bmdw == null ? null : bmdw.trim();
+    }
+
+    public String getKstz() {
+        return kstz;
+    }
+
+    public void setKstz(String kstz) {
+        this.kstz = kstz == null ? null : kstz.trim();
+    }
+
+    public String getXtdw() {
+        return xtdw;
+    }
+
+    public void setXtdw(String xtdw) {
+        this.xtdw = xtdw == null ? null : xtdw.trim();
+    }
+
+    public String getSjr() {
+        return sjr;
+    }
+
+    public void setSjr(String sjr) {
+        this.sjr = sjr == null ? null : sjr.trim();
+    }
+
+    public String getYsjzdm() {
+        return ysjzdm;
+    }
+
+    public void setYsjzdm(String ysjzdm) {
+        this.ysjzdm = ysjzdm == null ? null : ysjzdm.trim();
+    }
+
+    public String getWytl() {
+        return wytl;
+    }
+
+    public void setWytl(String wytl) {
+        this.wytl = wytl == null ? null : wytl.trim();
+    }
+
+    public String getTddw() {
+        return tddw;
+    }
+
+    public void setTddw(String tddw) {
+        this.tddw = tddw == null ? null : tddw.trim();
+    }
+
+    public String getJhxz() {
+        return jhxz;
+    }
+
+    public void setJhxz(String jhxz) {
+        this.jhxz = jhxz == null ? null : jhxz.trim();
+    }
+
+    public String getZsls() {
+        return zsls;
+    }
+
+    public void setZsls(String zsls) {
+        this.zsls = zsls == null ? null : zsls.trim();
     }
 
     public String getTdzy() {
@@ -1285,11 +1133,203 @@ public class Student {
         this.wkTz = wkTz == null ? null : wkTz.trim();
     }
 
+    public String getPcdm() {
+        return pcdm;
+    }
+
+    public void setPcdm(String pcdm) {
+        this.pcdm = pcdm == null ? null : pcdm.trim();
+    }
+
+    public String getPc() {
+        return pc;
+    }
+
+    public void setPc(String pc) {
+        this.pc = pc == null ? null : pc.trim();
+    }
+
+    public Double getPcfs() {
+        return pcfs;
+    }
+
+    public void setPcfs(Double pcfs) {
+        this.pcfs = pcfs;
+    }
+
+    public String getTzsh() {
+        return tzsh;
+    }
+
+    public void setTzsh(String tzsh) {
+        this.tzsh = tzsh == null ? null : tzsh.trim();
+    }
+
+    public String getXh() {
+        return xh;
+    }
+
+    public void setXh(String xh) {
+        this.xh = xh == null ? null : xh.trim();
+    }
+
+    public String getXslb() {
+        return xslb;
+    }
+
+    public void setXslb(String xslb) {
+        this.xslb = xslb == null ? null : xslb.trim();
+    }
+
+    public String getXqdm() {
+        return xqdm;
+    }
+
+    public void setXqdm(String xqdm) {
+        this.xqdm = xqdm == null ? null : xqdm.trim();
+    }
+
+    public String getXq() {
+        return xq;
+    }
+
+    public void setXq(String xq) {
+        this.xq = xq == null ? null : xq.trim();
+    }
+
+    public String getXydm() {
+        return xydm;
+    }
+
+    public void setXydm(String xydm) {
+        this.xydm = xydm == null ? null : xydm.trim();
+    }
+
+    public String getXy() {
+        return xy;
+    }
+
+    public void setXy(String xy) {
+        this.xy = xy == null ? null : xy.trim();
+    }
+
+    public String getXydm1() {
+        return xydm1;
+    }
+
+    public void setXydm1(String xydm1) {
+        this.xydm1 = xydm1 == null ? null : xydm1.trim();
+    }
+
+    public String getXy1() {
+        return xy1;
+    }
+
+    public void setXy1(String xy1) {
+        this.xy1 = xy1 == null ? null : xy1.trim();
+    }
+
+    public String getZydm() {
+        return zydm;
+    }
+
+    public void setZydm(String zydm) {
+        this.zydm = zydm == null ? null : zydm.trim();
+    }
+
+    public String getZy() {
+        return zy;
+    }
+
+    public void setZy(String zy) {
+        this.zy = zy == null ? null : zy.trim();
+    }
+
+    public String getZydm1() {
+        return zydm1;
+    }
+
+    public void setZydm1(String zydm1) {
+        this.zydm1 = zydm1 == null ? null : zydm1.trim();
+    }
+
+    public String getZy1() {
+        return zy1;
+    }
+
+    public void setZy1(String zy1) {
+        this.zy1 = zy1 == null ? null : zy1.trim();
+    }
+
+    public String getXz() {
+        return xz;
+    }
+
+    public void setXz(String xz) {
+        this.xz = xz == null ? null : xz.trim();
+    }
+
+    public String getZybj() {
+        return zybj;
+    }
+
+    public void setZybj(String zybj) {
+        this.zybj = zybj == null ? null : zybj.trim();
+    }
+
+    public String getQsxx() {
+        return qsxx;
+    }
+
+    public void setQsxx(String qsxx) {
+        this.qsxx = qsxx == null ? null : qsxx.trim();
+    }
+
+    public Date getRq() {
+        return rq;
+    }
+
+    public void setRq(Date rq) {
+        this.rq = rq;
+    }
+
+    public String getYy() {
+        return yy;
+    }
+
+    public void setYy(String yy) {
+        this.yy = yy == null ? null : yy.trim();
+    }
+
+    public String getNcl() {
+        return ncl;
+    }
+
+    public void setNcl(String ncl) {
+        this.ncl = ncl == null ? null : ncl.trim();
+    }
+
     public Date getNy() {
         return ny;
     }
 
     public void setNy(Date ny) {
         this.ny = ny;
+    }
+
+    public Long getDrpc() {
+        return drpc;
+    }
+
+    public void setDrpc(Long drpc) {
+        this.drpc = drpc;
+    }
+
+    public Long getDrrid() {
+        return drrid;
+    }
+
+    public void setDrrid(Long drrid) {
+        this.drrid = drrid;
     }
 }

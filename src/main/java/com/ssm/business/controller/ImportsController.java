@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -62,7 +63,7 @@ public class ImportsController extends BaseAction {
     private static final String INDEX = "/business/imports/list";
     private static final String EDIT = "/business/imports/edit";
 
-    @RequestMapping(value="/index", method= RequestMethod.GET)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
         return INDEX;
     }
@@ -70,9 +71,10 @@ public class ImportsController extends BaseAction {
 
     /**
      * 表格数据导入
+     *
      * @return GridModel
      */
-    @RequestMapping(value="/list", method= RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public GridModel list() {
         Imports imports = SearchForm(Imports.class);
@@ -86,21 +88,20 @@ public class ImportsController extends BaseAction {
 
     /**
      * 添加数据导入
+     *
      * @return ModelAndView
      */
-    @RequestMapping(value="/add")
+    @RequestMapping(value = "/add")
     @ResponseBody
     public ModelAndView add() {
         ModelAndView mav = new ModelAndView(EDIT);
         Imports imports = new Imports();
         try {
             ObjectMapper mapper = JacksonMapper.getInstance();
-            String json =mapper.writeValueAsString(imports);
+            String json = mapper.writeValueAsString(imports);
             mav.addObject("message", "完成");
-            mav.addObject("imports",json);
-        }
-        catch (Exception e)
-        {
+            mav.addObject("imports", json);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return mav;
@@ -108,27 +109,25 @@ public class ImportsController extends BaseAction {
 
     /**
      * 编辑数据导入
+     *
      * @return ModelAndView
      */
-    @RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView edit(@PathVariable Integer id) {
         logger.debug("edit id = " + id);
         ModelAndView mav = new ModelAndView(EDIT);
         try {
-            Imports imports =  importService.get(id);
+            Imports imports = importService.get(id);
             ObjectMapper mapper = JacksonMapper.getInstance();
-            String json =mapper.writeValueAsString(imports);
+            String json = mapper.writeValueAsString(imports);
             mav.addObject("message", "完成");
-            mav.addObject("imports",json);
-        }
-        catch (Exception e)
-        {
+            mav.addObject("imports", json);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return mav;
     }
-
 
 
     /**
@@ -142,7 +141,7 @@ public class ImportsController extends BaseAction {
         Result result = new Result();
         try {
             InputStream fis;
-            String fileName ;
+            String fileName;
             List<Item> showList = new ArrayList<>();//配置对应字段使用
             List<Item> dataList = new ArrayList<>();//存储使用
             if (!file.isEmpty()) {
@@ -154,7 +153,6 @@ public class ImportsController extends BaseAction {
                 columns.setTableName("business_student");
                 columns.setTableSchema("recruit");
                 //TODO 只需要对应的字段条件
-                List<Columns> dataColumnsList = columnsService.selectByExample(null, columns);
                 columns.setDataType("double");
                 List<Columns> columnsList = columnsService.selectByExample(null, columns);
                 imports.setTitle(fileName);//文件名称
@@ -175,14 +173,13 @@ public class ImportsController extends BaseAction {
                     item.setSourceTabel(fileName);
                     item.setSourceField(field.getName());
                     item.setItemId(i);
-                    if(field.getName().toString().indexOf("CJ")>1||field.getName().toString().indexOf("GK")>1) {
+                    if (field.getName().toString().indexOf("CJ") > 1 || field.getName().toString().indexOf("GK") > 1) {
                         showList.add(item);
                     }
                     dataList.add(item);
                 }
                 imports.setItemList(showList);//dbf 文件字段
-                session.setAttribute("dataList",dataList);
-                session.setAttribute("dataColumnsList",dataColumnsList);
+                session.setAttribute("dataList", dataList);
             }
             result.setMsg("文件加载完成，请对应字段");
             result.setSuccessful(true);
@@ -211,17 +208,14 @@ public class ImportsController extends BaseAction {
             InputStream fis;
             List<Item> list = new ArrayList<>();
             Model model = new Model();
-            if(imports.isModelFlag())
-            {
+            if (imports.isModelFlag()) {
                 model.setName(request.getParameter("name"));
                 model.setState(1);
                 model.setCreateDate(new Date());
-                model.setUserId(Integer.parseInt(com.ssm.shiro.SecurityUtils.getShiroUser().getId()+""));
+                model.setUserId(Integer.parseInt(com.ssm.shiro.SecurityUtils.getShiroUser().getId() + ""));
                 modelService.save(model);//先增加模板
                 imports.setModelId(model.getModelId());
-            }
-            else
-            {
+            } else {
                 imports.setModelId(0);
             }
 
@@ -230,18 +224,18 @@ public class ImportsController extends BaseAction {
             imports.setState(1);
             imports.setMessage("导入中");
             imports.setFieldCount(imports.getFieldHtml().size());
-            imports.setTitle(model.getName()+imports.getTitle());
+            imports.setTitle(model.getName() + imports.getTitle());
             int importId;
             importService.save(imports);
             importId = imports.getImportId();
             result.setMsg("数据导入中");
             result.setSuccessful(true);
             result.setData(imports);
-            List<String> fieldHtml,columnHtml,sourceFieldDBF=new ArrayList<>();
+            List<String> fieldHtml, columnHtml, sourceFieldDBF = new ArrayList<>();
             fieldHtml = imports.getFieldHtml();
             columnHtml = imports.getColumnHtml();
 
-            if(imports.isModelFlag()) {
+            if (imports.isModelFlag()) {
                 //导入模板数据
                 ImportThread importThread = new ImportThread(model.getModelId(), imports.getTitle(), fieldHtml, columnHtml);
                 try {
@@ -266,11 +260,11 @@ public class ImportsController extends BaseAction {
             }*/
             // 一条条取出path文件中记录
 
-            List<String> dataList = (List<String>) session.getAttribute("dataList");
-            List<String> dataColumnsList = (List<String>) session.getAttribute("dataColumnsList");
+            List<Item> dataList = (List<Item>) session.getAttribute("dataList");
+            List<Columns> dataColumnsList = (List<Columns>) session.getAttribute("dataColumnsList");
 
             try {
-                ImportDateThread threadData = new ImportDateThread(importId,reader,fieldHtml,columnHtml,/*sourceFieldDBF,*/dataList,dataColumnsList);
+                ImportDateThread threadData = new ImportDateThread(importId, reader, fieldHtml, columnHtml, dataList);
                 Thread thread = new Thread(threadData);
                 thread.start();
             } catch (Exception e) {
@@ -289,59 +283,67 @@ public class ImportsController extends BaseAction {
     }
 
 
-    class ImportDateThread implements Runnable
-    {
+    class ImportDateThread implements Runnable {
         private DBFReader reader;
-        private List<String> fieldHtml,columnHtml,sourceFieldDBF,dataList,dataColumnsList;
-        private int num=1,importId;
-        public ImportDateThread(int importId,DBFReader reader,List<String> fieldHtml,List<String> columnHtml,/*List<String> sourceFieldDBF,*/List<String> dataList,List<String> dataColumnsList)
-        {
+        private List<String> fieldHtml, columnHtml;
+        private List<Item> dataList;
+        private int num = 1, importId;
+
+        public ImportDateThread(int importId, DBFReader reader, List<String> fieldHtml, List<String> columnHtml, List<Item> dataList) {
             this.importId = importId;
             this.reader = reader;
             this.fieldHtml = fieldHtml;
             this.columnHtml = columnHtml;
-//            this.sourceFieldDBF = sourceFieldDBF;
             this.dataList = dataList;//所有的dbf数据字段
-            this.dataColumnsList = dataColumnsList; //界面存储对应关系的dbf数据字段
         }
 
         /**
          * 获取字段的set方法
+         *
          * @param orginString
          * @return
          */
-        private String getMethodName(String orginString)
-        {
-            return "set" + StringUtil.firstCharacterToUpper(StringUtil.replaceUnderlineAndfirstToUpper(orginString.split("\\.")[1], "_", ""));
+        private String getMethodName(String orginString) {
+            return "set" +getFieldName(orginString);
+        }
+
+        /**
+         * 获取字段
+         *
+         * @param orginString
+         * @return
+         */
+        private String getFieldName(String orginString) {
+            return StringUtil.firstCharacterToUpper((orginString.toLowerCase()));
         }
 
         @Override
         public synchronized void run() {
             Object[] rowValues;
-            String methodName,initValue;
+            String methodName, initValue;
+            Field field ;
             int location;
             try {
                 while ((rowValues = reader.nextRecord()) != null) {//取dbf文件的每一行
                     Student student = new Student();
                     for (int i = 0; i < rowValues.length; i++) {//循环每一行的每一个字段的值
                         initValue = String.valueOf(rowValues[i]);
-                        Out:
-                        for(int x=0;x<dataList.size();x++) {//循环比较dbf文件行表头，以便对应bean的属性
-                            location = fieldHtml.lastIndexOf(dataList.get(x).trim());//如果表头在界面的配置里面
-                            methodName = getMethodName((location>-1)?columnHtml.get(location):dataList.get(x));//界面dbf展现字段名等于界面表的字段
-                            Student.class.getMethod(methodName, String.class).invoke(student, initValue);//通过反射将值保存到bean
-                            break Out;
-                        }
+                        //Out:
+                        //for(int x :dataList) {//循环比较dbf文件行表头，以便对应bean的属性
+                        Item item = dataList.get(i);
+                        location = fieldHtml.lastIndexOf(item.getSourceField().trim());//如果表头在界面的配置里面
+                        field = Student.class.getField((location > -1) ? columnHtml.get(location) : item.getSourceField().trim());
+                        methodName = getMethodName(field.toString());//界面dbf展现字段名等于界面表的字段
+                        Student.class.getMethod(methodName, field.getType()).invoke(student, initValue);//通过反射将值保存到bean
+                        //    break Out;
+                        //}
                     }
                     studentService.save(student);//保存一行
                     num++;
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 Imports imports = new Imports();
                 imports.setState(1);
                 imports.setImportId(importId);
@@ -352,14 +354,12 @@ public class ImportsController extends BaseAction {
         }
     }
 
-    class ImportThread implements Runnable
-    {
+    class ImportThread implements Runnable {
         private int modelId;
         private String fileName;
-        private List<String> fieldHtml,columnHtml;
+        private List<String> fieldHtml, columnHtml;
 
-        public ImportThread(int modelId,String fileName,List<String> fieldHtml,List<String> columnHtml)
-        {
+        public ImportThread(int modelId, String fileName, List<String> fieldHtml, List<String> columnHtml) {
             this.modelId = modelId;
             this.fileName = fileName;
             this.fieldHtml = fieldHtml;
@@ -370,9 +370,8 @@ public class ImportsController extends BaseAction {
         public synchronized void run() {
             List<Item> list = new ArrayList<Item>();
             int i = 0;
-            for(String field: fieldHtml)
-            {
-                String [] columnArray = columnHtml.get(i).split("\\.");
+            for (String field : fieldHtml) {
+                String[] columnArray = columnHtml.get(i).split("\\.");
                 Item item = new Item();
                 item.setModelId(modelId);
                 item.setState(1);
@@ -383,7 +382,7 @@ public class ImportsController extends BaseAction {
                 i++;
                 list.add(item);
             }
-            if(list!=null) {
+            if (list != null) {
                 itemService.saveBatch(list);
             }
         }
@@ -392,21 +391,23 @@ public class ImportsController extends BaseAction {
 
     /**
      * 查询单个数据导入
+     *
      * @param id
      * @return
      */
-    @RequestMapping(value="/get/{id}")
+    @RequestMapping(value = "/get/{id}")
     @ResponseBody
     public Imports getInfo(@PathVariable Integer id) {
-        return  importService.get(id);
+        return importService.get(id);
     }
 
     /**
      * 删除数据导入
+     *
      * @param id
      * @return
      */
-    @RequestMapping(value="/delete/{id}")
+    @RequestMapping(value = "/delete/{id}")
     @ResponseBody
     public Result deleteInfo(@PathVariable Integer id) {
         Result result = new Result();

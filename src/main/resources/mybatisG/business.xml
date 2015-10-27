@@ -58,7 +58,7 @@
                 <table schema="ssm" tableName="business_visit" domainObjectName="Visit" >
                     <columnOverride column="input_time" property="inputTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP" />
                 </table>-->
-        <table schema="ssm" tableName="business_batch" domainObjectName="Batch" >
+        <table schema="ssm" tableName="business_student" domainObjectName="Student" >
         </table>
         <!--
         <table schema="ssm" tableName="business_visit_client" domainObjectName="VisitClient" >

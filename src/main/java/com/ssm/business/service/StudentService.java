@@ -7,7 +7,7 @@ import com.ssm.exception.ServiceException;
 import java.util.List;
 
 /**
- * Created by V on Sat Oct 17 14:49:26 GMT+08:00 2015.
+ * Created by V on Mon Oct 26 15:59:00 GMT+08:00 2015.
  */
 
 public interface StudentService {

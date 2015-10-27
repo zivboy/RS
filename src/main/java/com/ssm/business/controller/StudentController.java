@@ -1,6 +1,9 @@
 package com.ssm.business.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonEncoding;
 import com.ssm.business.entity.Student;
 import com.ssm.business.service.StudentService;
 import com.ssm.common.baseaction.BaseAction;
@@ -14,9 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import java.util.List;
 
 /**
- * Created by xecoder on Sat Oct 17 14:49:26 GMT+08:00 2015.
+ * Created by xecoder on Mon Oct 26 15:59:00 GMT+08:00 2015.
  */
 @Controller
 @SuppressWarnings("unchecked")
