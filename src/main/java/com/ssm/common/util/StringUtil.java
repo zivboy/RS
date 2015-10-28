@@ -1,11 +1,11 @@
 package com.ssm.common.util;
 
-import com.alibaba.druid.util.Base64;
-
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by admin on 2014/7/30.
@@ -27,6 +27,16 @@ public class StringUtil {
         }
         // return to String Formed
         return xmlUTF8;
+    }
+
+    public static String replaceBlank(String str) {
+        String dest = "";
+        if (str!=null) {
+            Pattern p = Pattern.compile("\\s*\\s*|\t|\r|\n");
+            Matcher m = p.matcher(str);
+            dest = m.replaceAll("");
+        }
+        return dest;
     }
 
     public static void main(String[] args) {

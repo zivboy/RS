@@ -318,9 +318,7 @@
   <insert id="insertSelective" parameterType="com.ssm.business.entity.Student">
     insert into business_student
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
         id,
-      </if>
       <if test="xm != null">
         xm,
       </if>
@@ -719,9 +717,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
+      null,
       <if test="xm != null">
         #{xm,jdbcType=VARCHAR},
       </if>

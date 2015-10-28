@@ -13,10 +13,7 @@ import com.ssm.business.service.ModelService;
 import com.ssm.business.service.StudentService;
 import com.ssm.common.baseaction.BaseAction;
 import com.ssm.common.mybatis.Page;
-import com.ssm.common.util.JacksonMapper;
-import com.ssm.common.util.Result;
-import com.ssm.common.util.StringUtil;
-import com.ssm.common.util.UploadUtils;
+import com.ssm.common.util.*;
 import com.ssm.entity.Columns;
 import com.ssm.service.core.ColumnsService;
 import com.ssm.viewModel.GridModel;
@@ -173,7 +170,7 @@ public class ImportsController extends BaseAction {
                     item.setSourceTabel(fileName);
                     item.setSourceField(field.getName());
                     item.setItemId(i);
-                    if (field.getName().toString().indexOf("CJ") > 1 || field.getName().toString().indexOf("GK") > 1) {
+                    if (field.getName().toString().indexOf("CJ") > -1 || field.getName().toString().indexOf("GK") > -1|| field.getName().toString().indexOf("ZGF") > -1) {
                         showList.add(item);
                     }
                     dataList.add(item);
@@ -319,37 +316,66 @@ public class ImportsController extends BaseAction {
 
         @Override
         public synchronized void run() {
+            SimpleDate simpleDate = new SimpleDate();
+            StringUtil stringUtil = new StringUtil();
             Object[] rowValues;
-            String methodName, initValue;
+            String methodName;
+            Object initValue;
             Field field ;
             int location;
             try {
                 while ((rowValues = reader.nextRecord()) != null) {//取dbf文件的每一行
                     Student student = new Student();
                     for (int i = 0; i < rowValues.length; i++) {//循环每一行的每一个字段的值
-                        initValue = String.valueOf(rowValues[i]);
+                        initValue = rowValues[i];
                         //Out:
                         //for(int x :dataList) {//循环比较dbf文件行表头，以便对应bean的属性
                         Item item = dataList.get(i);
                         location = fieldHtml.lastIndexOf(item.getSourceField().trim());//如果表头在界面的配置里面
-                        field = Student.class.getField((location > -1) ? columnHtml.get(location) : item.getSourceField().trim());
-                        methodName = getMethodName(field.toString());//界面dbf展现字段名等于界面表的字段
-                        Student.class.getMethod(methodName, field.getType()).invoke(student, initValue);//通过反射将值保存到bean
+                        try {
+                            field = Student.class.getDeclaredField(((location > -1) ? (columnHtml.get(location)).split("\\.")[1] : item.getSourceField().trim()).toLowerCase());
+                            methodName = getMethodName(field.getName());//界面dbf展现字段名等于界面表的字段
+                            if(field.getType().equals(String.class))
+                            {
+                                initValue = stringUtil.replaceBlank(String.valueOf(initValue));
+                            }
+                            else if(field.getType().equals(Double.class))
+                            {
+                                initValue = Double.parseDouble(initValue.toString());
+                            }else if(field.getType().equals(Date.class))
+                            {
+                                try {
+                                    initValue = simpleDate.strToDate(simpleDate.format((Date) initValue));
+                                }
+                                catch(Exception e)
+                                {
+                                    initValue = new Date();
+                                }
+                            }else {
+                                initValue = String.valueOf(initValue);
+                            }
+                            System.out.println(methodName+"--------initValue = " + initValue.toString());
+                            Student.class.getMethod(methodName, field.getType()).invoke(student, initValue);//通过反射将值保存到bean
+                        }
+                        catch (Exception e){
+
+                        }
                         //    break Out;
                         //}
                     }
                     studentService.save(student);//保存一行
                     num++;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
+
                 Imports imports = new Imports();
                 imports.setState(1);
                 imports.setImportId(importId);
                 imports.setMessage("导入成功");
                 imports.setRowSum(num);
                 importService.update(imports);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
             }
         }
     }
