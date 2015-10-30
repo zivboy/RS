@@ -126,6 +126,37 @@ public class ImportsController extends BaseAction {
         return mav;
     }
 
+    /**
+     * 保存数据导入
+     *
+     * @return Result
+     */
+    @RequestMapping(value = "/save2")
+    @ResponseBody
+    public Result save2(@ModelAttribute Imports imports, @RequestParam("file") MultipartFile[] files) {
+        Result result = new Result();
+        try {
+            if (files != null && files.length > 0) {
+                //循环获取file数组中得文件
+                for (int i = 0; i < files.length; i++) {
+                    MultipartFile file = files[i];
+                    //保存文件
+                    // saveFile(file);
+                    String fileName = file.getOriginalFilename();
+                    imports.setTitle(fileName);
+                    String path = UploadUtils.upload(file, request);
+                    System.out.println("path = " + path);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setMsg("操作失败");
+            result.setSuccessful(false);
+        }
+        return result;
+    }
+
 
     /**
      * 保存数据导入
@@ -148,7 +179,7 @@ public class ImportsController extends BaseAction {
                 imports.setFilePath(path);
                 Columns columns = new Columns();
                 columns.setTableName("business_student");
-                columns.setTableSchema("recruit");
+                columns.setTableSchema("recruits");
                 //TODO 只需要对应的字段条件
                 columns.setDataType("double");
                 List<Columns> columnsList = columnsService.selectByExample(null, columns);
@@ -170,7 +201,7 @@ public class ImportsController extends BaseAction {
                     item.setSourceTabel(fileName);
                     item.setSourceField(field.getName());
                     item.setItemId(i);
-                    if (field.getName().toString().indexOf("CJ") > -1 || field.getName().toString().indexOf("GK") > -1|| field.getName().toString().indexOf("ZGF") > -1) {
+                    if (field.getName().toString().indexOf("CJ") > -1 || field.getName().toString().indexOf("GK") > -1 || field.getName().toString().indexOf("ZGF") > -1) {
                         showList.add(item);
                     }
                     dataList.add(item);
@@ -280,6 +311,7 @@ public class ImportsController extends BaseAction {
     }
 
 
+    //异步最终导入数据
     class ImportDateThread implements Runnable {
         private DBFReader reader;
         private List<String> fieldHtml, columnHtml;
@@ -301,7 +333,7 @@ public class ImportsController extends BaseAction {
          * @return
          */
         private String getMethodName(String orginString) {
-            return "set" +getFieldName(orginString);
+            return "set" + getFieldName(orginString);
         }
 
         /**
@@ -314,54 +346,66 @@ public class ImportsController extends BaseAction {
             return StringUtil.firstCharacterToUpper((orginString.toLowerCase()));
         }
 
+
+        SimpleDate simpleDate = new SimpleDate();
+        StringUtil stringUtil = new StringUtil();
+
+        private Object getField(Field field, Object initValue) {
+            if (field.getType().equals(String.class)) {
+                initValue = stringUtil.replaceBlank(String.valueOf(initValue));
+            } else if (field.getType().equals(Double.class)) {
+                initValue = Double.parseDouble(initValue.toString());
+            } else if (field.getType().equals(Date.class)) {
+                try {
+                    initValue = simpleDate.strToDate(simpleDate.format((Date) initValue));
+                } catch (Exception e) {
+                    initValue = new Date();
+                }
+            } else {
+                initValue = String.valueOf(initValue);
+            }
+            return initValue;
+        }
+
         @Override
         public synchronized void run() {
-            SimpleDate simpleDate = new SimpleDate();
-            StringUtil stringUtil = new StringUtil();
             Object[] rowValues;
             String methodName;
             Object initValue;
-            Field field ;
+            Field field;
             int location;
+            List<Example> examples = new ArrayList<>();
+            Student student = new Student();
             try {
                 while ((rowValues = reader.nextRecord()) != null) {//取dbf文件的每一行
-                    Student student = new Student();
-                    for (int i = 0; i < rowValues.length; i++) {//循环每一行的每一个字段的值
-                        initValue = rowValues[i];
-                        //Out:
-                        //for(int x :dataList) {//循环比较dbf文件行表头，以便对应bean的属性
-                        Item item = dataList.get(i);
-                        location = fieldHtml.lastIndexOf(item.getSourceField().trim());//如果表头在界面的配置里面
-                        try {
-                            field = Student.class.getDeclaredField(((location > -1) ? (columnHtml.get(location)).split("\\.")[1] : item.getSourceField().trim()).toLowerCase());
-                            methodName = getMethodName(field.getName());//界面dbf展现字段名等于界面表的字段
-                            if(field.getType().equals(String.class))
-                            {
-                                initValue = stringUtil.replaceBlank(String.valueOf(initValue));
+                    if (num == 1) {//第一条记录保存逻辑字段
+                        for (int i = 0; i < rowValues.length; i++) {//循环每一行的每一个字段的值
+                            Example example = new Example();
+                            initValue = rowValues[i];
+                            Item item = dataList.get(i);
+                            location = fieldHtml.lastIndexOf(item.getSourceField().trim());//如果表头在界面的配置里面
+                            try {
+                                field = Student.class.getDeclaredField(((location > -1) ? (columnHtml.get(location)).split("\\.")[1] : item.getSourceField().trim()).toLowerCase());
+                                methodName = getMethodName(field.getName());//界面dbf展现字段名等于界面表的字段
+                                initValue = getField(field, initValue);
+                                example.setField(field);
+                                example.setMethodName(methodName);
+                                Student.class.getMethod(methodName, field.getType()).invoke(student, initValue);//通过反射将值保存到bean
+                            } catch (Exception e) {
+                                ;
                             }
-                            else if(field.getType().equals(Double.class))
-                            {
-                                initValue = Double.parseDouble(initValue.toString());
-                            }else if(field.getType().equals(Date.class))
-                            {
-                                try {
-                                    initValue = simpleDate.strToDate(simpleDate.format((Date) initValue));
-                                }
-                                catch(Exception e)
-                                {
-                                    initValue = new Date();
-                                }
-                            }else {
-                                initValue = String.valueOf(initValue);
+                            examples.add(example);//逻辑字段
+                        }
+                    } else {
+                        for (int i = 0; i < rowValues.length; i++) {//循环每一行的每一个字段的值
+                            Example example = examples.get(i);
+                            initValue = rowValues[i];
+                            try {
+                                Student.class.getMethod(example.getMethodName(), example.getField().getType()).invoke(student, initValue);//通过反射将值保存到bean
+                            } catch (Exception e) {
+                                ;
                             }
-                            System.out.println(methodName+"--------initValue = " + initValue.toString());
-                            Student.class.getMethod(methodName, field.getType()).invoke(student, initValue);//通过反射将值保存到bean
                         }
-                        catch (Exception e){
-
-                        }
-                        //    break Out;
-                        //}
                     }
                     studentService.save(student);//保存一行
                     num++;
@@ -380,6 +424,29 @@ public class ImportsController extends BaseAction {
         }
     }
 
+    class Example {
+        Field field;
+        String methodName;
+
+        public Field getField() {
+            return field;
+        }
+
+        public void setField(Field field) {
+            this.field = field;
+        }
+
+        public String getMethodName() {
+            return methodName;
+        }
+
+        public void setMethodName(String methodName) {
+            this.methodName = methodName;
+        }
+    }
+
+
+    //导入数据字段
     class ImportThread implements Runnable {
         private int modelId;
         private String fileName;

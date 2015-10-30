@@ -134,7 +134,7 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
                         formData.append(val.name, val.value);
                     });
                     $.ajax({
-                        url: WEB_GLOBAL_CTX + "/business/imports/save",
+                        url: WEB_GLOBAL_CTX + "/business/imports/save2",
                         data: formData,
                         cache: false,
                         contentType: false,

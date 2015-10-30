@@ -35,9 +35,21 @@
             </div>
             <div class="step-content">
                 <div class="step-pane active sample-pane alert" data-step="1">
+
+                    <div class="row control-group">
+                        <div class="col-sm-2 col-sm-offset-1">
+                            <label class="control-label" for="modelList">生源省份</label>
+                        </div>
+                        <div class="col-sm-8 controls">
+                            <select id="modelList" name="modelList" class="form-control" >
+                                <option value=''></option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="row control-group">
                         <div class="col-sm-12 controls">
-                            <input type="file" class="form-control" id="file"  name="file" maxlength="50"
+                            <input type="file" class="form-control" id="file"  name="file" maxlength="50" multiple
                                    placeholder="选择文件"
                                    required/>
                         </div>
