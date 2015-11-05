@@ -34,21 +34,34 @@
                         class="glyphicon glyphicon-arrow-right"></span></button>
             </div>
             <div class="step-content">
-                <div class="step-pane active sample-pane alert" data-step="1">
+                <div class="step-pane active sample-pane alert  text-right" data-step="1">
 
                     <div class="row control-group">
-                        <div class="col-sm-2 col-sm-offset-1">
+                        <div class="col-sm-1">
                             <label class="control-label" for="modelList">生源省份</label>
                         </div>
-                        <div class="col-sm-8 controls">
-                            <select id="modelList" name="modelList" class="form-control" >
+                        <div class="col-sm-11 controls">
+                            <select id="sf" name="sf" class="form-control" >
+                                <option value=''></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="col-sm-1">
+                            <label class="control-label" for="modelList">批次</label>
+                        </div>
+                        <div class="col-sm-11 controls">
+                            <select id="pc" name="pc" class="form-control" >
                                 <option value=''></option>
                             </select>
                         </div>
                     </div>
 
                     <div class="row control-group">
-                        <div class="col-sm-12 controls">
+                        <div class="col-sm-1">
+                            <label class="control-label" for="file">dbf文件</label>
+                        </div>
+                        <div class="col-sm-11 controls">
                             <input type="file" class="form-control" id="file"  name="file" maxlength="50" multiple
                                    placeholder="选择文件"
                                    required/>

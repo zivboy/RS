@@ -7,13 +7,16 @@ import com.ssm.business.service.KsjlService;
 import com.ssm.common.basedao.BaseDao;
 import com.ssm.common.baseservice.BaseService;
 import com.ssm.common.mybatis.Page;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by V on Thu Oct 15 19:14:20 GMT+08:00 2015.
+ * Created by V on Wed Nov 04 22:20:24 GMT+08:00 2015.
  */
 @Service("KsjlService")
 @Transactional
@@ -24,7 +27,7 @@ public class KsjlServiceImpl  extends BaseService implements KsjlService {
     @Override
     public Page findByPage(Page page, Ksjl ksjl) {
         page.setCount(countByExample(page,ksjl));
-        List<Ksjl> list= findAll(page,ksjl);
+        List<Ksjl> list= baseDao.selectByPage("com.ssm.business.mapper.KsjlMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,ksjl),page);
         if(list!=null)
             return page.setRows(list);
         else
@@ -33,7 +36,7 @@ public class KsjlServiceImpl  extends BaseService implements KsjlService {
     
     @Override
     public List<Ksjl> findAll(Page page, Ksjl ksjl) {
-        return baseDao.selectByPage("com.ssm.business.mapper.KsjlMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,ksjl),page);
+        return baseDao.selectList("com.ssm.business.mapper.KsjlMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,ksjl));
     }
 
     @Override
@@ -46,7 +49,11 @@ public class KsjlServiceImpl  extends BaseService implements KsjlService {
         KsjlCriteria criteria = new KsjlCriteria();
         KsjlCriteria.Criteria cri = criteria.createCriteria();
         if (ksjl != null) {
-                
+                               if(StringUtils.isNotBlank(ksjl.getZmr())) {
+                cri.andZmrEqualTo(ksjl.getZmr());
+               }
+
+
         }
         if(page != null && page.getSort() != null && page.getOrder() != null){
             criteria.setOrderByClause(page.getSort() + " " + page.getOrder());
