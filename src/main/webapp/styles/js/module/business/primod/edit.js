@@ -10,8 +10,9 @@ requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'selectCN', 'validator', 
         //提示框
         var $OK = $.scojs_message.TYPE_OK;
         var $ERROR = $.scojs_message.TYPE_ERROR;
-
+        var modState ='';
         if (primod != undefined && primod != null && primod != "") {
+            modState = primod.modState;//初始化下拉
             //初始化页面
             meForm($('#formSubmit'), primod);
                         $('.selectpicker').selectpicker('refresh');
@@ -21,6 +22,8 @@ requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'selectCN', 'validator', 
 
         }
         //修改页面结束
+        //初始化下拉框 //可做异步下拉框选择
+        initSelect("modState", WEB_GLOBAL_CTX+"/business/dictionary/getDropDown", {dicName: 'PRIMOD-STATE'}, modState, "dicKey", "dicValue",true);
 
         parent.Loading.modal('hide');
 

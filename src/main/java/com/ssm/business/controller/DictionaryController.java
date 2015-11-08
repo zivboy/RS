@@ -208,5 +208,19 @@ public class DictionaryController extends BaseAction {
         result.setMsg("删除成功");
         return result;
     }
+
+    /**
+     * 通用下拉
+     * @param dicName
+     * @return
+     */
+    @RequestMapping(value="/getDropDown")
+    @ResponseBody
+    public List<Dictionary> getDropDown(@RequestParam String dicName) {
+        Dictionary dictionary = new Dictionary();
+        dictionary.setDicName(dicName);
+        List<Dictionary> list = dictionaryService.findAll(null,dictionary);
+        return list;
+    }
 }
 
