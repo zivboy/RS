@@ -2,11 +2,12 @@ package com.ssm.business.service;
 
 import com.ssm.business.entity.Ksjl;
 import com.ssm.common.mybatis.Page;
+import com.ssm.exception.ServiceException;
 
 import java.util.List;
 
 /**
- * Created by V on Thu Oct 15 19:14:20 GMT+08:00 2015.
+ * Created by V on Wed Nov 04 22:20:24 GMT+08:00 2015.
  */
 
 public interface KsjlService {
@@ -15,7 +16,7 @@ public interface KsjlService {
 
     List<Ksjl> findAll(Page page, Ksjl ksjl);
 
-    int countByExample(Page page, Ksjl ksjl);
+    int countByExample(Page page,Ksjl ksjl);
 
     void save(Ksjl ksjl);
 

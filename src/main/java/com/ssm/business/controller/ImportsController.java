@@ -6,11 +6,12 @@ import com.linuxense.javadbf.DBFReader;
 import com.ssm.business.entity.Imports;
 import com.ssm.business.entity.Item;
 import com.ssm.business.entity.Model;
-import com.ssm.business.entity.Student;
 import com.ssm.business.service.ImportService;
 import com.ssm.business.service.ItemService;
 import com.ssm.business.service.ModelService;
 import com.ssm.business.service.StudentService;
+import com.ssm.business.service.thread.ImportDateThread;
+import com.ssm.business.service.thread.ImportThread;
 import com.ssm.common.baseaction.BaseAction;
 import com.ssm.common.mybatis.Page;
 import com.ssm.common.util.*;
@@ -28,10 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by xecoder on Sat Sep 26 16:41:04 GMT+08:00 2015.
@@ -165,50 +163,53 @@ public class ImportsController extends BaseAction {
      */
     @RequestMapping(value = "/save")
     @ResponseBody
-    public Result save(@ModelAttribute Imports imports, @RequestParam("file") MultipartFile file) {
+    public Result save(@ModelAttribute Imports imports, @RequestParam("file") MultipartFile[] files) {
         Result result = new Result();
         try {
-            InputStream fis;
-            String fileName;
-            List<Item> showList = new ArrayList<>();//配置对应字段使用
-            List<Item> dataList = new ArrayList<>();//存储使用
-            if (!file.isEmpty()) {
-                fileName = file.getOriginalFilename();
-                imports.setTitle(fileName);
-                String path = UploadUtils.upload(file, request);
-                imports.setFilePath(path);
-                Columns columns = new Columns();
-                columns.setTableName("business_student");
-                columns.setTableSchema("recruits");
-                //TODO 只需要对应的字段条件
-                columns.setDataType("double");
-                List<Columns> columnsList = columnsService.selectByExample(null, columns);
-                imports.setTitle(fileName);//文件名称
-                imports.setColumn(columnsList);//数据库的表字段
+            String path;
+            Map<String, String> filesMap = new HashMap<>();//存储使用
 
-                fis = new FileInputStream(path);
-                // 根据输入流初始化一个DBFReader实例，用来读取DBF文件信息
-                DBFReader reader = new DBFReader(fis);
-                reader.setCharactersetName("GBK");
-                // 调用DBFReader对实例方法得到path文件中字段的个数
-                int fieldsCount = reader.getFieldCount();
-                imports.setFieldCount(fieldsCount);//字段个数
-                // 取出字段信息
-                for (int i = 0; i < fieldsCount; i++) {
-                    DBFField field = reader.getField(i);
-                    Item item = new Item();
-                    //item.setModelId(model_id);
-                    item.setSourceTabel(fileName);
-                    item.setSourceField(field.getName());
-                    item.setItemId(i);
-                    if (field.getName().toString().indexOf("CJ") > -1 || field.getName().toString().indexOf("GK") > -1 || field.getName().toString().indexOf("ZGF") > -1) {
-                        showList.add(item);
-                    }
-                    dataList.add(item);
-                }
-                imports.setItemList(showList);//dbf 文件字段
-                session.setAttribute("dataList", dataList);
+
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                filesMap.put(file.getOriginalFilename().split("\\.")[0], UploadUtils.upload(file, request));
             }
+
+            //学生
+            if (filesMap.size() > 0 && filesMap.get("T_TDD") != null) {
+                doTDD(imports,filesMap.get("T_TDD"));
+            }
+
+            //简历
+            if (filesMap.size() > 0 && filesMap.get("T_KSJL") != null) {
+               /* path = filesMap.get("T_KSJL");
+
+                new Thread(new Runnable() {
+
+                    public String path;
+
+                    InputStream fis;
+
+                    @Override
+                    public void run() {
+                        try {
+                            fis = new FileInputStream(path);
+                            DBFReader reader = new DBFReader(fis);
+                            reader.setCharactersetName("GBK");
+                            while (reader.nextRecord() != null) {//取dbf文件的每一行
+
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+                */
+            }
+
+
             result.setMsg("文件加载完成，请对应字段");
             result.setSuccessful(true);
             result.setData(imports);
@@ -219,6 +220,55 @@ public class ImportsController extends BaseAction {
             result.setSuccessful(false);
         }
         return result;
+    }
+
+//学生主要数据
+    private void doTDD(Imports imports,String path)
+    {
+        List<Item> showList = new ArrayList<>();//配置对应字段使用
+        List<Item> dataList = new ArrayList<>();//存储使用
+
+        try{
+            String fileName = "T_TDD";
+            imports.setFilePath(path);
+            Columns columns = new Columns();
+            columns.setTableName("business_student");
+            columns.setTableSchema("recruits");
+            //TODO 只需要对应的字段条件
+            columns.setDataType("double");
+            List<Columns> columnsList = columnsService.selectByExample(null, columns);
+            imports.setTitle(fileName);//文件名称
+            imports.setColumn(columnsList);//数据库的表字段
+
+            InputStream fis = new FileInputStream(path);
+            // 根据输入流初始化一个DBFReader实例，用来读取DBF文件信息
+            DBFReader reader = new DBFReader(fis);
+            reader.setCharactersetName("GBK");
+            // 调用DBFReader对实例方法得到path文件中字段的个数
+            int fieldsCount = reader.getFieldCount();
+            imports.setFieldCount(fieldsCount);//字段个数
+            // 取出字段信息
+            for (int i = 0; i < fieldsCount; i++) {
+                DBFField field = reader.getField(i);
+                Item item = new Item();
+                //item.setModelId(model_id);
+                item.setSourceTabel(fileName);
+                item.setSourceField(field.getName());
+                item.setItemId(i);
+                if (field.getName().toString().indexOf("CJ") > -1 || field.getName().toString().indexOf("GK") > -1 || field.getName().toString().indexOf("ZGF") > -1) {
+                    showList.add(item);
+                }
+                dataList.add(item);
+            }
+
+
+            imports.setItemList(showList);//dbf 文件字段
+            session.setAttribute("dataList", dataList);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -309,178 +359,6 @@ public class ImportsController extends BaseAction {
         }
         return result;
     }
-
-
-    //异步最终导入数据
-    class ImportDateThread implements Runnable {
-        private DBFReader reader;
-        private List<String> fieldHtml, columnHtml;
-        private List<Item> dataList;
-        private int num = 1, importId;
-
-        public ImportDateThread(int importId, DBFReader reader, List<String> fieldHtml, List<String> columnHtml, List<Item> dataList) {
-            this.importId = importId;
-            this.reader = reader;
-            this.fieldHtml = fieldHtml;
-            this.columnHtml = columnHtml;
-            this.dataList = dataList;//所有的dbf数据字段
-        }
-
-        /**
-         * 获取字段的set方法
-         *
-         * @param orginString
-         * @return
-         */
-        private String getMethodName(String orginString) {
-            return "set" + getFieldName(orginString);
-        }
-
-        /**
-         * 获取字段
-         *
-         * @param orginString
-         * @return
-         */
-        private String getFieldName(String orginString) {
-            return StringUtil.firstCharacterToUpper((orginString.toLowerCase()));
-        }
-
-
-        SimpleDate simpleDate = new SimpleDate();
-        StringUtil stringUtil = new StringUtil();
-
-        private Object getField(Field field, Object initValue) {
-            if (field.getType().equals(String.class)) {
-                initValue = stringUtil.replaceBlank(String.valueOf(initValue));
-            } else if (field.getType().equals(Double.class)) {
-                initValue = Double.parseDouble(initValue.toString());
-            } else if (field.getType().equals(Date.class)) {
-                try {
-                    initValue = simpleDate.strToDate(simpleDate.format((Date) initValue));
-                } catch (Exception e) {
-                    initValue = new Date();
-                }
-            } else {
-                initValue = String.valueOf(initValue);
-            }
-            return initValue;
-        }
-
-        @Override
-        public synchronized void run() {
-            Object[] rowValues;
-            String methodName;
-            Object initValue;
-            Field field;
-            int location;
-            List<Example> examples = new ArrayList<>();
-            Student student = new Student();
-            try {
-                while ((rowValues = reader.nextRecord()) != null) {//取dbf文件的每一行
-                    if (num == 1) {//第一条记录保存逻辑字段
-                        for (int i = 0; i < rowValues.length; i++) {//循环每一行的每一个字段的值
-                            Example example = new Example();
-                            initValue = rowValues[i];
-                            Item item = dataList.get(i);
-                            location = fieldHtml.lastIndexOf(item.getSourceField().trim());//如果表头在界面的配置里面
-                            try {
-                                field = Student.class.getDeclaredField(((location > -1) ? (columnHtml.get(location)).split("\\.")[1] : item.getSourceField().trim()).toLowerCase());
-                                methodName = getMethodName(field.getName());//界面dbf展现字段名等于界面表的字段
-                                initValue = getField(field, initValue);
-                                example.setField(field);
-                                example.setMethodName(methodName);
-                                Student.class.getMethod(methodName, field.getType()).invoke(student, initValue);//通过反射将值保存到bean
-                            } catch (Exception e) {
-                                ;
-                            }
-                            examples.add(example);//逻辑字段
-                        }
-                    } else {
-                        for (int i = 0; i < rowValues.length; i++) {//循环每一行的每一个字段的值
-                            Example example = examples.get(i);
-                            initValue = rowValues[i];
-                            try {
-                                Student.class.getMethod(example.getMethodName(), example.getField().getType()).invoke(student, initValue);//通过反射将值保存到bean
-                            } catch (Exception e) {
-                                ;
-                            }
-                        }
-                    }
-                    studentService.save(student);//保存一行
-                    num++;
-                }
-
-                Imports imports = new Imports();
-                imports.setState(1);
-                imports.setImportId(importId);
-                imports.setMessage("导入成功");
-                imports.setRowSum(num);
-                importService.update(imports);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-            }
-        }
-    }
-
-    class Example {
-        Field field;
-        String methodName;
-
-        public Field getField() {
-            return field;
-        }
-
-        public void setField(Field field) {
-            this.field = field;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
-        }
-    }
-
-
-    //导入数据字段
-    class ImportThread implements Runnable {
-        private int modelId;
-        private String fileName;
-        private List<String> fieldHtml, columnHtml;
-
-        public ImportThread(int modelId, String fileName, List<String> fieldHtml, List<String> columnHtml) {
-            this.modelId = modelId;
-            this.fileName = fileName;
-            this.fieldHtml = fieldHtml;
-            this.columnHtml = columnHtml;
-        }
-
-        @Override
-        public synchronized void run() {
-            List<Item> list = new ArrayList<Item>();
-            int i = 0;
-            for (String field : fieldHtml) {
-                String[] columnArray = columnHtml.get(i).split("\\.");
-                Item item = new Item();
-                item.setModelId(modelId);
-                item.setState(1);
-                item.setSourceTabel(fileName);
-                item.setSourceField(field);
-                item.setTargetTable(columnArray[0]);
-                item.setTargetField(columnArray[1]);
-                i++;
-                list.add(item);
-            }
-            if (list != null) {
-                itemService.saveBatch(list);
-            }
-        }
-    }
-
 
     /**
      * 查询单个数据导入
