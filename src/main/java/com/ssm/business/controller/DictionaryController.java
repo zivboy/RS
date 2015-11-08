@@ -238,6 +238,6 @@ public class DictionaryController extends BaseAction {
         Page info = dictionaryService.findByPage(page(), dictionary);
         return info.getRows();
     }
-}
+
 }
 
