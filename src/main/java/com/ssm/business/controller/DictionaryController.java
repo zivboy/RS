@@ -211,6 +211,20 @@ public class DictionaryController extends BaseAction {
 
 
     /**
+     * 通用下拉
+     * @param dicName
+     * @return
+     */
+    @RequestMapping(value="/getDropDown")
+    @ResponseBody
+    public List<Dictionary> getDropDown(@RequestParam String dicName) {
+        Dictionary dictionary = new Dictionary();
+        dictionary.setDicName(dicName);
+        List<Dictionary> list = dictionaryService.findAll(null,dictionary);
+        return list;
+    }
+
+    /**
      * 省份
      * @param type
      * @return
@@ -224,5 +238,6 @@ public class DictionaryController extends BaseAction {
         Page info = dictionaryService.findByPage(page(), dictionary);
         return info.getRows();
     }
+}
 }
 

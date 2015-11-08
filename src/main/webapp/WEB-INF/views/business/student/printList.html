@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<#include "/console/layout/main.html"/>
+<@head/>
+<object  id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+    <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 pluginspage="${base}/styles/js/module/business/student/install_lodop.exe"></embed>
+</object>
+<body>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">学生信息</div>
+        <div class="panel-body">
+            <table id="tableB" class="table-hover table-condensed table-striped">
+                <thead>
+                <tr>
+                    <th data-field="state" data-checkbox="true"></th>
+                    <th data-field="pc" class="col-md-1">批次</th>
+                    <th data-field="sf" class="col-md-1">省份</th>
+                    <th data-field="xm" class="col-md-1">姓名</th>
+                    <th data-field="xq" class="col-md-1">校区</th>
+                    <th data-field="xy" class="col-md-1">学院</th>
+                    <th data-field="zy" class="col-md-1">专业</th>
+                    <th data-field="kskl" class="col-md-1">考生科类</th>
+                    <th data-field="zkzh" class="col-md-1">准考证号</th>
+                    <th data-field="tzsh" class="col-md-1">通知书号</th>
+                    <th data-field="jtdz" class="col-md-3">家庭地址</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div><!--/.container-->
+<div id="custom-toolbar">
+    <form role="form" name="form" id="form1">
+        <div class="form-inline" role="form">
+            <div class="row">
+                <div class="col-md-3">
+                    <select class="form-control " id="search_select" name="search_select">
+                        <option value="search_xm">姓名</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="输入查询条件" id="search"
+                               name="search_username">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" id="query" name="query" title="查询"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="btn-group" id="do">
+                    <@shiro.hasPermission name="Student:save">
+                        <button type="button" class="btn btn-default dropdown-toggle" id="print" name="print" data-toggle="dropdown" title="打印">
+                            <li class="glyphicon glyphicon-print"></li><span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu" id="primods"></ul>
+                    </@shiro.hasPermission>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/business/student/printList.js"></script>
+</html>
+

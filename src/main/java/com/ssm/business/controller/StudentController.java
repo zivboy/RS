@@ -4,7 +4,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonEncoding;
+import com.ssm.business.entity.Priitems;
+import com.ssm.business.entity.Primod;
 import com.ssm.business.entity.Student;
+import com.ssm.business.service.PriitemsService;
+import com.ssm.business.service.PrimodService;
 import com.ssm.business.service.StudentService;
 import com.ssm.common.baseaction.BaseAction;
 import com.ssm.common.mybatis.Page;
@@ -30,15 +34,31 @@ public class StudentController extends BaseAction {
 
     @Autowired
     StudentService studentService;
+    @Autowired
+    PrimodService primodService;
+    @Autowired
+    PriitemsService priitemsService;
 
     private static final String INDEX = "/business/student/list";
     private static final String EDIT = "/business/student/edit";
+    private static final String PRINTLIST = "/business/student/printList";//打印列表
+    private static final String PRINTTZS = "/business/student/printTzs";//打印通知书
+    private static final String PRINTEMS = "/business/student/printEms";//打印信封
+    private static final String PRINTBDZ = "/business/student/printBdz";//打印报到证
 
     @RequestMapping(value="/index", method= RequestMethod.GET)
     public String index() {
         return INDEX;
     }
 
+    /**
+     * 打印列表初始页面
+     * @return
+     */
+    @RequestMapping(value="/printList", method= RequestMethod.GET)
+    public String printList() {
+        return PRINTLIST;
+    }
 
     /**
      * 表格学生
@@ -158,6 +178,69 @@ public class StudentController extends BaseAction {
         result.setSuccessful(true);
         result.setMsg("删除成功");
         return result;
+    }
+
+    /**
+     * 打印
+     * @return ModelAndView
+     */
+    @RequestMapping(value="/print/{id}",params ="modId",method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView print(@PathVariable Integer id,@RequestParam(value="modId")  String modId) {
+        logger.debug("print id = " + id+"modId:"+modId);
+        ModelAndView mav = new ModelAndView(PRINTTZS);
+        try {
+            Student student =  studentService.get(id);
+            Primod primod = primodService.get(Integer.parseInt(modId));
+            Priitems priitems = new Priitems();
+            if("2".equals(primod.getModState())){
+                mav = new ModelAndView(PRINTEMS);
+            }else if("3".equals(primod.getModState())){
+                mav = new ModelAndView(PRINTBDZ);
+            }
+            priitems.setModId(Integer.parseInt(modId));
+            List<Priitems> priitemsList = priitemsService.findAll(null,priitems);
+            ObjectMapper mapper = JacksonMapper.getInstance();
+            String sjson =mapper.writeValueAsString(student);
+            String pjson =mapper.writeValueAsString(primod);
+            String psjson =mapper.writeValueAsString(priitemsList);
+            mav.addObject("message", "完成");
+            mav.addObject("student",sjson);
+            mav.addObject("primod",pjson);
+            mav.addObject("priitemsList",psjson);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return mav;
+    }
+
+    @RequestMapping(value="/findPrimod")
+    @ResponseBody
+    public List<Primod> findAllPrimod() {
+        Primod primod = new Primod();
+        List<Primod> list = primodService.findAll(null,primod);
+        return list;
+    }
+
+    @RequestMapping(value="/getPri/{smodId}")
+    @ResponseBody
+    public String getPri(@PathVariable Integer smodId) {
+        String pri = "";
+        try {
+            Primod primod = primodService.get(smodId);
+            Priitems priitems = new Priitems();
+            priitems.setModId(smodId);
+            List<Priitems> priitemsList = priitemsService.findAll(null,priitems);
+            ObjectMapper mapper = JacksonMapper.getInstance();
+            pri =mapper.writeValueAsString(primod)+"#"+mapper.writeValueAsString(priitemsList);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return pri;
     }
 }
 
