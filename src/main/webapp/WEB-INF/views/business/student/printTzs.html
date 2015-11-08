@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<#include "/console/layout/main.html"/>
+<html class="fuelux" >
+<@headEdit/>
+<body>
+<object  id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+    <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 pluginspage="${base}/styles/js/module/business/student/install_lodop.exe"></embed>
+</object>
+<div class="container">
+    <form role="form" id="formSubmit" commandName="student" class="form-horizontal"
+          data-fv-framework="bootstrap"
+          data-fv-message="This value is not valid"
+          data-fv-feedbackicons-valid="glyphicon glyphicon-ok"
+          data-fv-feedbackicons-invalid="glyphicon glyphicon-remove"
+          data-fv-feedbackicons-validating="glyphicon glyphicon-refresh">
+        <!-- Modal -->
+        <div class="panel panel-default">
+            <div class="panel-heading">通知书信息</div>
+            <div class="panel-body">
+                <div class="control-group">
+                    <input type="hidden" name="id" id="id"/>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <label class="control-label" for="xm">姓名</label>
+                    </div>
+                    <div class="col-sm-8 controls">
+                        <input type="text" class="form-control"  id="xm" name="xm" readonly="true" />
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xz">学制</label>
+                    </div>
+                    <div class="col-sm-8 controls">
+                        <input type="text" class="form-control"  id="xz" name="xz" readonly="true"/>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="pc">批次</label>
+                    </div>
+                    <div class="col-sm-8 controls">
+                        <input type="text" class="form-control"  id="pc" name="pc" readonly="true"/>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="tzsh">通知书号</label>
+                    </div>
+                    <div class="col-sm-8 controls">
+                        <input type="text" class="form-control"  id="tzsh" name="tzsh" readonly="true"/>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="sfzh">身份证号</label>
+                    </div>
+                    <div class="col-sm-8 controls">
+                        <input type="text" class="form-control"  id="sfzh" name="sfzh" readonly="true"/>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row control-group">
+                    <div class="col-sm-4 col-sm-offset-5">
+                        <div style="align-content: center">
+                            <button type="button" id="print" class="btn btn-primary" >打印</button>
+                            <button type="button" id="back" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+<!-- /.container -->
+
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/business/student/printComm.js"></script>
+<script type="text/javascript">
+    var student = JSON.parse(JSON.stringify(${student}));
+    var primod = JSON.parse(JSON.stringify(${primod}));
+    var priitemsList = JSON.parse(JSON.stringify(${priitemsList}));
+</script>
+</html>
+
