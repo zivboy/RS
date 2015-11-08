@@ -21,6 +21,10 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
 
         initSelect("modelList", WEB_GLOBAL_CTX + "/business/model/modelList", '', '', "id", "name", true);
 
+        //初始化下拉框 //可做异步下拉框选择
+        initSelect("sf", WEB_GLOBAL_CTX+"/business/dictionary/find/sfdm", {description: ''}, "", "dicKey", "dicValue",true);
+        initSelect("pc", WEB_GLOBAL_CTX+"/business/batch/lists", {description: ''}, "", "id", "batchName",true);
+
         var msg = "文件限于dbf格式，请重新选择";
         var type = ".DBF";
         $("#file").change(function () {

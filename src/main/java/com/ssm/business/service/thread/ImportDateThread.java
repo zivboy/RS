@@ -36,56 +36,20 @@ public class ImportDateThread implements Runnable {
     private DBFReader reader;
     private List<String> fieldHtml, columnHtml;
     private List<Item> dataList;
-    private int num = 1, importId;
+    private int num = 1;
+    private Imports imports;
+    private long userId;
 
-    public ImportDateThread(int importId, DBFReader reader, List<String> fieldHtml, List<String> columnHtml, List<Item> dataList) {
-        this.importId = importId;
+    public ImportDateThread(Imports imports, DBFReader reader, List<String> fieldHtml, List<String> columnHtml, List<Item> dataList,long userId) {
+        this.imports = imports;
         this.reader = reader;
         this.fieldHtml = fieldHtml;
         this.columnHtml = columnHtml;
         this.dataList = dataList;//所有的dbf数据字段
-    }
-
-    /**
-     * 获取字段的set方法
-     *
-     * @param orginString
-     * @return
-     */
-    private String getMethodName(String orginString) {
-        return "set" + getFieldName(orginString);
-    }
-
-    /**
-     * 获取字段
-     *
-     * @param orginString
-     * @return
-     */
-    private String getFieldName(String orginString) {
-        return StringUtil.firstCharacterToUpper((orginString.toLowerCase()));
+        this.userId = userId;
     }
 
 
-    SimpleDate simpleDate = new SimpleDate();
-    StringUtil stringUtil = new StringUtil();
-
-    private Object getField(Field field, Object initValue) {
-        if (field.getType().equals(String.class)) {
-            initValue = stringUtil.replaceBlank(String.valueOf(initValue));
-        } else if (field.getType().equals(Double.class)) {
-            initValue = Double.parseDouble(initValue.toString());
-        } else if (field.getType().equals(Date.class)) {
-            try {
-                initValue = simpleDate.strToDate(simpleDate.format((Date) initValue));
-            } catch (Exception e) {
-                initValue = new Date();
-            }
-        } else {
-            initValue = String.valueOf(initValue);
-        }
-        return initValue;
-    }
 
     @Override
     public synchronized void run() {
@@ -96,6 +60,9 @@ public class ImportDateThread implements Runnable {
         int location;
         List<Example> examples = new ArrayList<>();
         Student student = new Student();
+        student.setNy(new Date());
+        student.setDrpc(Long.valueOf(imports.getPc()));
+        student.setDrrid(userId);
         try {
             while ((rowValues = reader.nextRecord()) != null) {//取dbf文件的每一行
                 if (num == 1) {//第一条记录保存逻辑字段
@@ -106,13 +73,13 @@ public class ImportDateThread implements Runnable {
                         location = fieldHtml.lastIndexOf(item.getSourceField().trim());//如果表头在界面的配置里面
                         try {
                             field = Student.class.getDeclaredField(((location > -1) ? (columnHtml.get(location)).split("\\.")[1] : item.getSourceField().trim()).toLowerCase());
-                            methodName = getMethodName(field.getName());//界面dbf展现字段名等于界面表的字段
-                            initValue = getField(field, initValue);
+                            methodName = DbfFieldExtend.getMethodName(field.getName());//界面dbf展现字段名等于界面表的字段
+                            initValue = DbfFieldExtend.getField(field, initValue);
                             example.setField(field);
                             example.setMethodName(methodName);
                             Student.class.getMethod(methodName, field.getType()).invoke(student, initValue);//通过反射将值保存到bean
                         } catch (Exception e) {
-                            ;
+                            e.printStackTrace();
                         }
                         examples.add(example);//逻辑字段
                     }
@@ -133,7 +100,7 @@ public class ImportDateThread implements Runnable {
 
             Imports imports = new Imports();
             imports.setState(1);
-            imports.setImportId(importId);
+            imports.setImportId(imports.getImportId());
             imports.setMessage("导入成功");
             imports.setRowSum(num);
             importService.update(imports);

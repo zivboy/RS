@@ -112,6 +112,17 @@
       #{jl,jdbcType=VARCHAR}, #{rhzw,jdbcType=VARCHAR}, #{zmr,jdbcType=VARCHAR}, #{sf,jdbcType=VARCHAR}, 
       #{pc,jdbcType=VARCHAR}, #{ny,jdbcType=INTEGER})
   </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into business_ksjl (id, ksh, qsrq, zjrq,
+      jl, rhzw, zmr, sf,
+      pc, ny)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+    (#{item.id,jdbcType=BIGINT}, #{item.ksh,jdbcType=VARCHAR}, #{item.qsrq,jdbcType=DATE}, #{item.zjrq,jdbcType=DATE},
+      #{item.jl,jdbcType=VARCHAR}, #{item.rhzw,jdbcType=VARCHAR}, #{item.zmr,jdbcType=VARCHAR}, #{item.sf,jdbcType=VARCHAR},
+      #{item.pc,jdbcType=VARCHAR}, #{item.ny,jdbcType=INTEGER})
+    </foreach>
+  </insert>
   <insert id="insertSelective" parameterType="com.ssm.business.entity.Ksjl" >
     insert into business_ksjl
     <trim prefix="(" suffix=")" suffixOverrides="," >

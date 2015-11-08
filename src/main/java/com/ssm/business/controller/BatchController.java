@@ -159,5 +159,22 @@ public class BatchController extends BaseAction {
         result.setMsg("删除成功");
         return result;
     }
+
+
+
+    /**
+     * 历史批次
+     * @return
+     */
+    @RequestMapping(value="/lists")
+    @ResponseBody
+    public List<Batch> lists() {
+        Batch batch = new Batch();
+        Page page = page();
+        page.setSort("batch_year");
+        page.setOrder("desc");
+        Page info = batchService.findByPage(page(), batch);
+        return info.getRows();
+    }
 }
 

@@ -208,5 +208,21 @@ public class DictionaryController extends BaseAction {
         result.setMsg("删除成功");
         return result;
     }
+
+
+    /**
+     * 省份
+     * @param type
+     * @return
+     */
+    @RequestMapping(value="/find/{type}")
+    @ResponseBody
+    public List<Dictionary> findAllRole(@PathVariable String type) {
+        Dictionary dictionary = new Dictionary();
+        dictionary.setDicCode("bus-san");
+        dictionary.setDicName(type);
+        Page info = dictionaryService.findByPage(page(), dictionary);
+        return info.getRows();
+    }
 }
 

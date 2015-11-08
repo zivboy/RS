@@ -20,6 +20,8 @@ public interface KsjlService {
 
     void save(Ksjl ksjl);
 
+    void saveBatch(List<Ksjl> list);
+
     Ksjl get(int id);
 
     void update(Ksjl ksjl);
