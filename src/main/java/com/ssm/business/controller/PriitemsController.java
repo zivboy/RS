@@ -187,7 +187,6 @@ public class PriitemsController extends BaseAction {
     @RequestMapping(value="/getPriCodeDown")
     @ResponseBody
     public List<Dictionary> getPriCodeDown(@RequestParam String dicName,@RequestParam String modId) {
-        System.out.println("###################:"+dicName+":"+modId);
         Dictionary dictionary = new Dictionary();
         dictionary.setDicName(dicName);
         Primod primod = primodService.get(Integer.parseInt(modId));
