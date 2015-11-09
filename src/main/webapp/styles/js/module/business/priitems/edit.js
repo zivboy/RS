@@ -16,6 +16,7 @@ requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'selectCN', 'validator', 
             meForm($('#formSubmit'), priitems);
             $('.selectpicker').selectpicker('refresh');
             modIdVal = priitems.modId;
+            var priCode = priitems.priCode;
         }
         else {
 
@@ -24,9 +25,13 @@ requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'selectCN', 'validator', 
 
         //初始化下拉框
         initSelect("modId", WEB_GLOBAL_CTX+"/business/priitems/getAllPrimod", {}, modIdVal, "modId", "modName",true);
-
+        initSelect("priCode", WEB_GLOBAL_CTX+"/business/priitems/getPriCodeDown", {dicName: 'PRI-CODE', modId:$("#modId").val()}, priCode, "dicKey", "dicValue",true);
         parent.Loading.modal('hide');
-
+        //根据模板确定打印下拉项
+        $("#modId").change(function(){
+            $("#priCode option").delete();
+            initSelect("priCode", WEB_GLOBAL_CTX+"/business/priitems/getPriCodeDown", {dicName: 'PRI-CODE', modId:$("#modId").val()}, priCode, "dicKey", "dicValue",true);
+        });
         //提交
         $('#formSubmit').formValidation({
             framework: 'bootstrap',

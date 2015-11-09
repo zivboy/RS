@@ -10,8 +10,6 @@ public class Priitems {
 
     private Integer modId;
 
-    private String priName;
-
     private String priCode;
 
     private String priValue;
@@ -24,7 +22,10 @@ public class Priitems {
 
     private Integer priHeight;
 
-    private Integer priOrder;
+    private String modName;
+
+    private String priName;
+
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date stateTime;
@@ -43,14 +44,6 @@ public class Priitems {
 
     public void setModId(Integer modId) {
         this.modId = modId;
-    }
-
-    public String getPriName() {
-        return priName;
-    }
-
-    public void setPriName(String priName) {
-        this.priName = priName == null ? null : priName.trim();
     }
 
     public String getPriCode() {
@@ -101,19 +94,27 @@ public class Priitems {
         this.priHeight = priHeight;
     }
 
-    public Integer getPriOrder() {
-        return priOrder;
-    }
-
-    public void setPriOrder(Integer priOrder) {
-        this.priOrder = priOrder;
-    }
-
     public Date getStateTime() {
         return stateTime;
     }
 
     public void setStateTime(Date stateTime) {
         this.stateTime = stateTime;
+    }
+
+    public String getModName() {
+        return modName;
+    }
+
+    public void setModName(String modName) {
+        this.modName = modName;
+    }
+
+    public String getPriName() {
+        return priName;
+    }
+
+    public void setPriName(String priName) {
+        this.priName = priName == null ? null : priName.trim();
     }
 }

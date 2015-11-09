@@ -7,6 +7,7 @@ import com.ssm.business.service.PriitemsService;
 import com.ssm.common.basedao.BaseDao;
 import com.ssm.common.baseservice.BaseService;
 import com.ssm.common.mybatis.Page;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +47,9 @@ public class PriitemsServiceImpl  extends BaseService implements PriitemsService
         PriitemsCriteria criteria = new PriitemsCriteria();
         PriitemsCriteria.Criteria cri = criteria.createCriteria();
         if (priitems != null) {
-                
+            if(priitems.getModId()!=null&&priitems.getModId()!=0) {
+                cri.andModIdEqualTo(priitems.getModId());
+            }
         }
         if(page != null && page.getSort() != null && page.getOrder() != null){
             criteria.setOrderByClause(page.getSort() + " " + page.getOrder());

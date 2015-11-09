@@ -1,7 +1,9 @@
 package com.ssm.business.controller;
 
+import com.ssm.business.entity.Dictionary;
 import com.ssm.business.entity.Priitems;
 import com.ssm.business.entity.Primod;
+import com.ssm.business.service.DictionaryService;
 import com.ssm.business.service.PriitemsService;
 import com.ssm.business.service.PrimodService;
 import com.ssm.common.baseaction.BaseAction;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,6 +35,8 @@ public class PriitemsController extends BaseAction {
     PriitemsService priitemsService;
     @Autowired
     PrimodService primodService;
+    @Autowired
+    DictionaryService dictionaryService;
 
     private static final String INDEX = "/business/priitems/list";
     private static final String EDIT = "/business/priitems/edit";
@@ -114,6 +119,7 @@ public class PriitemsController extends BaseAction {
     @ResponseBody
     public Result saveAddPriitems(@ModelAttribute Priitems priitems) {
         Result result = new Result();
+        priitems.setStateTime(new Date());
         try {
             if (priitems.getPriId() != null)
             {
@@ -169,6 +175,26 @@ public class PriitemsController extends BaseAction {
     public List<Primod> getAllPrimod() {
         Primod primod = new Primod();
         List<Primod> list = primodService.findAll(null,primod);
+        return list;
+    }
+
+    /**
+     * 打印项下拉
+     * @param dicName
+     * @param modId
+     * @return
+     */
+    @RequestMapping(value="/getPriCodeDown")
+    @ResponseBody
+    public List<Dictionary> getPriCodeDown(@RequestParam String dicName,@RequestParam String modId) {
+        System.out.println("###################:"+dicName+":"+modId);
+        Dictionary dictionary = new Dictionary();
+        dictionary.setDicName(dicName);
+        Primod primod = primodService.get(Integer.parseInt(modId));
+        if(primod!=null&&primod.getModState().length()>0){
+            dictionary.setDicCode(primod.getModState());
+        }
+        List<Dictionary> list = dictionaryService.findAll(null,dictionary);
         return list;
     }
 }
