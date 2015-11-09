@@ -1,5 +1,6 @@
 package com.ssm.business.mapper;
 
+import com.ssm.business.entity.Item;
 import com.ssm.business.entity.Ksjl;
 import com.ssm.business.entity.KsjlCriteria;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface KsjlMapper {
     int updateByPrimaryKeySelective(Ksjl record);
 
     int updateByPrimaryKey(Ksjl record);
+
+    int insertBatch(List<Ksjl> list);
 }

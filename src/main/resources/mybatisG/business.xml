@@ -24,7 +24,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/recruit"
+                        connectionURL="jdbc:mysql://localhost:3306/recruits"
                         userId="vincent"
                         password="123qwe">
         </jdbcConnection>
@@ -58,7 +58,9 @@
                 <table schema="ssm" tableName="business_visit" domainObjectName="Visit" >
                     <columnOverride column="input_time" property="inputTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP" />
                 </table>-->
-        <table schema="ssm" tableName="business_student" domainObjectName="Student" >
+        <table schema="recruits" tableName="business_dm" domainObjectName="CodeManage" >
+        </table>
+        <table schema="recruits" tableName="business_tjxx" domainObjectName="Tjxx" >
         </table>
         <!--
         <table schema="ssm" tableName="business_visit_client" domainObjectName="VisitClient" >

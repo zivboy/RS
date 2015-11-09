@@ -19,6 +19,8 @@ public class SimpleDate
 
     public static String DATE_PATTEN = "yyyy-MM-dd";
 
+    public static String DATE_YEAR = "yyyy-MM-dd";
+
     public static String DATE_PATTEN_MM = "yyyy-MM-dd HH:mm";
 
     public static String DATE_PATTEN_TM = "yyyy-MM-dd HH:mm:ss";
@@ -40,6 +42,11 @@ public class SimpleDate
     public static String format(Date date)
     {
         String s = DateFormatUtils.format(date, DATE_PATTEN);
+        return s;
+    }
+    public static String formatYear(Date date)
+    {
+        String s = DateFormatUtils.format(date, DATE_YEAR);
         return s;
     }
 

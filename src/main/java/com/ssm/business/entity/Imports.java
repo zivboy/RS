@@ -31,6 +31,10 @@ public class Imports implements Serializable {
 
     private int fieldCount;
 
+    private int pc;
+
+    private int sf;
+
     private boolean modelFlag;
 
     private List<Item> ItemList;
@@ -40,6 +44,22 @@ public class Imports implements Serializable {
     private List<String> fieldHtml;
 
     private List<String> columnHtml;
+
+    public int getSf() {
+        return sf;
+    }
+
+    public void setSf(int sf) {
+        this.sf = sf;
+    }
+
+    public int getPc() {
+        return pc;
+    }
+
+    public void setPc(int pc) {
+        this.pc = pc;
+    }
 
     public Integer getImportId() {
         return importId;

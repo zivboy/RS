@@ -67,6 +67,11 @@ public class KsjlServiceImpl  extends BaseService implements KsjlService {
     }
 
     @Override
+    public void saveBatch(List<Ksjl> list) {
+        baseDao.getMapper(KsjlMapper.class).insertBatch(list);
+    }
+
+    @Override
     public Ksjl get(int id) {
         return baseDao.getMapper(KsjlMapper.class).selectByPrimaryKey(Long.valueOf(id));
     }

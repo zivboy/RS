@@ -209,6 +209,7 @@ public class DictionaryController extends BaseAction {
         return result;
     }
 
+
     /**
      * 通用下拉
      * @param dicName
@@ -222,5 +223,21 @@ public class DictionaryController extends BaseAction {
         List<Dictionary> list = dictionaryService.findAll(null,dictionary);
         return list;
     }
+
+    /**
+     * 省份
+     * @param type
+     * @return
+     */
+    @RequestMapping(value="/find/{type}")
+    @ResponseBody
+    public List<Dictionary> findAllRole(@PathVariable String type) {
+        Dictionary dictionary = new Dictionary();
+        dictionary.setDicCode("bus-san");
+        dictionary.setDicName(type);
+        Page info = dictionaryService.findByPage(page(), dictionary);
+        return info.getRows();
+    }
+
 }
 

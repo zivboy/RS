@@ -3,21 +3,22 @@ package com.ssm.business.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.linuxense.javadbf.DBFField;
 import com.linuxense.javadbf.DBFReader;
-import com.ssm.business.entity.Imports;
-import com.ssm.business.entity.Item;
-import com.ssm.business.entity.Model;
-import com.ssm.business.service.ImportService;
-import com.ssm.business.service.ItemService;
-import com.ssm.business.service.ModelService;
-import com.ssm.business.service.StudentService;
+import com.ssm.business.entity.*;
+import com.ssm.business.service.*;
 import com.ssm.business.service.thread.ImportDateThread;
+import com.ssm.business.service.thread.ImportDmThread;
+import com.ssm.business.service.thread.ImportKsjlThread;
 import com.ssm.business.service.thread.ImportThread;
 import com.ssm.common.baseaction.BaseAction;
 import com.ssm.common.mybatis.Page;
 import com.ssm.common.util.*;
 import com.ssm.entity.Columns;
+import com.ssm.entity.Role;
 import com.ssm.service.core.ColumnsService;
+import com.ssm.shiro.SecurityUtils;
+import com.ssm.shiro.ShiroUser;
 import com.ssm.viewModel.GridModel;
+import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,10 @@ public class ImportsController extends BaseAction {
 
     @Autowired
     ItemService itemService;
+
+    @Autowired
+    KsjlService ksjlService;
+
 
     private static final String INDEX = "/business/imports/list";
     private static final String EDIT = "/business/imports/edit";
@@ -178,36 +183,41 @@ public class ImportsController extends BaseAction {
 
             //学生
             if (filesMap.size() > 0 && filesMap.get("T_TDD") != null) {
-                doTDD(imports,filesMap.get("T_TDD"));
+                doTDD(imports, filesMap.get("T_TDD"));
             }
 
             //简历
             if (filesMap.size() > 0 && filesMap.get("T_KSJL") != null) {
-               /* path = filesMap.get("T_KSJL");
-
-                new Thread(new Runnable() {
-
-                    public String path;
-
-                    InputStream fis;
-
-                    @Override
-                    public void run() {
-                        try {
-                            fis = new FileInputStream(path);
-                            DBFReader reader = new DBFReader(fis);
-                            reader.setCharactersetName("GBK");
-                            while (reader.nextRecord() != null) {//取dbf文件的每一行
-
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-                */
+                try {
+                    InputStream fis = new FileInputStream(filesMap.get("T_KSJL"));
+                    DBFReader reader = new DBFReader(fis);
+                    reader.setCharactersetName("GBK");
+                    Ksjl ksjlSource= new Ksjl();
+                    ksjlSource.setNy(Integer.valueOf(SimpleDate.formatYear(new Date())));
+                    ksjlSource.setPc(String.valueOf(imports.getPc()));
+                    ksjlSource.setSf(String.valueOf(imports.getSf()));
+                    ImportKsjlThread importKsjlThread  = new ImportKsjlThread(Ksjl.class,ksjlSource,reader);
+                    importKsjlThread.run();//
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
+            //体检信息
+            if (filesMap.size() > 0 && filesMap.get("T_TJXX") != null) {
+            }
+
+            try{
+
+                ImportDmThread importKsjlThread  = new ImportDmThread(filesMap);
+                importKsjlThread.run();//
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
 
 
             result.setMsg("文件加载完成，请对应字段");
@@ -222,13 +232,13 @@ public class ImportsController extends BaseAction {
         return result;
     }
 
-//学生主要数据
-    private void doTDD(Imports imports,String path)
-    {
+
+    //学生主要数据
+    private void doTDD(Imports imports, String path) {
         List<Item> showList = new ArrayList<>();//配置对应字段使用
         List<Item> dataList = new ArrayList<>();//存储使用
 
-        try{
+        try {
             String fileName = "T_TDD";
             imports.setFilePath(path);
             Columns columns = new Columns();
@@ -260,13 +270,9 @@ public class ImportsController extends BaseAction {
                 }
                 dataList.add(item);
             }
-
-
             imports.setItemList(showList);//dbf 文件字段
             session.setAttribute("dataList", dataList);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -282,30 +288,29 @@ public class ImportsController extends BaseAction {
     public Result saveModel(@ModelAttribute Imports imports) {
         Result result = new Result();
         try {
-
+            ShiroUser shiroUser = com.ssm.shiro.SecurityUtils.getShiroUser();
+            long userId = shiroUser.getId();
             InputStream fis;
-            List<Item> list = new ArrayList<>();
+            //List<Item> list = new ArrayList<>();
             Model model = new Model();
             if (imports.isModelFlag()) {
                 model.setName(request.getParameter("name"));
                 model.setState(1);
                 model.setCreateDate(new Date());
-                model.setUserId(Integer.parseInt(com.ssm.shiro.SecurityUtils.getShiroUser().getId() + ""));
+                model.setUserId((int) userId);
                 modelService.save(model);//先增加模板
                 imports.setModelId(model.getModelId());
             } else {
                 imports.setModelId(0);
             }
-
-
             imports.setActionTime(new Date());
             imports.setState(1);
             imports.setMessage("导入中");
             imports.setFieldCount(imports.getFieldHtml().size());
             imports.setTitle(model.getName() + imports.getTitle());
-            int importId;
+            //int importId;
             importService.save(imports);
-            importId = imports.getImportId();
+            //importId = imports.getImportId();
             result.setMsg("数据导入中");
             result.setSuccessful(true);
             result.setData(imports);
@@ -323,34 +328,22 @@ public class ImportsController extends BaseAction {
                     e.printStackTrace();
                 }
             }
-
-            //导入表格数据
-
             fis = new FileInputStream(imports.getFilePath());
             // 根据输入流初始化一个DBFReader实例，用来读取DBF文件信息
             DBFReader reader = new DBFReader(fis);
             reader.setCharactersetName("GBK");
-/*            Object[] rowValues;
-
-            for (int i = 0; i < reader.getFieldCount(); i++) {
-                DBFField field = reader.getField(i);
-                sourceFieldDBF.add(field.getName());
-            }*/
-            // 一条条取出path文件中记录
-
             List<Item> dataList = (List<Item>) session.getAttribute("dataList");
             List<Columns> dataColumnsList = (List<Columns>) session.getAttribute("dataColumnsList");
 
             try {
-                ImportDateThread threadData = new ImportDateThread(importId, reader, fieldHtml, columnHtml, dataList);
+                ImportDateThread threadData = new ImportDateThread(imports, reader, fieldHtml, columnHtml, dataList, userId);
                 Thread thread = new Thread(threadData);
                 thread.start();
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                fis.close();
             }
-
-            //fis.close();
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -387,5 +380,7 @@ public class ImportsController extends BaseAction {
         result.setMsg("删除成功");
         return result;
     }
+
+
 }
 
