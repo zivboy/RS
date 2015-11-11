@@ -15,6 +15,8 @@
 
         <input type="hidden" name="filePath" id="filePath"/>
         <input type="hidden" name="title" id="title"/>
+        <input type="hidden" name="xq" id="xq"/>
+        <input type="hidden" name="sf" id="sf"/>
         <input type="hidden" id="modelFlag" name="modelFlag" class="js-check-change-field"/>
 
         <!-- /.container -->
@@ -38,20 +40,31 @@
 
                     <div class="row control-group">
                         <div class="col-sm-1">
-                            <label class="control-label" for="modelList">生源省份</label>
+                            <label class="control-label" for="sfdm">生源省份</label>
                         </div>
                         <div class="col-sm-11 controls">
-                            <select id="sf" name="sf" class="form-control" >
+                            <select id="sfdm" name="sfdm" class="form-control" >
                                 <option value=''></option>
                             </select>
                         </div>
                     </div>
                     <div class="row control-group">
                         <div class="col-sm-1">
-                            <label class="control-label" for="modelList">批次</label>
+                            <label class="control-label" for="pc">批次</label>
                         </div>
                         <div class="col-sm-11 controls">
                             <select id="pc" name="pc" class="form-control" >
+                                <option value=''></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row control-group">
+                        <div class="col-sm-1">
+                            <label class="control-label" for="xqdm">校区</label>
+                        </div>
+                        <div class="col-sm-11 controls">
+                            <select id="xqdm" name="xqdm" class="form-control" >
                                 <option value=''></option>
                             </select>
                         </div>

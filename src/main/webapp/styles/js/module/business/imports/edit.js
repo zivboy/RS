@@ -22,8 +22,9 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
         initSelect("modelList", WEB_GLOBAL_CTX + "/business/model/modelList", '', '', "id", "name", true);
 
         //初始化下拉框 //可做异步下拉框选择
-        initSelect("sf", WEB_GLOBAL_CTX+"/business/dictionary/find/sfdm", {description: ''}, "", "dicKey", "dicValue",true);
+        initSelect("sfdm", WEB_GLOBAL_CTX+"/business/dictionary/find/sfdm", {description: ''}, "", "dicKey", "dicValue",true);
         initSelect("pc", WEB_GLOBAL_CTX+"/business/batch/lists", {description: ''}, "", "id", "batchName",true);
+        initSelect("xqdm", WEB_GLOBAL_CTX+"/business/dictionary/find/xqdm", {description: ''}, "", "dicKey", "dicValue",true);
 
         var msg = "文件限于dbf格式，请重新选择";
         var type = ".DBF";
@@ -68,6 +69,8 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
             }
         }).on('success.form.fv', function (e) {
             e.preventDefault();
+            $("#xq").val($("#xqdm option:selected").text());
+            $("#sf").val($("#sfdm option:selected").text());
             var $form = $(e.target);
             var params = $form.serialize();
             var selectedCount =$("select[name='fieldHtml']").length;
@@ -81,6 +84,7 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
                 $.scojs_message("未选择字段匹配", $ERROR);
                 return false;
             } else {
+
                 $.post(WEB_GLOBAL_CTX + "/business/imports/saveModel", params, function (rsp) {
                     if (rsp.successful) {
                         $.scojs_message(rsp.msg, $OK);
@@ -138,7 +142,7 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
                         formData.append(val.name, val.value);
                     });
                     $.ajax({
-                        url: WEB_GLOBAL_CTX + "/business/imports/save2",
+                        url: WEB_GLOBAL_CTX + "/business/imports/save",
                         data: formData,
                         cache: false,
                         contentType: false,

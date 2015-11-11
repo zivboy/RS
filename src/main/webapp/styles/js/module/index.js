@@ -81,8 +81,8 @@ function getModuleString(id) {
         +'"><div class="panel-title"><a class="collapsed" style="text-decoration-line: none" data-parent="#accordion" data-toggle="collapse" href="#collapseListGroup'+this.id
         +'" aria-expanded="false" aria-controls="collapseListGroup'+this.id
         +'"><span class="'+this.className
-        +'"></span>&nbsp;<span class="text" style="font-size: small">'+this.name
-        +'</span></a></div></div><div id="collapseListGroup'+this.id
+        +'"></span>&nbsp;<span class="text" style="font-size: small"><strong>'+this.name
+        +'</strong></span></a></div></div><div id="collapseListGroup'+this.id
         +'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading'+this.id
         +'"><div class="list-group">';
         secondModule = getModuleList(this.id);

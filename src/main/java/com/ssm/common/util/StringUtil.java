@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,22 +41,24 @@ public class StringUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(replaceUnderlineAndfirstToUpper("ni_hao_abc","_",""));
-        URL url = ClassLoader.getSystemResource("");
-        System.out.println("url = " + url.toString());
-        String basePath = StringUtil.class.getResource("/").toString().replaceAll("file:","").replaceFirst("/","");
-        File f = new File(basePath);
-        basePath = f.getParentFile().getParentFile().getPath();
+//        System.out.println(replaceUnderlineAndfirstToUpper("ni_hao_abc","_",""));
+//        URL url = ClassLoader.getSystemResource("");
+//        System.out.println("url = " + url.toString());
+//        String basePath = StringUtil.class.getResource("/").toString().replaceAll("file:","").replaceFirst("/","");
+//        File f = new File(basePath);
+//        basePath = f.getParentFile().getParentFile().getPath();
+//
+//        System.out.println("basePath = " + basePath);
+//        System.out.println(Encodes.escapeHtml("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=%E8%A5%BF%E7%93%9C&_=1419563345379"));
+//        System.out.println(Encodes.unescapeHtml("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=%E8%A5%BF%E7%93%9C&_=1419563345379"));
+//        System.out.println(Encodes.escapeXml("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=%E8%A5%BF%E7%93%9C&_=1419563345379"));
+//        System.out.println(Encodes.urlEncode("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=%E8%A5%BF%E7%93%9C&_=1419563345379"));
+//        System.out.println(Encodes.urlDecode("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=%E8%A5%BF%E7%93%9C&_=1419563345379"));
+//        System.out.println(Encodes.urlDecode("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=西瓜&_=1419563345379"));
+        Double doubles = 40.0;
+        Float spd = (Float)doubles.floatValue();
+        System.out.println(spd);
 
-        System.out.println("basePath = " + basePath);
-
-
-        System.out.println(Encodes.escapeHtml("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=%E8%A5%BF%E7%93%9C&_=1419563345379"));
-        System.out.println(Encodes.unescapeHtml("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=%E8%A5%BF%E7%93%9C&_=1419563345379"));
-        System.out.println(Encodes.escapeXml("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=%E8%A5%BF%E7%93%9C&_=1419563345379"));
-        System.out.println(Encodes.urlEncode("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=%E8%A5%BF%E7%93%9C&_=1419563345379"));
-        System.out.println(Encodes.urlDecode("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=%E8%A5%BF%E7%93%9C&_=1419563345379"));
-        System.out.println(Encodes.urlDecode("/console/security/user/userList?limit=10&offset=0&order=asc&sortName=username&sortOrder=desc&search_email=&search_username=西瓜&_=1419563345379"));
     }
 
 

@@ -7,6 +7,7 @@ import com.ssm.business.service.StudentService;
 import com.ssm.common.basedao.BaseDao;
 import com.ssm.common.baseservice.BaseService;
 import com.ssm.common.mybatis.Page;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +47,10 @@ public class StudentServiceImpl  extends BaseService implements StudentService {
         StudentCriteria criteria = new StudentCriteria();
         StudentCriteria.Criteria cri = criteria.createCriteria();
         if (student != null) {
-                
+            if(StringUtils.isNotBlank(student.getKsh()))
+            {
+                cri.andKshEqualTo(student.getKsh().trim());
+            }
         }
         if(page != null && page.getSort() != null && page.getOrder() != null){
             criteria.setOrderByClause(page.getSort() + " " + page.getOrder());

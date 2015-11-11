@@ -33,7 +33,13 @@ public class Imports implements Serializable {
 
     private int pc;
 
-    private int sf;
+    private String sf;
+
+    private String sfdm;
+
+    private String xq;
+
+    private String xqdm;
 
     private boolean modelFlag;
 
@@ -45,12 +51,36 @@ public class Imports implements Serializable {
 
     private List<String> columnHtml;
 
-    public int getSf() {
+    public String getSfdm() {
+        return sfdm;
+    }
+
+    public void setSfdm(String sfdm) {
+        this.sfdm = sfdm;
+    }
+
+    public String getXqdm() {
+        return xqdm;
+    }
+
+    public void setXqdm(String xqdm) {
+        this.xqdm = xqdm;
+    }
+
+    public String getSf() {
         return sf;
     }
 
-    public void setSf(int sf) {
+    public void setSf(String sf) {
         this.sf = sf;
+    }
+
+    public String getXq() {
+        return xq;
+    }
+
+    public void setXq(String xq) {
+        this.xq = xq;
     }
 
     public int getPc() {
