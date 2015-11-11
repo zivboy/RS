@@ -93,14 +93,7 @@ public class ModelController extends BaseAction {
     public ModelAndView add() {
         ModelAndView mav = new ModelAndView(EDIT);
         Model model = new Model();
-        try {
-            ObjectMapper mapper = JacksonMapper.getInstance();
-            String json = mapper.writeValueAsString(model);
-            mav.addObject("message", "完成");
-            mav.addObject("model", json);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        RebackInfoAdd(model,"model",mav);
         return mav;
     }
 
@@ -125,6 +118,7 @@ public class ModelController extends BaseAction {
         }
         return mav;
     }
+
 
     /**
      * 保存

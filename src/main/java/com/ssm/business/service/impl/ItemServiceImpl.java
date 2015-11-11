@@ -47,7 +47,10 @@ public class ItemServiceImpl  extends BaseService implements ItemService {
         ItemCriteria criteria = new ItemCriteria();
         ItemCriteria.Criteria cri = criteria.createCriteria();
         if (item != null) {
-                
+                if(item.getModelId()!=null)
+                {
+                    cri.andModelIdEqualTo(item.getModelId());
+                }
         }
         if(page != null && page.getSort() != null && page.getOrder() != null){
             criteria.setOrderByClause(page.getSort() + " " + page.getOrder());

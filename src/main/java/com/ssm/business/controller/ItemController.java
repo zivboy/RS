@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 /**
  * Created by xecoder on Tue Sep 22 23:55:11 GMT+08:00 2015.
  */
@@ -53,6 +55,20 @@ public class ItemController extends BaseAction {
 
 
     /**
+     * 表格模板字段
+     * @return GridModel
+     */
+    @RequestMapping(value="/model/list/{id}", method= RequestMethod.POST)
+    @ResponseBody
+    public List<Item> itemList(@PathVariable Integer id) {
+        Item item = new Item();
+        item.setModelId(id);
+        Page info = itemService.findByPage(page(), item);
+        return info.getRows();
+    }
+
+
+    /**
      * 添加模板字段
      * @return ModelAndView
      */
@@ -61,16 +77,7 @@ public class ItemController extends BaseAction {
     public ModelAndView add() {
         ModelAndView mav = new ModelAndView(EDIT);
         Item item = new Item();
-        try {
-            ObjectMapper mapper = JacksonMapper.getInstance();
-            String json =mapper.writeValueAsString(item);
-            mav.addObject("message", "完成");
-            mav.addObject("item",json);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        RebackInfoAdd(item,"item",mav);
         return mav;
     }
 
