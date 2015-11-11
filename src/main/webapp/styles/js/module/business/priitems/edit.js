@@ -22,15 +22,13 @@ requirejs(['jquery',  'bootstrap', 'fuelux', 'select', 'selectCN', 'validator', 
 
         }
         //修改页面结束
-
-        //初始化下拉框
-        initSelect("modId", WEB_GLOBAL_CTX+"/business/priitems/getAllPrimod", {}, modIdVal, "modId", "modName",true);
-        initSelect("priCode", WEB_GLOBAL_CTX+"/business/priitems/getPriCodeDown", {dicName: 'PRI-CODE', modId:$("#modId").val()}, priCode, "dicKey", "dicValue",true);
+        initSelect("modId", WEB_GLOBAL_CTX+"/business/priitems/getAllPrimod", {}, [modIdVal], "modId", "modName",false);
+        initSelect("priCode", WEB_GLOBAL_CTX+"/business/priitems/getPriCodeDown", {dicName: 'PRI-CODE', modId:$("#modId").val()}, [priCode], "dicKey", "dicValue",false);
         parent.Loading.modal('hide');
         //根据模板确定打印下拉项
         $("#modId").change(function(){
-            $("#priCode option").delete();
-            initSelect("priCode", WEB_GLOBAL_CTX+"/business/priitems/getPriCodeDown", {dicName: 'PRI-CODE', modId:$("#modId").val()}, priCode, "dicKey", "dicValue",true);
+            $("#priCode").empty();
+            initSelect("priCode", WEB_GLOBAL_CTX+"/business/priitems/getPriCodeDown", {dicName: 'PRI-CODE', modId:$("#modId").val()}, "", "dicKey", "dicValue",false);
         });
         //提交
         $('#formSubmit').formValidation({
