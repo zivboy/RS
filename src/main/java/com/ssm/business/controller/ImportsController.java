@@ -59,6 +59,9 @@ public class ImportsController extends BaseAction {
     @Autowired
     KsjlService ksjlService;
 
+    @Autowired
+    CodeManageService codeManageService;
+
 
     private static final String INDEX = "/business/imports/list";
     private static final String EDIT = "/business/imports/edit";
@@ -96,14 +99,7 @@ public class ImportsController extends BaseAction {
     public ModelAndView add() {
         ModelAndView mav = new ModelAndView(EDIT);
         Imports imports = new Imports();
-        try {
-            ObjectMapper mapper = JacksonMapper.getInstance();
-            String json = mapper.writeValueAsString(imports);
-            mav.addObject("message", "完成");
-            mav.addObject("imports", json);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        RebackInfoAdd(imports,"imports",mav);
         return mav;
     }
 
@@ -189,15 +185,19 @@ public class ImportsController extends BaseAction {
             //简历
             if (filesMap.size() > 0 && filesMap.get("T_KSJL") != null) {
                 try {
-                    InputStream fis = new FileInputStream(filesMap.get("T_KSJL"));
-                    DBFReader reader = new DBFReader(fis);
-                    reader.setCharactersetName("GBK");
                     Ksjl ksjlSource= new Ksjl();
                     ksjlSource.setNy(Integer.valueOf(SimpleDate.formatYear(new Date())));
                     ksjlSource.setPc(String.valueOf(imports.getPc()));
                     ksjlSource.setSf(String.valueOf(imports.getSf()));
-                    ImportKsjlThread importKsjlThread  = new ImportKsjlThread(Ksjl.class,ksjlSource,reader);
-                    importKsjlThread.run();//
+                    int count = ksjlService.countByExample(null,ksjlSource);
+                    if(count==0) {
+                        InputStream fis = new FileInputStream(filesMap.get("T_KSJL"));
+                        DBFReader reader = new DBFReader(fis);
+                        reader.setCharactersetName("GBK");
+                        ImportKsjlThread importKsjlThread = new ImportKsjlThread(Ksjl.class, ksjlSource, reader);
+                        importKsjlThread.setKsjlService(ksjlService);
+                        importKsjlThread.run();//
+                    }
                 }
                 catch (Exception e)
                 {
@@ -210,8 +210,9 @@ public class ImportsController extends BaseAction {
 
             try{
 
-                ImportDmThread importKsjlThread  = new ImportDmThread(filesMap);
-                importKsjlThread.run();//
+                ImportDmThread importDmThread  = new ImportDmThread(filesMap);
+                importDmThread.setCodeManageService(codeManageService);
+                importDmThread.run();//
             }
             catch (Exception e)
             {
@@ -272,6 +273,7 @@ public class ImportsController extends BaseAction {
             }
             imports.setItemList(showList);//dbf 文件字段
             session.setAttribute("dataList", dataList);
+            importService.get(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -307,7 +309,7 @@ public class ImportsController extends BaseAction {
             imports.setState(1);
             imports.setMessage("导入中");
             imports.setFieldCount(imports.getFieldHtml().size());
-            imports.setTitle(model.getName() + imports.getTitle());
+            imports.setTitle(model.getName() );
             //int importId;
             importService.save(imports);
             //importId = imports.getImportId();
@@ -320,8 +322,9 @@ public class ImportsController extends BaseAction {
 
             if (imports.isModelFlag()) {
                 //导入模板数据
-                ImportThread importThread = new ImportThread(model.getModelId(), imports.getTitle(), fieldHtml, columnHtml);
+                ImportThread importThread = new ImportThread(model.getModelId(), "T_TDD", fieldHtml, columnHtml);
                 try {
+                    importThread.setItemService(itemService);
                     Thread thread = new Thread(importThread);
                     thread.start();
                 } catch (Exception e) {
@@ -337,12 +340,14 @@ public class ImportsController extends BaseAction {
 
             try {
                 ImportDateThread threadData = new ImportDateThread(imports, reader, fieldHtml, columnHtml, dataList, userId);
+                threadData.setImportService(importService);
+                threadData.setStudentService(studentService);
                 Thread thread = new Thread(threadData);
                 thread.start();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                fis.close();
+                //fis.close();
             }
 
         } catch (Exception e) {

@@ -38,7 +38,7 @@ public class MultipleDataSourceInterceptor  {
         } else if (methodName.contains("Generator")) {
             CustomerContextHolder.setCustomerType(CustomerContextHolder.DATA_SOURCE_GENERATOR);
         } else {
-            CustomerContextHolder.clearCustomerType();
+            CustomerContextHolder.setCustomerType(CustomerContextHolder.DATA_SOURCE_DEFAULT);
         }
 
     }

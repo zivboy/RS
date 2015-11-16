@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssm.common.util.DateConverter;
+import com.ssm.common.util.JacksonMapper;
 import com.ssm.entity.LogEntity;
 import com.ssm.service.core.LogEntityService;
 import com.ssm.shiro.SecurityUtils;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.ssm.common.SecurityConstants;
 import com.ssm.common.mybatis.Page;
+import org.springframework.web.servlet.ModelAndView;
 
 
 public class BaseAction {
@@ -176,4 +179,16 @@ public class BaseAction {
 			}
 			return params;
 		}
+
+	public void RebackInfoAdd(Object o, String name, ModelAndView modelAndView)
+	{
+		try {
+			ObjectMapper mapper = JacksonMapper.getInstance();
+			String json = mapper.writeValueAsString(o);
+			modelAndView.addObject("message", "完成");
+			modelAndView.addObject(name, json);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

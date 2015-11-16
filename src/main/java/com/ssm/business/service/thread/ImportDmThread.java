@@ -6,6 +6,7 @@ import com.ssm.business.service.CodeManageService;
 import com.ssm.common.util.SimpleDate;
 import com.sun.tools.javac.jvm.Code;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
@@ -16,12 +17,21 @@ import java.util.*;
  * Created by vincent on 2015/11/8.
  */
 
-@Service("ImportDmThread")
 public class ImportDmThread implements Runnable {
-    @Autowired
+
     CodeManageService codeManageService;
 
     Object[] rowValues;
+
+    int ny = Integer.valueOf(SimpleDate.formatYear(new Date()));
+
+    public CodeManageService getCodeManageService() {
+        return codeManageService;
+    }
+
+    public void setCodeManageService(CodeManageService codeManageService) {
+        this.codeManageService = codeManageService;
+    }
 
     public ImportDmThread(){}
     Map<String, String> filesMap = new HashMap<>();//存储使用
@@ -122,31 +132,44 @@ public class ImportDmThread implements Runnable {
      */
     public void batchSave(String type)
     {
+
         try
         {
-            InputStream fis = new FileInputStream(filesMap.get(type));
-            DBFReader reader = new DBFReader(fis);
-            reader.setCharactersetName("GBK");
-            List<CodeManage> list = new ArrayList<>();
-            CodeManage codeManage = new CodeManage();
-            codeManage.setNf(Integer.valueOf(SimpleDate.formatYear(new Date())));
-            while ((rowValues = reader.nextRecord()) != null) {//取dbf文件的每一行
-                if(!(type.indexOf("TD_ZCDM")>-1)) {
-                    codeManage.setDm((String) rowValues[0]);
-                    codeManage.setMc((String) rowValues[1]);
-                    list.add(codeManage);
+            CodeManage codeManageSearch = new CodeManage();
+            codeManageSearch.setDmType(type);
+            codeManageSearch.setNf(ny);
+            int count = codeManageService.countByExample(null,codeManageSearch);
+            if(count==0)
+            {
+                InputStream fis = new FileInputStream(filesMap.get(type));
+                DBFReader reader = new DBFReader(fis);
+                reader.setCharactersetName("GBK");
+                List<CodeManage> list = new ArrayList<>();
+
+                while ((rowValues = reader.nextRecord()) != null) {//取dbf文件的每一行
+                    CodeManage codeManage = new CodeManage();
+                    codeManage.setNf(ny);
+                    codeManage.setId(null);
+                    codeManage.setDmType(type);
+                    if (!(type.indexOf("TD_ZCDM") > -1)) {
+                        codeManage.setDm(((String) rowValues[0]).trim());
+                        codeManage.setMc(((String) rowValues[1]).trim());
+                        codeManage.setZgf(null);
+                        codeManage.setXdx(null);
+                        list.add(codeManage);
+                    } else {
+                        codeManage.setDm(((String) rowValues[0]).trim());
+                        codeManage.setMc(((String) rowValues[1]).trim());
+                        Double dd = (Double)( rowValues[2]);
+                        Float spd = (Float)dd.floatValue();
+                        codeManage.setZgf((rowValues[2] != null) ? spd : null);
+                        codeManage.setXdx((rowValues[3] != null) ? ((String) rowValues[3]).trim() : null);
+                        list.add(codeManage);
+                    }
                 }
-                else
-                {
-                    codeManage.setDm((String) rowValues[0]);
-                    codeManage.setMc((String) rowValues[1]);
-                    codeManage.setZgf((rowValues[2]!=null)? (Float) rowValues[2] :null);
-                    codeManage.setXdx((rowValues[3]!=null)? (String) rowValues[3] :null);
-                    list.add(codeManage);
-                    codeManage = new CodeManage();
-                }
+                if(list.size()!=0)
+                codeManageService.save(list);
             }
-            codeManageService.save(list);
         }
         catch (Exception e)
         {

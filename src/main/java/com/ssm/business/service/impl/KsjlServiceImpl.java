@@ -21,41 +21,44 @@ import java.util.List;
 @Service("KsjlService")
 @Transactional
 @SuppressWarnings("unchecked")
-public class KsjlServiceImpl  extends BaseService implements KsjlService {
+public class KsjlServiceImpl extends BaseService implements KsjlService {
 
 
     @Override
     public Page findByPage(Page page, Ksjl ksjl) {
-        page.setCount(countByExample(page,ksjl));
-        List<Ksjl> list= baseDao.selectByPage("com.ssm.business.mapper.KsjlMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,ksjl),page);
-        if(list!=null)
+        page.setCount(countByExample(page, ksjl));
+        List<Ksjl> list = baseDao.selectByPage("com.ssm.business.mapper.KsjlMapper." + BaseDao.SELECT_BY_EXAMPLE, getCriteria(page, ksjl), page);
+        if (list != null)
             return page.setRows(list);
         else
             return null;
     }
-    
+
     @Override
     public List<Ksjl> findAll(Page page, Ksjl ksjl) {
-        return baseDao.selectList("com.ssm.business.mapper.KsjlMapper."+BaseDao.SELECT_BY_EXAMPLE, getCriteria(page,ksjl));
+        return baseDao.selectList("com.ssm.business.mapper.KsjlMapper." + BaseDao.SELECT_BY_EXAMPLE, getCriteria(page, ksjl));
     }
 
     @Override
     public int countByExample(Page page, Ksjl ksjl) {
-        return baseDao.getMapper(KsjlMapper.class).countByExample(getCriteria(page,ksjl));
+        return baseDao.getMapper(KsjlMapper.class).countByExample(getCriteria(page, ksjl));
     }
 
-    public KsjlCriteria getCriteria(Page page,Ksjl ksjl)
-    {
+    public KsjlCriteria getCriteria(Page page, Ksjl ksjl) {
         KsjlCriteria criteria = new KsjlCriteria();
         KsjlCriteria.Criteria cri = criteria.createCriteria();
         if (ksjl != null) {
-                               if(StringUtils.isNotBlank(ksjl.getZmr())) {
+            if (StringUtils.isNotBlank(ksjl.getZmr())) {
                 cri.andZmrEqualTo(ksjl.getZmr());
-               }
-
-
+            }
+            if(ksjl.getNy()!=null)
+                cri.andNyEqualTo(ksjl.getNy());
+            if(ksjl.getPc()!=null)
+                cri.andPcEqualTo(ksjl.getPc());
+            if(ksjl.getSf()!=null)
+                cri.andSfEqualTo(ksjl.getSf());
         }
-        if(page != null && page.getSort() != null && page.getOrder() != null){
+        if (page != null && page.getSort() != null && page.getOrder() != null) {
             criteria.setOrderByClause(page.getSort() + " " + page.getOrder());
         }
         return criteria;

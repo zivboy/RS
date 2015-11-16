@@ -98,14 +98,16 @@ public  class DbfFieldExtend {
         try {
             for (int i = 0; i < row.length; i++) {//一行
                 DBFField dbfField = reader.getField(i);//一列
+                out:
                 for(Field field: fields)
                 {
-                    if(dbfField.getName().indexOf(field.getName())>-1)
+                    if(dbfField.getName().toLowerCase().indexOf(field.getName().toLowerCase())>-1)
                     {
                         Example example = new Example();//存储列信息
                         example.setField(field);
                         example.setMethodName(getMethodName(field.getName()));
                         examples.add(example);
+                        break out;
                     }
                 }
             }

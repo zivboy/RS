@@ -19,11 +19,46 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
         var $OK = $.scojs_message.TYPE_OK;
         var $ERROR = $.scojs_message.TYPE_ERROR;
 
-        initSelect("modelList", WEB_GLOBAL_CTX + "/business/model/modelList", '', '', "id", "name", true);
+        initSelect("modelList", WEB_GLOBAL_CTX + "/business/model/modelList", '', '', "modelId", "name", true);
 
         //初始化下拉框 //可做异步下拉框选择
-        initSelect("sf", WEB_GLOBAL_CTX+"/business/dictionary/find/sfdm", {description: ''}, "", "dicKey", "dicValue",true);
+        initSelect("sfdm", WEB_GLOBAL_CTX+"/business/dictionary/find/sfdm", {description: ''}, "", "dicKey", "dicValue",true);
         initSelect("pc", WEB_GLOBAL_CTX+"/business/batch/lists", {description: ''}, "", "id", "batchName",true);
+        initSelect("xqdm", WEB_GLOBAL_CTX+"/business/dictionary/find/xqdm", {description: ''}, "", "dicKey", "dicValue",true);
+
+        //选择模板
+        $( "#modelList").change(function(){
+
+            $("select[name='fieldHtml']").each(function() {
+                    $(this).selectpicker('val',"");
+            });
+
+            var id = jQuery(this).find('option:selected').val();
+            $.ajax({
+                async: false,
+                cache: false,
+                type: 'POST',
+                url: WEB_GLOBAL_CTX + "/business/item/model/list/"+id,
+                error: function () {// 请求失败处理函数
+                    $.scojs_message("获取失败,请重新登陆!", $ERROR);
+                },
+                success: function (result) {
+                    $(result).each(function () {
+                        var options_value = this.targetTable+"."+this.targetField;
+                        var select_value = this.sourceField;
+                        var i =0;
+                        $("input[name='columnHtml']").each(function() {
+                            if($(this).val()==  options_value)
+                            {
+                                $("#fieldHtml_"+i).selectpicker('val',select_value);
+                            }
+                            i++;
+                        });
+
+                    });
+                }
+            });
+        });
 
         var msg = "文件限于dbf格式，请重新选择";
         var type = ".DBF";
@@ -68,6 +103,8 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
             }
         }).on('success.form.fv', function (e) {
             e.preventDefault();
+            $("#xq").val($("#xqdm option:selected").text());
+            $("#sf").val($("#sfdm option:selected").text());
             var $form = $(e.target);
             var params = $form.serialize();
             var selectedCount =$("select[name='fieldHtml']").length;
@@ -81,11 +118,12 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
                 $.scojs_message("未选择字段匹配", $ERROR);
                 return false;
             } else {
+
                 $.post(WEB_GLOBAL_CTX + "/business/imports/saveModel", params, function (rsp) {
                     if (rsp.successful) {
                         $.scojs_message(rsp.msg, $OK);
-                        //$("#save").toggleClass("disabled");
-                        //setTimeout("window.location.href='" + WEB_GLOBAL_CTX + "/business/imports/index'", 1000);
+                        $("#save").toggleClass("disabled");
+                        setTimeout("window.location.href='" + WEB_GLOBAL_CTX + "/business/imports/index'", 1000);
                     } else {
                         $.scojs_message(rsp.msg, $ERROR);
                     }
@@ -138,7 +176,7 @@ requirejs(['jquery', 'switchs', 'fuelux', 'bootstrap', 'select', 'selectCN', 'va
                         formData.append(val.name, val.value);
                     });
                     $.ajax({
-                        url: WEB_GLOBAL_CTX + "/business/imports/save2",
+                        url: WEB_GLOBAL_CTX + "/business/imports/save",
                         data: formData,
                         cache: false,
                         contentType: false,
