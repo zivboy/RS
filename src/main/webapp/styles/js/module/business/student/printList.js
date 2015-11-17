@@ -167,7 +167,15 @@ function doBulkPrint(primod,priitemsList,student){
 }
 var LODOP=getLodop(document.getElementById('LODOP'),document.getElementById('LODOP_EM'));
 function CreatePrintPage(primod,priitemsList,student) {
-    LODOP.PRINT_INIT("通知书模板");
+    var title = ""
+    if(primod.modState=="1"){
+        title = "通知书";
+    }else if(primod.modState=="2"){
+        title = "EMS";
+    }else{
+        title = "报到证";
+    }
+    LODOP.PRINT_INIT(title);
     LODOP.ADD_PRINT_SETUP_BKIMG("<img border='0' src='"+WEB_GLOBAL_CTX+"/download/getImg?filePath="+primod.url+"'/>");
     LODOP.SET_SHOW_MODE("BKIMG_WIDTH",primod.modWidth);
     LODOP.SET_SHOW_MODE("BKIMG_HEIGHT",primod.modHeight);
@@ -180,8 +188,8 @@ function CreatePrintPage(primod,priitemsList,student) {
         }
         LODOP.ADD_PRINT_TEXT(this.priTop,this.priLeft,this.priWidth,this.priHeight,text);
         LODOP.SET_PRINT_STYLEA(0,"FontName","华文中宋");
-        LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
-        LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+        LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+        LODOP.SET_PRINT_STYLEA(0,"Bold",0);
     });
 }
 function getLodop(oOBJECT,oEMBED){

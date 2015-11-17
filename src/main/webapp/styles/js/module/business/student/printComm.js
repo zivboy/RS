@@ -15,6 +15,16 @@ requirejs(['jquery',  'bootstrap', 'fuelux','switchs', 'select', 'selectCN', 'va
             //初始化页面
             meForm($('#formSubmit'), student);
             $('.selectpicker').selectpicker('refresh');
+            if(primod.modState=="2"){//寄件人信息填充
+                $.each(priitemsList, function () {
+                    var text = "";
+                    if(this.priValue!=null&&this.priValue!=""){
+                        text = this.priValue;
+                        $("#"+this.priCode).val(text);
+                        $("#"+this.priCode).attr("readonly",true);
+                    }
+                });
+            }
         }
         else {
 
@@ -36,11 +46,11 @@ var LODOP=getLodop(document.getElementById('LODOP'),document.getElementById('LOD
 function CreatePrintPage(modState) {
     var title = "";
     if(modState=="1"){
-        title="通知书模板";
+        title="通知书";
     }else if(modState=="2"){
-        title="EMS模板";
+        title="EMS";
     }else{
-        title="报到证模板";
+        title="报到证";
     }
     LODOP.PRINT_INIT(title);
     LODOP.ADD_PRINT_SETUP_BKIMG("<img border='0' src='"+WEB_GLOBAL_CTX+"/download/getImg?filePath="+primod.url+"'/>");
@@ -48,28 +58,19 @@ function CreatePrintPage(modState) {
     LODOP.SET_SHOW_MODE("BKIMG_HEIGHT",primod.modHeight);
     $.each(priitemsList, function () {
         var text = "";
-        var fontName = "";
-        var fontSize = 0;
-        var bold = 0;
         if(modState=="1"){
-            fontName = "华文中宋";
-            fontSize = 12;
-            bold = 1;
             if(this.priValue==null||this.priValue==""){
                text = student[this.priCode];
             }else{
                text = this.priValue;
             }
         }else if(modState=="2"){
-            fontName = "华文中宋";
-            fontSize = 10;
-            bold = 0;
             text = $("#"+this.priCode).val();
         }
         LODOP.ADD_PRINT_TEXT(this.priTop,this.priLeft,this.priWidth,this.priHeight,text);
-        LODOP.SET_PRINT_STYLEA(0,"FontName",fontName);
-        LODOP.SET_PRINT_STYLEA(0,"FontSize",fontSize);
-        LODOP.SET_PRINT_STYLEA(0,"Bold",bold);
+        LODOP.SET_PRINT_STYLEA(0,"FontName","华文中宋");
+        LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+        LODOP.SET_PRINT_STYLEA(0,"Bold",0);
     });
 }
 
