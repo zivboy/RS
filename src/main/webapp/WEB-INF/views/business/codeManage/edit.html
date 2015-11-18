@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<#include "/console/layout/main.html"/>
+<html class="fuelux" >
+<@headEdit/>
+<body>
+<div class="container">
+    <form role="form" id="formSubmit" commandName="codeManage" class="form-horizontal"
+          data-fv-framework="bootstrap"
+          data-fv-message="This value is not valid"
+          data-fv-feedbackicons-valid="glyphicon glyphicon-ok"
+          data-fv-feedbackicons-invalid="glyphicon glyphicon-remove"
+          data-fv-feedbackicons-validating="glyphicon glyphicon-refresh">
+        <!-- Modal -->
+        <div class="panel panel-default">
+            <div class="panel-heading">代码管理</div>
+            <div class="panel-body">
+                <div class="control-group">
+                                   <input type="hidden" name="id" id="id" /> 
+
+                </div>
+                          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dmType">代码类型</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="dmType" name="dmType" maxlength="50" placeholder="输入代码类型" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="dm">代码</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="dm" name="dm" maxlength="50" placeholder="输入代码" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="mc">名称</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="mc" name="mc" maxlength="50" placeholder="输入名称" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="zgf">照顾分</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="zgf" name="zgf" maxlength="50" placeholder="输入照顾分" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="xdx">相对线</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="xdx" name="xdx" maxlength="50" placeholder="输入相对线" size="100" required   />
+                </div> 
+          </div> 
+          <div class="row control-group">
+                <div class="col-sm-2 col-sm-offset-1"><label class="control-label" for="nf">年份</label>
+                </div>
+                    <div class="col-sm-8 controls">
+                   <input type="text" class="form-control"  id="nf" name="nf" maxlength="50" placeholder="输入年份" size="100" required   />
+                </div> 
+          </div> 
+
+            </div>
+
+            <div class="panel-footer">
+                <div class="row control-group">
+                    <div class="col-sm-4 col-sm-offset-5">
+                        <div style="align-content: center">
+                            <button type="submit" id="save" class="btn btn-primary" >保存</button>
+                            <button type="button" id="back" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+<!-- /.container -->
+
+</body>
+<@foot/>
+<script src="${base}/styles/js/module/business/codeManage/edit.js"></script>
+<script type="text/javascript">
+    var codeManage = JSON.parse(JSON.stringify(${codeManage}));
+</script>
+</html>
+
