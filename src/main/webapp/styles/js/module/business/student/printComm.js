@@ -44,13 +44,9 @@ function showPrint(modState){
 }
 var LODOP=getLodop(document.getElementById('LODOP'),document.getElementById('LODOP_EM'));
 function CreatePrintPage(modState) {
-    var title = "";
-    if(modState=="1"){
-        title="通知书";
-    }else if(modState=="2"){
+    var title = "通知书";
+    if(modState=="2"){
         title="EMS";
-    }else{
-        title="报到证";
     }
     LODOP.PRINT_INIT(title);
     LODOP.ADD_PRINT_SETUP_BKIMG("<img border='0' src='"+WEB_GLOBAL_CTX+"/download/getImg?filePath="+primod.url+"'/>");

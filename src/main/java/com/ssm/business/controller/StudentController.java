@@ -44,7 +44,6 @@ public class StudentController extends BaseAction {
     private static final String PRINTLIST = "/business/student/printList";//打印列表
     private static final String PRINTTZS = "/business/student/printTzs";//打印通知书
     private static final String PRINTEMS = "/business/student/printEms";//打印信封
-    private static final String PRINTBDZ = "/business/student/printBdz";//打印报到证
 
     @RequestMapping(value="/index", method= RequestMethod.GET)
     public String index() {
@@ -195,8 +194,6 @@ public class StudentController extends BaseAction {
             Priitems priitems = new Priitems();
             if("2".equals(primod.getModState())){
                 mav = new ModelAndView(PRINTEMS);
-            }else if("3".equals(primod.getModState())){
-                mav = new ModelAndView(PRINTBDZ);
             }
             priitems.setModId(Integer.parseInt(modId));
             List<Priitems> priitemsList = priitemsService.findAll(null,priitems);
