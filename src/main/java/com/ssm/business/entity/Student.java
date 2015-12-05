@@ -269,6 +269,10 @@ public class Student {
 
     private Long drrid;
 
+    private Integer tzsbs;
+
+    private Integer emsbs;
+
     public Long getId() {
         return id;
     }
@@ -1331,5 +1335,21 @@ public class Student {
 
     public void setDrrid(Long drrid) {
         this.drrid = drrid;
+    }
+
+    public Integer getTzsbs() {
+        return tzsbs;
+    }
+
+    public void setTzsbs(Integer tzsbs) {
+        this.tzsbs = tzsbs;
+    }
+
+    public Integer getEmsbs() {
+        return emsbs;
+    }
+
+    public void setEmsbs(Integer emsbs) {
+        this.emsbs = emsbs;
     }
 }

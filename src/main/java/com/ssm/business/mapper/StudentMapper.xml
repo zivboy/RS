@@ -135,6 +135,8 @@
     <result column="ny" jdbcType="DATE" property="ny" />
     <result column="drpc" jdbcType="BIGINT" property="drpc" />
     <result column="drrid" jdbcType="BIGINT" property="drrid" />
+    <result column="tzsbs" jdbcType="INTEGER" property="tzsbs" />
+    <result column="emsbs" jdbcType="INTEGER" property="emsbs" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -205,7 +207,7 @@
     zytz, zyzytj, dxtj, zytjfc, tjsxbz, tjjldm, bh, kslsczbz, zysxdm1, zysxdm2, zysxdm3, 
     zysxdm4, zysxdm5, zysxdm6, wk_sg, wk_tz, pcdm, pc, pcfs, tzsh, xh, xslb, xqdm, xq, 
     xydm, xy, xydm1, xy1, zydm, zy, zydm1, zy1, xz, zybj, qsxx, rq, yy, ncl, ny, drpc, 
-    drrid
+    drrid,tzsbs,emsbs
   </sql>
   <select id="selectByExample" parameterType="com.ssm.business.entity.StudentCriteria" resultMap="BaseResultMap">
     select
@@ -1524,6 +1526,12 @@
       <if test="record.drrid != null">
         drrid = #{record.drrid,jdbcType=BIGINT},
       </if>
+      <if test="record.tzsbs != null">
+        tzsbs = #{record.tzsbs,jdbcType=INTEGER},
+      </if>
+      <if test="record.emsbs != null">
+        emsbs = #{record.emsbs,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -1663,7 +1671,9 @@
       ncl = #{record.ncl,jdbcType=VARCHAR},
       ny = #{record.ny,jdbcType=DATE},
       drpc = #{record.drpc,jdbcType=BIGINT},
-      drrid = #{record.drrid,jdbcType=BIGINT}
+      drrid = #{record.drrid,jdbcType=BIGINT},
+      tzsbs = #{record.tzsbs,jdbcType=INTEGER},
+      emsbs = #{record.emsbs,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -2067,6 +2077,12 @@
       <if test="drrid != null">
         drrid = #{drrid,jdbcType=BIGINT},
       </if>
+      <if test="tzsbs != null">
+        tzsbs = #{tzsbs,jdbcType=INTEGER},
+      </if>
+      <if test="emsbs != null">
+        emsbs = #{emsbs,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -2203,7 +2219,9 @@
       ncl = #{ncl,jdbcType=VARCHAR},
       ny = #{ny,jdbcType=DATE},
       drpc = #{drpc,jdbcType=BIGINT},
-      drrid = #{drrid,jdbcType=BIGINT}
+      drrid = #{drrid,jdbcType=BIGINT},
+      tzsbs = #{tzsbs,jdbcType=INTEGER},
+      emsbs = #{emsbs,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
