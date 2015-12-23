@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <html>
 <#include "/console/layout/main.html"/>
 <@head/>
-<object  id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+<!--<object  id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
     <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
-</object>
+</object>-->
 <body>
 <div class="container">
     <div class="panel panel-default">
@@ -24,6 +25,8 @@
                     <th data-field="zkzh" class="col-md-1">准考证号</th>
                     <th data-field="tzsh" class="col-md-1">通知书号</th>
                     <th data-field="jtdz" class="col-md-3">家庭地址</th>
+                    <th data-field="tzsbs" class="col-md-1" data-formatter="printFormatter">通知书标识</th>
+                    <th data-field="emsbs" class="col-md-1" data-formatter="printFormatter">EMS标识</th>
                 </tr>
                 </thead>
             </table>
@@ -37,19 +40,19 @@
                 <div class="col-md-3">
                     <select class="form-control " id="search_select" name="search_select">
                         <option value="search_xm">姓名</option>
+                        <option value="search_zkzh">准考证号</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group">
                         <input class="form-control" type="text" placeholder="输入查询条件" id="search"
-                               name="search_username">
+                               name="search">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" id="query" name="query" title="查询"><span
                                     class="glyphicon glyphicon-search"></span></button>
                         </span>
                     </div>
                 </div>
-
                 <div class="col-md-5">
                     <div class="btn-group" id="do">
                     <@shiro.hasPermission name="Student:save">

@@ -87,7 +87,13 @@ requirejs(['jquery', 'bootstrap', 'table', 'tablezn', 'tExport', 'tExportS', 'ba
 
     });
 
-
+var printBsList = [{id: '1', name: '已打印'}, {id: '0', name: '未打印'}];
+function printFormatter(value, row, index) {
+    for (var i = 0; !(i >= printBsList.length); i++) {
+        if (printBsList[i].id == value) return printBsList[i].name;
+    }
+    return value;
+}
 //本页查询拼装
 function queryParamsF(params) {
     var name = $("#search_select").val();

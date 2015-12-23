@@ -233,7 +233,7 @@ public class StudentCriteria {
         }
 
         public Criteria andXmLike(String value) {
-            addCriterion("xm like", value, "xm");
+            addCriterion("xm like", "%"+value+"%", "xm");
             return (Criteria) this;
         }
 

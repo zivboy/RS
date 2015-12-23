@@ -51,6 +51,14 @@ public class StudentServiceImpl  extends BaseService implements StudentService {
             {
                 cri.andKshEqualTo(student.getKsh().trim());
             }
+            if(StringUtils.isNotBlank(student.getZkzh()))
+            {
+                cri.andZkzhEqualTo(student.getZkzh().trim());
+            }
+            if(StringUtils.isNotBlank(student.getXm()))
+            {
+                cri.andXmLike(student.getXm().trim());
+            }
         }
         if(page != null && page.getSort() != null && page.getOrder() != null){
             criteria.setOrderByClause(page.getSort() + " " + page.getOrder());
