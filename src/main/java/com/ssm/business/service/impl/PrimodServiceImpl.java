@@ -48,7 +48,7 @@ public class PrimodServiceImpl  extends BaseService implements PrimodService {
         PrimodCriteria.Criteria cri = criteria.createCriteria();
         if (primod != null) {
             if(StringUtils.isNotBlank(primod.getModName())) {
-                cri.andModNameEqualTo(primod.getModName());
+                cri.andModNameLike(primod.getModName());
             }
         }
         if(page != null && page.getSort() != null && page.getOrder() != null){

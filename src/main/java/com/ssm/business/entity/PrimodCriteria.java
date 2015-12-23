@@ -293,7 +293,7 @@ public class PrimodCriteria {
         }
 
         public Criteria andModNameLike(String value) {
-            addCriterion("mod_name like", value, "modName");
+            addCriterion("mod_name like", "%"+value+"%", "modName");
             return (Criteria) this;
         }
 
